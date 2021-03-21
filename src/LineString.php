@@ -46,7 +46,7 @@ class LineString extends Curve
     /**
      * {@inheritDoc}
      */
-    public function current(): mixed
+    public function current(): Point
     {
         return current($this->points);
     }
