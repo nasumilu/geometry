@@ -3,7 +3,7 @@
     "description": "Component provides the basic geometry classes used in Geographical Information Systems (GIS).",
     "type": "library",
     "homepage": "https://nasumilu.net",
-    "license": "MIT",
+    "license": "Apache-2.0",
     "keywords": ["gis", 
         "geometry", 
         "point",
