@@ -19,12 +19,11 @@
     "authors": [
         {
             "name": "Michael Lucas",
-            "email": "mlucas@nasumilu.com"
+            "email": "nasumilu-owner@gmail.com"
         }
     ],
     "require": {
-        "php": ">=7.4",
-        "symfony/event-dispatcher": "v5.2.4"
+        "php": ">=7.4"
     },
     "autoload": {
         "psr-4": {
