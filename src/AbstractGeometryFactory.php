@@ -23,7 +23,9 @@ namespace Nasumilu\Spatial\Geometry;
 use function \array_unique;
 use function \array_merge;
 use function \array_search;
+
 use Nasumilu\Spatial\Geometry\Builder\{
+    CloneGeometryBuilder,
     ArrayGeometryBuilder,
     GeometryBuilder,
     GeometryBuilderRegistry
@@ -32,8 +34,7 @@ use Nasumilu\Spatial\Geometry\Builder\{
 /**
  * AbstractGeometryFactory
  */
-abstract class AbstractGeometryFactory 
-    implements GeometryFactory, GeometryBuilderRegistry, CoordinateSystem, SpatialEngine
+abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuilderRegistry, CoordinateSystem, SpatialEngine
 {
 
     /** @var int */
@@ -57,7 +58,11 @@ abstract class AbstractGeometryFactory
         $this->is3D = boolval($options['is_3d'] ?? false);
         $this->isMeasured = boolval($options['is_measured'] ?? false);
         $this->precisionModel = $options['precision_model'] ?? new PrecisionModel();
-        $builders = array_merge([new ArrayGeometryBuilder()], (array)($options['builders'] ?? []));
+        $builders = array_merge([
+            new ArrayGeometryBuilder(),
+            new CloneGeometryBuilder()]
+                , (array) ($options['builders'] ?? []));
+        
         $this->registerBuilder(...$builders);
     }
 
@@ -90,7 +95,7 @@ abstract class AbstractGeometryFactory
      */
     public final function registerBuilder(GeometryBuilder ...$builders)
     {
-        $this->builders = array_unique(array_merge($this->builders, $builders));
+        $this->builders = array_unique(array_merge($this->builders, $builders), SORT_REGULAR);
     }
 
     /**
@@ -151,6 +156,17 @@ abstract class AbstractGeometryFactory
     {
         return $this->srid;
     }
+    
+    public function create($args): Geometry
+    {
+        $geometry = null;
+        foreach($this->builders as $builder) {
+            if(null !== $geometry = $builder->build($this, $args)) {
+                return $geometry;
+            }
+        }
+        throw new RuntimeException('Uable to build Geometry!');
+    }
 
     /**
      * {@inheritDoc}
@@ -158,6 +174,15 @@ abstract class AbstractGeometryFactory
     public function createPoint(array $coordinates): Point
     {
         return new Point($this, $coordinates);
+    }
+
+    public function createLineString(array $coordinates): LineString
+    {
+        $points = [];
+        foreach ($coordinates as $coordinate) {
+            $points[] = $this->createPoint($coordinate);
+        }
+        return new LineString($this, ...$points);
     }
 
 }
