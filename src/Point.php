@@ -34,7 +34,7 @@ class Point extends Geometry implements Coordinate
 {
 
     public const WKT_TYPE = 'point';
-    public const WKB_TYPE = 0;
+    public const WKB_TYPE = 1;
 
     private array $coordinates = [];
 
