@@ -22,7 +22,7 @@ namespace Nasumilu\Spatial\Geometry\Builder;
 
 use Nasumilu\Spatial\Geometry\{
     Geometry,
-    AbstractGeometryFactory
+    GeometryFactory
 };
 
 /**
@@ -38,5 +38,5 @@ interface GeometryBuilder
     * @param mixed $args
     * @return Geometry|null
     */
-   public function build(AbstractGeometryFactory $geometryFactory, $args): ?Geometry;
+   public function build(GeometryFactory $factory, $args): ?Geometry;
 }
