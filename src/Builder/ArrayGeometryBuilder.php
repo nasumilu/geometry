@@ -21,9 +21,11 @@ declare(strict_types=1);
 namespace Nasumilu\Spatial\Geometry\Builder;
 
 use function \is_array;
+use function \call_user_func;
+
 use Nasumilu\Spatial\Geometry\{
     Geometry,
-    AbstractGeometryFactory
+    GeometryFactory
 };
 
 /**
@@ -35,12 +37,12 @@ class ArrayGeometryBuilder implements GeometryBuilder
     /**
      * {@inheritDoc}
      */
-    public function build(AbstractGeometryFactory $geometryFactory, $args): ?Geometry
+    public function build(GeometryFactory $factory, $args): ?Geometry
     {
-        if (!is_array($args) && !isset($args['type'])) {
+        if (!is_array($args) || !isset($args['type'])) {
             return null;
         }
-        return call_user_func([$geometryFactory, 'create' . $args['type']],
+        return call_user_func([$factory, 'create' . $args['type']],
                 $args['coordinates'] ?? $args['geometries'] ?? []);
     }
 
