@@ -109,4 +109,6 @@ interface SpatialEngine
 
     public function symDifference(Geometry $geometry, Geometry $other): Geometry;
     
+    public function transform(Geometry $geometry, GeometryFactory $factory): Geometry;
+    
 }
