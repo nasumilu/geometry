@@ -43,7 +43,7 @@ class GeometryTest extends TestCase
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class,
                 [self::FACTORY_OPTIONS]);
         $geometry = $this->getMockForAbstractClass(Geometry::class, [$factory]);
-        $this->assertSame($factory, $geometry->getGeometryFactory());
+        $this->assertSame($factory, $geometry->getFactory());
         return $geometry;
     }
 
