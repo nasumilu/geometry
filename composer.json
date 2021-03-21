@@ -1,0 +1,42 @@
+{
+    "name": "nasumilu/geometry",
+    "description": "Component provides the basic geometry classes used in Geographical Information Systems (GIS).",
+    "type": "library",
+    "homepage": "https://nasumilu.net",
+    "license": "MIT",
+    "keywords": ["gis", 
+        "geometry", 
+        "point",
+        "linestring",
+        "polygon",
+        "multipoint",
+        "multipolygon",
+        "geometrycollection",
+        "tin",
+        "triangle",
+        "polyhedralsurface"
+    ],
+    "authors": [
+        {
+            "name": "Michael Lucas",
+            "email": "mlucas@nasumilu.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "symfony/event-dispatcher": "v5.2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nasumilu\\Spatial\\Geometry\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nasumilu\\Spatial\\Tests\\Geometry\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.5.3"
+    }
+}
