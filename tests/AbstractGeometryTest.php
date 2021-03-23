@@ -31,12 +31,12 @@ abstract class AbstractGeometryTest extends TestCase
     
     public function factoryOptions(): array
     {
-        $options = ['srid' => 3857, 'is_3d' => false, 'is_measured' => false];
+        $options = ['srid' => 3857, '3d' => false, 'measured' => false];
         return [
             'xy' => [$options],
-            'xyz' => [array_merge($options, ['is_3d'=>true])],
-            'xym' => [array_merge($options, ['is_measured' => true])],
-            'xyzm' => [array_merge($options, ['is_3d'=>true, 'is_measured'=>true])]
+            'xyz' => [array_merge($options, ['3d'=>true])],
+            'xym' => [array_merge($options, ['measured' => true])],
+            'xyzm' => [array_merge($options, ['3d'=>true, 'measured'=>true])]
         ];
     }
     

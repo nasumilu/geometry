@@ -34,8 +34,8 @@ class GeometryTest extends TestCase
 
     private const FACTORY_OPTIONS = [
         'srid' => 3857,
-        'is_3d' => true,
-        'is_measured' => true
+        '3d' => true,
+        'measured' => true
     ];
 
     public function testConstructor(): Geometry

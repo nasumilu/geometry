@@ -55,8 +55,8 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
     public function __construct(array $options = [])
     {
         $this->srid = intval($options['srid'] ?? -1);
-        $this->is3D = boolval($options['is_3d'] ?? false);
-        $this->isMeasured = boolval($options['is_measured'] ?? false);
+        $this->is3D = boolval($options['3d'] ?? false);
+        $this->isMeasured = boolval($options['measured'] ?? false);
         $this->precisionModel = $options['precision_model'] ?? new PrecisionModel();
         $builders = array_merge([
             new ArrayGeometryBuilder(),

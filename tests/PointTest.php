@@ -57,7 +57,7 @@ class PointTest extends AbstractGeometryTest
             $this->assertTrue(isset($point[1]));
             $this->assertTrue(isset($point['y']));
             $this->assertTrue(isset($point->y));
-            if ($factoryOptions['is_3d']) {
+            if ($factoryOptions['3d']) {
                 $this->assertTrue($point->hasOrdinate(2));
                 $this->assertTrue(isset($point[2]));
                 $this->assertTrue(isset($point['z']));
@@ -69,7 +69,7 @@ class PointTest extends AbstractGeometryTest
                 $this->assertFalse(isset($point->z));
             }
 
-            if ($factoryOptions['is_measured']) {
+            if ($factoryOptions['measured']) {
                 $this->assertTrue($point->hasOrdinate(3));
                 $this->assertTrue(isset($point[3]));
                 $this->assertTrue(isset($point['m']));
@@ -171,7 +171,7 @@ class PointTest extends AbstractGeometryTest
         $expected = $factory->getPrecisionModel()->makePrecise(self::COORDINATES['z']);
         foreach ([self::COORDINATES, array_values(self::COORDINATES)] as $param) {
             $point = new Point($factory, $param);
-            if ($factoryOptions['is_3d'] ?? false) {
+            if ($factoryOptions['3d'] ?? false) {
                 $this->assertEquals($expected, $point->z);
                 $this->assertEquals($expected, $point[2]);
                 $this->assertEquals($expected, $point['z']);
@@ -193,7 +193,7 @@ class PointTest extends AbstractGeometryTest
     {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [$factoryOptions]);
         $point = new Point($factory);
-        if ($factoryOptions['is_3d'] ?? false) {
+        if ($factoryOptions['3d'] ?? false) {
             $this->assertNan($point->getZ());
             $precision = $point->getFactory()->getPrecisionModel();
             $this->assertEquals($precision->makePrecise(3.25), $point->setZ(3.25)->getZ());
@@ -222,7 +222,7 @@ class PointTest extends AbstractGeometryTest
         $expected = $factory->getPrecisionModel()->makePrecise(self::COORDINATES['m']);
         foreach ([self::COORDINATES, array_values(self::COORDINATES)] as $param) {
             $point = new Point($factory, $param);
-            if ($factoryOptions['is_measured'] ?? false) {
+            if ($factoryOptions['measured'] ?? false) {
                 $this->assertEquals($expected, $point->m);
                 $this->assertEquals($expected, $point[3]);
                 $this->assertEquals($expected, $point['m']);
@@ -244,7 +244,7 @@ class PointTest extends AbstractGeometryTest
     {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [$factoryOptions]);
         $point = new Point($factory);
-        if ($factoryOptions['is_measured'] ?? false) {
+        if ($factoryOptions['measured'] ?? false) {
             $this->assertNan($point->getM());
             $precision = $point->getFactory()->getPrecisionModel();
             $this->assertEquals($precision->makePrecise(3.25), $point->setM(3.25)->getM());
