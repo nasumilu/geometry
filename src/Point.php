@@ -33,11 +33,24 @@ use function \array_key_exists;
 class Point extends Geometry implements Coordinate
 {
 
+    /** The well-known text type value */
     public const WKT_TYPE = 'point';
+    /** The well-known binary type value */
     public const WKB_TYPE = 1;
 
-    private array $coordinates = [];
+    /**
+     * The point's coordinate values.
+     *
+     * @var float[]
+     */
+    private $coordinates = [];
 
+    /**
+     * Constructs a Point from an array of float values.
+     *
+     * @param GeometryFactory $geometryFactory
+     * @param array $coordinates
+     */
     public function __construct(GeometryFactory $geometryFactory, array $coordinates = [])
     {
         parent::__construct($geometryFactory);

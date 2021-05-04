@@ -30,7 +30,7 @@ abstract class Geometry
     /**
      * @var GeometryFactory
      */
-    protected GeometryFactory $factory;
+    protected $factory;
 
     public function __construct(GeometryFactory $geometryFactory)
     {

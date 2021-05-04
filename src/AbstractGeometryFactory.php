@@ -38,19 +38,19 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
 {
 
     /** @var int */
-    private int $srid;
+    private $srid;
 
     /** @var bool */
-    private bool $is3D;
+    private $is3D;
 
     /** @var bool */
-    private bool $isMeasured;
+    private $isMeasured;
 
     /** @var PrecisionModel */
     private PrecisionModel $precisionModel;
 
     /** @var GeometryBuilder[] */
-    private array $builders = [];
+    private $builders = [];
 
     public function __construct(array $options = [])
     {

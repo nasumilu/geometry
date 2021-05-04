@@ -20,12 +20,12 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Geometry;
 
-use \InvalidArgumentException;
-use function \ini_get;
-use function \round;
-use function \is_numeric;
-use function \is_nan;
-use function \floatval;
+use InvalidArgumentException;
+use function ini_get;
+use function round;
+use function is_numeric;
+use function is_nan;
+use function floatval;
 
 /**
  * The precision model for Coordinate values.
@@ -46,12 +46,12 @@ final class PrecisionModel
     /**
      * The number of decimal digits (Default = 6). 
      */
-    private int $precision;
+    private $precision;
 
     /**
      * The mode used by this precision model (Default = ROUND_UP.
      */
-    private int $mode;
+    private $mode;
 
     /**
      * Creates a PrecisionModel with a precision of <code>$precision<code> using 

@@ -20,23 +20,38 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Geometry;
 
-use function \count;
-use function \key;
-use function \current;
-use function \reset;
-use function \next;
+use OutOfRangeException;
+use function count;
+use function key;
+use function current;
+use function reset;
+use function next;
 use function array_values;
 
 /**
- * Description of LineString
+ * LineString is a Curve with linear interpolation between points. Each consecutive
+ * pair of Points defines a Line segment.
+ * 
+ * @link https://www.ogc.org/standards/sfa Simple Feature Access - Part 1: Common Architecture
  */
 class LineString extends Curve
 {
     public const WKT_TYPE = 'linestring';
     public const WKB_TYPE = 2;
     
-    private array $points;
+    private $points;
     
+    /**
+     * Constructs a LineString with the GeometryFactory and set of Point(s)
+     * 
+     * Please use {@see GeometryFacotry::create} or {@see GeometryFactory::createLineString}
+     * to construct a LineString. If using this construct directly ensure that the 
+     * <code>Point</code>s found in the set where constructed with the same 
+     * <code>GeometryFactory</code>.
+     * 
+     * @param GeometryFactory $factory
+     * @param Point $points
+     */
     public function __construct(GeometryFactory $factory, Point ...$points)
     {
         parent::__construct($factory);
@@ -72,6 +87,9 @@ class LineString extends Curve
      */
     public function getPointN(int $offset): Point
     {
+        if(!$this->hasPointN($offset)) {
+            throw new OutOfRangeException("Offset: $offset out of range!");
+        }
         return $this->points[$offset];
     }
 
@@ -99,10 +117,15 @@ class LineString extends Curve
     /**
      * {@inheritDoc}
      */
-    public function removePointN(int $offset): void
+    public function removePointN(int $offset): Point
     {
+        if(!$this->hasPointN($offset)) {
+            throw new OutOfRangeException("Offset: $offset out of range!");
+        }
+        $oldValue = $this->points[$offset];
         unset($this->points[$offset]);
         $this->points = array_values($this->points);
+        return $oldValue;
     }
 
     /**
@@ -116,10 +139,11 @@ class LineString extends Curve
     /**
      * {@inheritDoc}
      */
-    public function setPointN($point, int $offset = null)
+    public function setPointN($point, ?int $offset = null): LineString
     {
         $this->points[$offset ?? count($this->points)] = 
                 $this->factory->create($point);
+        return $this;
     }
 
     /**

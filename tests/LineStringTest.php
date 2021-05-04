@@ -22,6 +22,7 @@ namespace Nasumilu\Spatial\Tests\Geometry;
 
 use function \count;
 use Nasumilu\Spatial\Geometry\{
+    Point,
     LineString,
     AbstractGeometryFactory
 };
@@ -32,12 +33,21 @@ use Nasumilu\Spatial\Geometry\{
 class LineStringTest extends AbstractGeometryTest
 {
 
+    private static array $data;
+    
+    /**
+     * @beforeClass
+     */
+    public static function setUpBeforeClass(): void
+    {
+        self::$data = require __DIR__ . '/Resources/php/linestring.php';
+    }
+    
     public function testConstructor()
     {
-        $data = require __DIR__ . '/Resources/php/linestring.php';
         $points = [];
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
-        foreach ($data['coordinates'] as $coordinate) {
+        foreach (self::$data['coordinates'] as $coordinate) {
             $points[] = $factory->createPoint($coordinate);
         }
         $linestring = new LineString($factory, ...$points);
@@ -46,10 +56,9 @@ class LineStringTest extends AbstractGeometryTest
 
     public function testGetPointN()
     {
-        $data = require __DIR__ . '/Resources/php/linestring.php';
         $points = [];
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
-        foreach ($data['coordinates'] as $coordinate) {
+        foreach (self::$data['coordinates'] as $coordinate) {
             $points[] = $factory->createPoint($coordinate);
         }
         $linestring = new LineString($factory, ...$points);
@@ -59,16 +68,15 @@ class LineStringTest extends AbstractGeometryTest
             $this->assertSame($point, $linestring->{$offset});
         }
         $invalidOffset = count($linestring) + 1;
-        $this->expectError();
+        $this->expectException(\OutOfRangeException::class);
         $linestring[$invalidOffset];
     }
 
     public function testHasPointN()
     {
-        $data = require __DIR__ . '/Resources/php/linestring.php';
         $points = [];
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
-        foreach ($data['coordinates'] as $coordinate) {
+        foreach (self::$data['coordinates'] as $coordinate) {
             $points[] = $factory->createPoint($coordinate);
         }
         $linestring = new LineString($factory, ...$points);
@@ -85,26 +93,29 @@ class LineStringTest extends AbstractGeometryTest
 
     public function testRemovePointN()
     {
-        $data = require __DIR__ . '/Resources/php/linestring.php';
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
         $linestring = new LineString($factory);
-        foreach ($data['coordinates'] as $offset => $coordinate) {
+        foreach (self::$data['coordinates'] as $offset => $coordinate) {
             $linestring[$offset] = ['type' => 'point', 'coordinates' => $coordinate];
         }
         unset($linestring[$linestring->getNumPoints() - 1]);
-        $this->assertCount(count($data['coordinates']) - 1, $linestring);
+        $this->assertCount(count(self::$data['coordinates']) - 1, $linestring);
+        
+        $this->assertInstanceOf(Point::class, $linestring->removePointN(count($linestring) - 1));
+        $this->expectException(\OutOfRangeException::class);
+        $linestring->removePointN(1000);
+       
     }
 
     public function testSetPointN()
     {
-        $data = require __DIR__ . '/Resources/php/linestring.php';
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
         $linestring = new LineString($factory);
-        foreach ($data['coordinates'] as $offset => $coordinate) {
+        foreach (self::$data['coordinates'] as $offset => $coordinate) {
             $linestring[$offset] = ['type' => 'point', 'coordinates' => $coordinate];
         }
         $linestring[] = require __DIR__ . '/Resources/php/point.php';
-        $this->assertCount(count($data['coordinates']) + 1, $linestring);
+        $this->assertCount(count(self::$data['coordinates']) + 1, $linestring);
     }
 
     public function testNumPoints()

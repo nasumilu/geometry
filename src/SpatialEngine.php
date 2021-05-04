@@ -61,12 +61,33 @@ interface SpatialEngine
 
     /**
      * Indicates whether two Geometry objects are spatially equal.
-     * 
      * @param Geometry $geometry
      * @param Geometry $other
      * @return bool
      */
     public function equals(Geometry $geometry, Geometry $other): bool;
+    
+    /**
+     * Gets the area of a Surface
+     * @param Surface $surface
+     * @return float
+     */
+    public function area(Surface $surface): float;
+    
+    /**
+     * Gets the mathematical centroid of a Surface. The result is not 
+     * guaranteed to be on the Surface
+     * @param Surface $surface
+     * @return Point
+     */
+    public function centroid(Surface $surface): Point;
+    
+    /**
+     * Gets a Point guaranteed to be on the Surface
+     * @param Surface $surface
+     * @return Point
+     */
+    public function pointOnSurface(Surface $surface): Point;
 
     /**
      * Indicates whether two Geometry objects are spatially disjoint.
