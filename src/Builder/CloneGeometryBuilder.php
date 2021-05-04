@@ -30,14 +30,14 @@ use Nasumilu\Spatial\Geometry\{
  */
 class CloneGeometryBuilder implements GeometryBuilder
 {
-    
+
     public function build(GeometryFactory $factory, $args): ?Geometry
     {
-        if(!$args instanceof Geometry) {
+        if (!$args instanceof Geometry) {
             return null;
         }
-        
-        if($args->getFactory() === $factory) {
+
+        if ($args->getFactory() === $factory) {
             return clone $args;
         } else {
             return $args->getFactory()->getSpatialEngine()->transform($args, $factory);

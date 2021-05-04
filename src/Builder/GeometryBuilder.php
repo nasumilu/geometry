@@ -31,12 +31,12 @@ use Nasumilu\Spatial\Geometry\{
 interface GeometryBuilder
 {
 
-   /**
-    * Build a Geometry object with <code>$args</code> or return null if unable
-    * or not responsible for building a Geometry from the <code>$args</code>.
-    * @param AbstractGeometryFactory $geometryFactory
-    * @param mixed $args
-    * @return Geometry|null
-    */
-   public function build(GeometryFactory $factory, $args): ?Geometry;
+    /**
+     * Build a Geometry object with <code>$args</code> or return null if unable
+     * or not responsible for building a Geometry from the <code>$args</code>.
+     * @param AbstractGeometryFactory $geometryFactory
+     * @param mixed $args
+     * @return Geometry|null
+     */
+    public function build(GeometryFactory $factory, $args): ?Geometry;
 }

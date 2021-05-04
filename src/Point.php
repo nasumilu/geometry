@@ -35,6 +35,7 @@ class Point extends Geometry implements Coordinate
 
     /** The well-known text type value */
     public const WKT_TYPE = 'point';
+
     /** The well-known binary type value */
     public const WKB_TYPE = 1;
 

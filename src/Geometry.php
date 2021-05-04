@@ -73,7 +73,7 @@ abstract class Geometry
     {
         return $this->factory->getCoordianteSystem()->isMeasured();
     }
-    
+
     /**
      * The inherent dimension of <i>this</i> geometric object, which must be 
      * less than or equal to the coordinate dimension. In non-homogeneous 
@@ -83,7 +83,7 @@ abstract class Geometry
      * @return int the Geometry object's dimension
      */
     public abstract function getDimension(): int;
-    
+
     /**
      * Gets the simple name of the instantiable subtype of Geometry of which 
      * <i>this</i> geometric object is an instantiable member. The name of the 
@@ -92,5 +92,4 @@ abstract class Geometry
      * @return string the Geometry object's instantiable subtype simple name
      */
     public abstract function getGeometryType(): string;
-
 }

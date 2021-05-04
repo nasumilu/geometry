@@ -33,7 +33,7 @@ class CoordinateException extends \InvalidArgumentException
      */
     public static function ordinateNotSupported(int $ordinate)
     {
-        if(false === $key = array_search($ordinate, Coordinate::ORDIANTES, true)) {
+        if (false === $key = array_search($ordinate, Coordinate::ORDIANTES, true)) {
             $key = $ordinate;
         }
         return new self(sprintf("The %s-coordinate is not "

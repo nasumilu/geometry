@@ -28,9 +28,9 @@ use function current;
 use function reset;
 
 /**
- * Polygon is a planar Surface defined by 1 exterior boundary and 0 or more interior 
+ * Polygon is a planar Surface defined by 1 exterior boundary and 0 or more interior
  * boundaries. Each of the interior boundary defines a hole in the Polygon.
- * 
+ *
  * @link https://www.ogc.org/standards/sfa Simple Feature Access - Part 1: Common Architecture
  */
 class Polygon extends Surface
@@ -38,6 +38,7 @@ class Polygon extends Surface
 
     /** The well-known text value */
     public const WKT_TYPE = 'polygon';
+
     /** The well-known binary value */
     public const WKB_TYPE = 3;
 
@@ -50,12 +51,12 @@ class Polygon extends Surface
 
     /**
      * Constructs a Polygon with the GeometryFactory and set of LineStirng objects.
-     * 
+     *
      * Please use {@see GeometryFacotry::create} or {@see GeometryFactory::createPolygon}
-     * to construct a Polygon. If using this construct directly ensure that the 
-     * <code>LineString</code>s found in the set and their <code>Point</code>s where 
+     * to construct a Polygon. If using this construct directly ensure that the
+     * <code>LineString</code>s found in the set and their <code>Point</code>s where
      * constructed with the same <code>GeometryFactory</code>.
-     * 
+     *
      * @param GeometryFactory $geometryFactory
      * @param LineString $linestrings
      */
@@ -65,7 +66,7 @@ class Polygon extends Surface
         // make sure it has at least one empty linestring element
         $this->linestrings = count($linestrings) === 0 ? [$geometryFactory->createLineString()] : $linestrings;
     }
-    
+
     /**
      * Gets the exterior ring of the Polygon
      * @return LineString
@@ -74,7 +75,7 @@ class Polygon extends Surface
     {
         return $this->linestrings[0];
     }
-    
+
     /**
      * Gets the number of internal rings (holes) of the Polygon
      * @return int
@@ -83,10 +84,10 @@ class Polygon extends Surface
     {
         return $this->count() - 1;
     }
-    
+
     public function getInteriorRingN(int $offset): LineString
     {
-        if(!isset($this->linestrings[$offset + 1])) {
+        if (!isset($this->linestrings[$offset + 1])) {
             throw new OutOfRangeException("Offset $offset not found!");
         }
         return $this->linestrings[$offset + 1];

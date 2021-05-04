@@ -33,72 +33,71 @@ interface GeometryFactory
      * @return Geometry
      */
     public function create($args): Geometry;
-    
+
     /**
      * Create a Point from an array of float values
      * @param float[] $coordinates
      * @return Point
      */
-    public function createPoint(array $coordinates): Point;
-    
+    public function createPoint(array $coordinates = []): Point;
+
     /**
      * Create a LineString from a multidimensional array of float values
      * @param array[] $coordinates
      * @return LineString
      */
-    public function createLineString(array $coordinates): LineString;
-    
+    public function createLineString(array $coordinates = []): LineString;
+
     /**
      * Create a Polygon from a multidimensional array of float values
      * @param array $linestrings
      * @return Polygon
      */
-    public function createPolygon(array $linestrings): Polygon;
-    
+    public function createPolygon(array $linestrings = []): Polygon;
+
     /**
      * Create a MultiPolygon from a multidimensional array of float values
      * @param array $coordinates
      * @return MultiPoint
      */
-    public function createMultiPoint(array $coordinates): MultiPoint;
-    
+    public function createMultiPoint(array $coordinates = []): MultiPoint;
+
     /**
      * Create a MulitLineString from a multidimensional array of float values
      * @param array $linestrings
      * @return MultiLineString
      */
-    public function createMultiLineString(array $linestrings): MultiLineString;
-    
+    public function createMultiLineString(array $linestrings = []): MultiLineString;
+
     /**
      * Create a MultiPolygon from a multidimensional array of float values
      * @param array $polygons
      * @return MultiPolygon
      */
-    public function createMultiPolygon(array $polygons): MultiPolygon;
-    
+    public function createMultiPolygon(array $polygons = []): MultiPolygon;
+
     /**
      * Create a GeometryCollection from an array
      * @param array $geometries
      * @return GeometryCollection
      */
-    public function createGeometryCollection(array $geometries): GeometryCollection;
-    
+    public function createGeometryCollection(array $geometries = []): GeometryCollection;
+
     /**
      * Get the GeometryFactory objects PrecisionModel
      * @return PrecisionModel
      */
     public function getPrecisionModel(): PrecisionModel;
-    
+
     /**
      * Gets the GeometryFactory objects CoordianteSystem
      * @return CoordinateSystem
      */
     public function getCoordianteSystem(): CoordinateSystem;
-    
+
     /**
      * Get the GeometryFacotry objects SpatialEnginez
      * @return SpatialEngine
      */
     public function getSpatialEngine(): SpatialEngine;
-    
 }

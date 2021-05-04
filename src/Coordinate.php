@@ -28,13 +28,16 @@ interface Coordinate extends \ArrayAccess, \Iterator
 
     /** The x-coordinate ordinate */
     public const X = 0;
+
     /** The y-coordinate ordinate */
     public const Y = 1;
+
     /** The z-coordinate ordinate */
     public const Z = 2;
+
     /** The m-coordinate ordinate */
     public const M = 3;
-    
+
     /** Ordinate names mapped to ordinate offset */
     public const ORDIANTES = [
         'x' => self::X,
@@ -42,23 +45,26 @@ interface Coordinate extends \ArrayAccess, \Iterator
         'z' => self::Z,
         'm' => self::M
     ];
-    
+
     /**
      * Gets the x-coordinate value
      * @return float
      */
     public function getX(): float;
+
     /**
      * Gets the y-coordinate value
      * @return float
      */
     public function getY(): float;
+
     /**
      * Gets the z-coordinate value
      * @return float
      * @throws CoordinateException
      */
     public function getZ(): float;
+
     /**
      * Gets the m-coordinate value
      * @return float
@@ -72,11 +78,10 @@ interface Coordinate extends \ArrayAccess, \Iterator
      * @return bool
      */
     public function is3D(): bool;
-    
+
     /**
      * Indicates whether the coordinate is measured
      * @return bool
      */
     public function isMeasured(): bool;
-    
 }

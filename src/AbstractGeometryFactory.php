@@ -23,7 +23,6 @@ namespace Nasumilu\Spatial\Geometry;
 use function \array_unique;
 use function \array_merge;
 use function \array_search;
-
 use Nasumilu\Spatial\Geometry\Builder\{
     CloneGeometryBuilder,
     ArrayGeometryBuilder,
@@ -62,7 +61,7 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
             new ArrayGeometryBuilder(),
             new CloneGeometryBuilder()]
                 , (array) ($options['builders'] ?? []));
-        
+
         $this->registerBuilder(...$builders);
     }
 
@@ -156,12 +155,15 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
     {
         return $this->srid;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function create($args): Geometry
     {
         $geometry = null;
-        foreach($this->builders as $builder) {
-            if(null !== $geometry = $builder->build($this, $args)) {
+        foreach ($this->builders as $builder) {
+            if (null !== $geometry = $builder->build($this, $args)) {
                 return $geometry;
             }
         }
@@ -171,18 +173,33 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
     /**
      * {@inheritDoc}
      */
-    public function createPoint(array $coordinates): Point
+    public function createPoint(array $coordinates = []): Point
     {
         return new Point($this, $coordinates);
     }
 
-    public function createLineString(array $coordinates): LineString
+    /**
+     * {@inheritDoc}
+     */
+    public function createLineString(array $coordinates = []): LineString
     {
         $points = [];
         foreach ($coordinates as $coordinate) {
             $points[] = $this->createPoint($coordinate);
         }
         return new LineString($this, ...$points);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function createPolygon(array $coordinates = []): Polygon
+    {
+        $linestrings = [];
+        foreach ($coordinates as $linestring) {
+            $linestrings[] = $this->createLineString($linestring);
+        }
+        return new Polygon($this, ...$linestrings);
     }
 
 }

@@ -43,7 +43,7 @@ interface SpatialEngine
      * @return bool true if simple; false otherwise
      */
     public function isSimple(Geometry $geometry): bool;
-    
+
     /**
      * Indicates whether a Geometry is empty.
      * @param Geometry $geometry use to chek if empty
@@ -66,14 +66,14 @@ interface SpatialEngine
      * @return bool
      */
     public function equals(Geometry $geometry, Geometry $other): bool;
-    
+
     /**
      * Gets the area of a Surface
      * @param Surface $surface
      * @return float
      */
     public function area(Surface $surface): float;
-    
+
     /**
      * Gets the mathematical centroid of a Surface. The result is not 
      * guaranteed to be on the Surface
@@ -81,7 +81,7 @@ interface SpatialEngine
      * @return Point
      */
     public function centroid(Surface $surface): Point;
-    
+
     /**
      * Gets a Point guaranteed to be on the Surface
      * @param Surface $surface
@@ -129,7 +129,6 @@ interface SpatialEngine
     public function difference(Geometry $geometry, Geometry $other): Geometry;
 
     public function symDifference(Geometry $geometry, Geometry $other): Geometry;
-    
+
     public function transform(Geometry $geometry, GeometryFactory $factory): Geometry;
-    
 }

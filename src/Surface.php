@@ -30,31 +30,34 @@ use Countable;
  */
 abstract class Surface extends Geometry implements Iterator, Countable
 {
+
     /**
      * @see SpatialEngine::boundary()
      * @return MultiCurve
      */
-    public function getBoundary() : MultiCurve {
+    public function getBoundary(): MultiCurve
+    {
         return $this->factory->getSpatialEngine()->boundary($this);
     }
-    
+
     /**
      * @see SpatialEngine::area
      * @return float
      */
-    public function getArea(): float 
+    public function getArea(): float
     {
         $this->factory->getSpatialEngine()->area($this);
     }
-    
+
     /**
      * @see SpatialEngine::centroid
      * @return type
      */
-    public function getCentroid() {
+    public function getCentroid()
+    {
         return $this->factory->getSpatialEngine()->centroid($this);
     }
-    
+
     /**
      * @see SpatialEngine::pointOnSurface
      * @return Point
@@ -63,7 +66,7 @@ abstract class Surface extends Geometry implements Iterator, Countable
     {
         return $this->factory->getSpatialEngine()->getPointOnSurface($this);
     }
-    
+
     /**
      * {@inheritDoc}
      */

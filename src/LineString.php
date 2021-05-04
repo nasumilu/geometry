@@ -36,11 +36,12 @@ use function array_values;
  */
 class LineString extends Curve
 {
+
     public const WKT_TYPE = 'linestring';
     public const WKB_TYPE = 2;
-    
+
     private $points;
-    
+
     /**
      * Constructs a LineString with the GeometryFactory and set of Point(s)
      * 
@@ -87,7 +88,7 @@ class LineString extends Curve
      */
     public function getPointN(int $offset): Point
     {
-        if(!$this->hasPointN($offset)) {
+        if (!$this->hasPointN($offset)) {
             throw new OutOfRangeException("Offset: $offset out of range!");
         }
         return $this->points[$offset];
@@ -119,7 +120,7 @@ class LineString extends Curve
      */
     public function removePointN(int $offset): Point
     {
-        if(!$this->hasPointN($offset)) {
+        if (!$this->hasPointN($offset)) {
             throw new OutOfRangeException("Offset: $offset out of range!");
         }
         $oldValue = $this->points[$offset];
@@ -141,8 +142,7 @@ class LineString extends Curve
      */
     public function setPointN($point, ?int $offset = null): LineString
     {
-        $this->points[$offset ?? count($this->points)] = 
-                $this->factory->create($point);
+        $this->points[$offset ?? count($this->points)] = $this->factory->create($point);
         return $this;
     }
 

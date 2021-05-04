@@ -36,7 +36,7 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
      * @return Point;
      */
     public abstract function getPointN(int $offset): Point;
-    
+
     /**
      * Sets the <i>n<sup>th</sup></i> Point
      * 
@@ -48,7 +48,7 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
      * @return Curve
      */
     public abstract function setPointN($point, ?int $offset = null): Curve;
-    
+
     /**
      * Indicates whether the Curve contains a point a <code>$offset</code> 
      * position.
@@ -57,7 +57,7 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
      * @return bool
      */
     public abstract function hasPointN(int $offset): bool;
-    
+
     /**
      * Removes a the Point found a <code>$offset</code>
      * 
@@ -65,7 +65,7 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
      * @return Point the removed Point
      */
     public abstract function removePointN(int $offset): Point;
-    
+
     /**
      * Gets the number of points found in the Curve
      * 
@@ -99,7 +99,7 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
     {
         return 1;
     }
-    
+
     /**
      * @internal Countable::count implementation, delegates to
      * Curve::getNumPoints
@@ -109,7 +109,7 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
     {
         return $this->getNumPoints();
     }
-    
+
     /**
      * @internal ArrayAccess::offsetSet implementation, delegates to
      * Curve::setPointN
@@ -129,7 +129,7 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
     {
         return $this->getPointN($offset);
     }
-    
+
     /**
      * @internal ArrayAccess::offsetExists implementation, delegates to 
      * Curve::hasPointN
@@ -139,7 +139,7 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
     {
         return $this->hasPointN($offset);
     }
-    
+
     /**
      * @internal ArrayAccess::offsetUnset implementation delegates to 
      * Curve::removePointN
@@ -149,7 +149,7 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
     {
         $this->removePointN($offset);
     }
-    
+
     /**
      * @internal magic method __get, delegates to Curve::gePointN
      * {@inheritDoc}
@@ -158,15 +158,16 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
     {
         return $this->getPointN(intval($name));
     }
-    
+
     /**
      * @internal magic method __set, delegates to Curve::setPointN
      * {@inheritDoc}
      */
-    public function __set($name, $value) {
+    public function __set($name, $value)
+    {
         $this->setPointN($value, intval($name));
     }
-    
+
     /**
      * @internal magic method __isset so a Curve object will work with some
      * of the existing array_** functions; delegates to Curve::hasPointN
@@ -176,4 +177,5 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
     {
         return $this->hasPointN(intval($name));
     }
+
 }
