@@ -201,5 +201,14 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
         }
         return new Polygon($this, ...$linestrings);
     }
+    
+    public function createMultiPoint(array $coordinates = []): MultiPoint
+    {
+        $points = [];
+        foreach($coordinates as $coordinate) {
+            $points[] = $this->createPoint($coordinate);
+        }
+        return new MultiPoint($this, ...$points);
+    }
 
 }
