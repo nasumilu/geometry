@@ -28,7 +28,7 @@ use Nasumilu\Spatial\Geometry\{
 };
 
 /**
- * Description of LineStringTest
+ * @covers Nasumilu\Spatial\Geometry\Linestring
  */
 class LineStringTest extends AbstractGeometryTest
 {

@@ -28,7 +28,7 @@ use Nasumilu\Spatial\Geometry\{
 };
 
 /**
- * Description of PolygonTest
+ * @covers Nasumilu\Spatial\Geometry\Polygon
  */
 class PolygonTest extends AbstractGeometryTest 
 {

@@ -28,11 +28,12 @@ use Nasumilu\Spatial\Geometry\{
 };
 
 /**
- * Description of PointTest
+ * @covers Nasumilu\Spatial\Geometry\Point
  */
 class PointTest extends AbstractGeometryTest
 {
 
+    /** Some coordinate data to test with */
     private const COORDINATES = [
         'x' => -85.14654564,
         'y' => 28.4964655465,
@@ -50,6 +51,7 @@ class PointTest extends AbstractGeometryTest
         foreach ([self::COORDINATES, array_values(self::COORDINATES)] as $param) {
             $point = new Point($factory, $param);
             $this->assertTrue($point->hasOrdinate(0));
+            $this->assertTrue($point->offsetExists(0));
             $this->assertTrue(isset($point[0]));
             $this->assertTrue(isset($point['x']));
             $this->assertTrue(isset($point->x));
@@ -58,11 +60,13 @@ class PointTest extends AbstractGeometryTest
             $this->assertTrue(isset($point['y']));
             $this->assertTrue(isset($point->y));
             if ($factoryOptions['3d']) {
+                $this->assertTrue($point->offsetExists(2));
                 $this->assertTrue($point->hasOrdinate(2));
                 $this->assertTrue(isset($point[2]));
                 $this->assertTrue(isset($point['z']));
                 $this->assertTrue(isset($point->z));
             } else {
+                $this->assertFalse($point->offsetExists(2));
                 $this->assertFalse($point->hasOrdinate(2));
                 $this->assertFalse(isset($point[2]));
                 $this->assertFalse(isset($point['z']));
@@ -70,11 +74,13 @@ class PointTest extends AbstractGeometryTest
             }
 
             if ($factoryOptions['measured']) {
+                $this->assertTrue($point->offsetExists(3));
                 $this->assertTrue($point->hasOrdinate(3));
                 $this->assertTrue(isset($point[3]));
                 $this->assertTrue(isset($point['m']));
                 $this->assertTrue(isset($point->m));
             } else {
+                $this->assertFalse($point->offsetExists(3));
                 $this->assertFalse($point->hasOrdinate(3));
                 $this->assertFalse(isset($point[3]));
                 $this->assertFalse(isset($point['m']));

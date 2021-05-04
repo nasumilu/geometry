@@ -27,7 +27,7 @@ use Nasumilu\Spatial\Geometry\{
 };
 
 /**
- * Description of GeometryTest
+ * @covers Nasumilu\Spatial\Geometry\Geometry
  */
 class GeometryTest extends TestCase
 {
