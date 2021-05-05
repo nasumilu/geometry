@@ -20,9 +20,9 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Geometry;
 
-use function \array_unique;
-use function \array_merge;
-use function \array_search;
+use function array_unique;
+use function array_merge;
+use function array_search;
 use Nasumilu\Spatial\Geometry\Builder\{
     CloneGeometryBuilder,
     ArrayGeometryBuilder,

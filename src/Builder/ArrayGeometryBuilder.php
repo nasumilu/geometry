@@ -20,8 +20,8 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Geometry\Builder;
 
-use function \is_array;
-use function \call_user_func;
+use function is_array;
+use function call_user_func;
 use Nasumilu\Spatial\Geometry\{
     Geometry,
     GeometryFactory

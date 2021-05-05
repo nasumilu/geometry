@@ -20,7 +20,7 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Tests\Geometry;
 
-use function \array_values;
+use function array_values;
 use Nasumilu\Spatial\Geometry\{
     CoordinateException,
     AbstractGeometryFactory,

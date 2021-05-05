@@ -20,7 +20,7 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Geometry;
 
-use function \array_search;
+use function array_search;
 
 class CoordinateException extends \InvalidArgumentException
 {

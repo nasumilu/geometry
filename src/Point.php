@@ -20,12 +20,12 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Geometry;
 
-use function \current;
-use function \reset;
-use function \key;
-use function \next;
-use function \intval;
-use function \array_key_exists;
+use function current;
+use function reset;
+use function key;
+use function next;
+use function intval;
+use function array_key_exists;
 
 /**
  *

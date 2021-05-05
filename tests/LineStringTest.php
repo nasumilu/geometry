@@ -20,7 +20,7 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Tests\Geometry;
 
-use function \count;
+use function count;
 use Nasumilu\Spatial\Geometry\{
     Point,
     LineString,
