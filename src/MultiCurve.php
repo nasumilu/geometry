@@ -63,16 +63,4 @@ abstract class MultiCurve extends GeometryCollection implements Lineal
         return true;
     }
     
-    /**
-     * {@inheritDoc}
-     */
-    public function setGeometryN($geometry, ?int $offset = null): GeometryCollection
-    {
-        $curve = $this->factory->create($geometry);
-        if(!$curve instanceof Curve) {
-            throw new InvalidArgumentException("MultiCurve is a homogeneous collection which "
-                    . "contains only Curve objects, found " + $curve->getGeometryType());
-        }
-        $this->geometries[$offset] = $curve;
-    }
 }
