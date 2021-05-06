@@ -24,6 +24,8 @@ use Iterator;
 use Countable;
 use ArrayAccess;
 use OutOfRangeException;
+use InvalidArgumentException;
+use function Nasumilu\Spatial\Geometry\static_cast_int;
 use function current;
 use function next;
 use function key;
@@ -83,6 +85,11 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
         foreach ($this->geometries as $geometry) {
             $dimension = max($dimension, $geometry->getDimension());
         }
+    }
+    
+    public function isEmpty(): bool
+    {
+        return $this->count() === 0;
     }
 
     /**
@@ -144,6 +151,11 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
         }
         return $this->geometries[$offset];
     }
+    
+    protected function createAllowedGeometry($geometry) : Geometry 
+    {
+        return $this->factory->create($geometry);
+    }
 
     /**
      * Sets a Geometry at <code>$offset</code> or push it to the end of the set
@@ -156,7 +168,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      */
     public function setGeometryN($geometry, ?int $offset = null): GeometryCollection
     {
-        $this->geometries[$offset] = $this->factory->create($geometry);
+        $this->geometries[$offset ?? $this->count()] = $this->createAllowedGeometry($geometry);
         return $this;
     }
 
@@ -237,7 +249,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      */
     public function __isset($name)
     {
-        return $this->hasGeometry($name);
+        return $this->hasGeometry(static_cast_int($name));
     }
 
     /**
@@ -246,7 +258,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      */
     public function __set($name, $value)
     {
-        $this->setGeometryN($value, $name);
+        $this->setGeometryN($value, static_cast_int($name));
     }
 
     /**
@@ -255,7 +267,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      */
     public function __get($name)
     {
-        return $this->getGeometryN($name);
+        return $this->getGeometryN(static_cast_int($name));
     }
 
 }

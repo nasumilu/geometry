@@ -20,6 +20,7 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Geometry;
 
+use ArrayAccess;
 use Iterator;
 use Countable;
 
@@ -28,8 +29,21 @@ use Countable;
  * 
  * @link https://www.ogc.org/standards/sfa Simple Feature Access - Part 1: Common Architecture
  */
-abstract class Surface extends Geometry implements Iterator, Countable
+abstract class Surface extends Geometry implements Iterator, ArrayAccess, Countable, Polygonal
 {
+
+    /**
+     * Gets the exterior ring of the Surface
+     * @return Curve
+     */
+    public abstract function getExteriorRing(): Curve;
+    
+    /**
+     * Gets the interior rings (holes).
+     * 
+     * @return LineString[]
+     */
+    public abstract function getInteriorRings(): array;
 
     /**
      * @see SpatialEngine::boundary()
@@ -41,30 +55,40 @@ abstract class Surface extends Geometry implements Iterator, Countable
     }
 
     /**
-     * @see SpatialEngine::area
-     * @return float
+     * {@inheritDoc}
      */
     public function getArea(): float
     {
-        $this->factory->getSpatialEngine()->area($this);
+        return $this->factory->getSpatialEngine()->area($this);
     }
 
     /**
-     * @see SpatialEngine::centroid
-     * @return type
+     * {@inheritDoc}
      */
-    public function getCentroid()
+    public function getCentroid(): Point
     {
         return $this->factory->getSpatialEngine()->centroid($this);
     }
 
     /**
-     * @see SpatialEngine::pointOnSurface
-     * @return Point
+     * {@inheritDoc}
      */
     public function getPointOnSurface(): Point
     {
-        return $this->factory->getSpatialEngine()->getPointOnSurface($this);
+        return $this->factory->getSpatialEngine()->pointOnSurface($this);
+    }
+
+    /**
+     * Indicates whether the Surface is empty
+     * 
+     * <strong>Note: this method only checks that the exterior ring is not empty
+     * </strong>
+     * @see Curve::isEmpty
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->getExteriorRing()->isEmpty();
     }
 
     /**

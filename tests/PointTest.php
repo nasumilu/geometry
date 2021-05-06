@@ -28,7 +28,7 @@ use Nasumilu\Spatial\Geometry\{
 };
 
 /**
- * @covers Nasumilu\Spatial\Geometry\Point
+ * @covers \Nasumilu\Spatial\Geometry\Point
  */
 class PointTest extends AbstractGeometryTest
 {
@@ -42,6 +42,85 @@ class PointTest extends AbstractGeometryTest
     ];
 
     /**
+     * Test the Point class Iterator interface
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Point::valid
+     * @covers \Nasumilu\Spatial\Geometry\Point::next
+     * @covers \Nasumilu\Spatial\Geometry\Point::current
+     * @covers \Nasumilu\Spatial\Geometry\Point::rewind
+     * @covers \Nasumilu\Spatial\Geometry\Point::key
+     * @dataProvider factoryOptions
+     * @param array $factoryOptions
+     */
+    public function testIteratorInterface(array $factoryOptions)
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [$factoryOptions]);
+        $point = new Point($factory, self::COORDINATES);
+        $precision = $factory->getPrecisionModel();
+        $expected = array_values(self::COORDINATES);
+        $i = 0;
+
+        while ($point->valid()) {
+            $this->assertEquals($precision->makePrecise($expected[$i]), $point->current());
+            $point->next();
+            $i++;
+
+            if ($i == 2 && $factoryOptions['measured'] && !$factoryOptions['3d']) {
+                $i++;
+                $this->assertEquals(3, $point->key());
+            }
+        }
+        $point->rewind();
+        $this->expectError();
+        $point['d'];
+    }
+
+    /**
+     * Test the Point ArrayAccess implementation
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Point::__unset
+     * @covers \Nasumilu\Spatial\Geometry\Point::offsetGet
+     * @covers \Nasumilu\Spatial\Geometry\Point::offsetUnset
+     * @covers \Nasumilu\Spatial\Geometry\Point::offsetSet
+     * @covers \Nasumilu\Spatial\Geometry\Point::offsetExists
+     * @dataProvider factoryOptions
+     * @param array $factoryOptions
+     */
+    public function testArrayAccess(array $factoryOptions)
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [$factoryOptions]);
+        $point = new Point($factory, self::COORDINATES);
+        $precision = $factory->getPrecisionModel();
+        $expected = array_values(self::COORDINATES);
+
+        $i = 0;
+        while ($point->valid()) {
+            if ($i == 2 && $factoryOptions['measured'] && !$factoryOptions['3d']) {
+                $i++;
+            }
+            $this->assertTrue($point->offsetExists($i));
+            $this->assertEquals($precision->makePrecise($expected[$i]), $point[$i]);
+            $i++;
+            $point->next();
+        }
+
+        unset($point['y']);
+        $this->assertNan($point->y);
+        if (!$point->is3D()) {
+            $this->expectException(CoordinateException::class);
+            $point->__unset('z');
+        }
+    }
+
+    /**
+     * Test the Point::hasOrdinate 
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Point::hasOrdinate
+     * @covers \Nasumilu\Spatial\Geometry\Point::offsetExists
+     * @covers \Nasumilu\Spatial\Geometry\Point::offsetGet
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -90,6 +169,12 @@ class PointTest extends AbstractGeometryTest
     }
 
     /**
+     * Tests the Point::getX method
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Point::__get
+     * @covers \Nasumilu\Spatial\Geometry\Point::getX
+     * @covers \Nasumilu\Spatial\Geometry\Point::getOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -108,6 +193,12 @@ class PointTest extends AbstractGeometryTest
     }
 
     /**
+     * Test Point::setX method
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Point::__set
+     * @covers \Nasumilu\Spatial\Geometry\Point::setX
+     * @covers \Nasumilu\Spatial\Geometry\Point::setOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -129,6 +220,12 @@ class PointTest extends AbstractGeometryTest
     }
 
     /**
+     * Tests the Point::getY method
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Point::__get
+     * @covers \Nasumilu\Spatial\Geometry\Point::getY
+     * @covers \Nasumilu\Spatial\Geometry\Point::getOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -147,6 +244,12 @@ class PointTest extends AbstractGeometryTest
     }
 
     /**
+     * Test Point::sety method
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Point::__set
+     * @covers \Nasumilu\Spatial\Geometry\Point::setY
+     * @covers \Nasumilu\Spatial\Geometry\Point::setOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -168,6 +271,12 @@ class PointTest extends AbstractGeometryTest
     }
 
     /**
+     * Tests the Point::getZ method
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Point::__get
+     * @covers \Nasumilu\Spatial\Geometry\Point::getZ
+     * @covers \Nasumilu\Spatial\Geometry\Point::getOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -192,6 +301,12 @@ class PointTest extends AbstractGeometryTest
     }
 
     /**
+     * Test Point::setZ method
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Point::__set
+     * @covers \Nasumilu\Spatial\Geometry\Point::setZ
+     * @covers \Nasumilu\Spatial\Geometry\Point::setOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -219,6 +334,12 @@ class PointTest extends AbstractGeometryTest
     }
 
     /**
+     * Tests the Point::getM method
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Point::__get
+     * @covers \Nasumilu\Spatial\Geometry\Point::getM
+     * @covers \Nasumilu\Spatial\Geometry\Point::getOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -243,6 +364,12 @@ class PointTest extends AbstractGeometryTest
     }
 
     /**
+     * Test Point::setM method
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Point::__set
+     * @covers \Nasumilu\Spatial\Geometry\Point::setM
+     * @covers \Nasumilu\Spatial\Geometry\Point::setOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -269,6 +396,12 @@ class PointTest extends AbstractGeometryTest
         }
     }
 
+    /**
+     * Test the Point::getDimension
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::getDimension
+     */
     public function testGetDimension()
     {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
@@ -276,11 +409,33 @@ class PointTest extends AbstractGeometryTest
         $this->assertEquals(0, $point->getDimension());
     }
 
+    /**
+     * Test the Point::getGeometryType
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::getGeometryType
+     */
     public function testGetGeometryType()
     {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
         $point = new Point($factory);
         $this->assertEquals(Point::WKT_TYPE, $point->getGeometryType());
+    }
+
+    /**
+     * Test Point::isEmpty
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Point::isEmpty
+     */
+    public function testIsEmpty()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $point = new Point($factory);
+        $this->assertTrue($point->isEmpty());
+        $point->x = -85.1111111111;
+        $this->assertTrue($point->isEmpty());
+        $point->y = 29.6456656545;
+        $this->assertFalse($point->isEmpty());
     }
 
 }

@@ -20,14 +20,17 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Geometry;
 
-use function intval;
+use function Nasumilu\Spatial\Geometry\static_cast_int;
+use ArrayAccess;
+use Iterator;
+use Countable;
 
 /**
  * A 1-dimensional geometric object usually stored as a sequence of Points.
  * 
  * @link https://www.ogc.org/standards/sfa Simple Feature Access - Part 1: Common Architecture
  */
-abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Countable
+abstract class Curve extends Geometry implements ArrayAccess, Iterator, Countable, Lineal
 {
 
     /**
@@ -83,6 +86,17 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function getLength(): float
+    {
+        if($this->count() < 2) {
+            return 0.0;
+        }
+        return $this->factory->getSpatialEngine()->length($this);
+    }
+
+    /**
      * Gets the end point of the Curve
      * @return Point|null
      */
@@ -100,6 +114,33 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
         return 1;
     }
 
+    /**
+     * Indicates whether the Curve is closed.
+     * 
+     * A closed curve has a minimum of 4 points and the 
+     * start point == end point
+     * 
+     * @return bool
+     */
+    public function isClosed(): bool
+    {
+        return $this->count() > 3 
+                && $this->getStartPoint() == $this->getEndPoint();
+    }
+    
+    /**
+     * An empty Curve has less than two points. 
+     * 
+     * <strong>Note: This method does not check the Curve's set of Point.
+     * Just that it contains 2 or more Point objects</strong>
+     * 
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->count() < 2;
+    }
+    
     /**
      * @internal Countable::count implementation, delegates to
      * Curve::getNumPoints
@@ -156,7 +197,7 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
      */
     public function __get($name)
     {
-        return $this->getPointN(intval($name));
+        return $this->getPointN(static_cast_int($name));
     }
 
     /**
@@ -165,7 +206,7 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
      */
     public function __set($name, $value)
     {
-        $this->setPointN($value, intval($name));
+        $this->setPointN($value, static_cast_int($name));
     }
 
     /**
@@ -175,7 +216,13 @@ abstract class Curve extends Geometry implements \ArrayAccess, \Iterator, \Count
      */
     public function __isset($name)
     {
-        return $this->hasPointN(intval($name));
+        return $this->hasPointN(static_cast_int($name));
+    }
+
+    public function __unset($name)
+    {
+
+        $this->removePointN(static_cast_int($name));
     }
 
 }

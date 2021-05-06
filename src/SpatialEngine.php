@@ -68,11 +68,18 @@ interface SpatialEngine
     public function equals(Geometry $geometry, Geometry $other): bool;
 
     /**
-     * Gets the area of a Surface
-     * @param Surface $surface
+     * Gets the area of a Polygonal objects
+     * @param Polgyonal $surface
      * @return float
      */
-    public function area(Surface $surface): float;
+    public function area(Polygonal $surface): float;
+
+    /**
+     * Get the length of a Lineal object
+     * @param Lineal $geometry
+     * @return float
+     */
+    public function length(Lineal $geometry): float;
 
     /**
      * Gets the mathematical centroid of a Surface. The result is not 

@@ -33,7 +33,8 @@
     "autoload-dev": {
         "psr-4": {
             "Nasumilu\\Spatial\\Tests\\Geometry\\": "tests/"
-        }
+        },
+        "files": ["src/static_cast.php"]
     },
     "require-dev": {
         "phpunit/phpunit": "9.5.3"

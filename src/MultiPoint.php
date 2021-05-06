@@ -51,14 +51,14 @@ class MultiPoint extends GeometryCollection
     /**
      * {@inheritDoc}
      */
-    public function setGeometryN($point, ?int $offset = null): GeometryCollection
+    protected function createAllowedGeometry($geometry): Point
     {
-        $_point = $this->factory->create($point);
-        if(!$_point instanceof Point) {
+        $point = $this->factory->create($geometry);
+        if(!$point instanceof Point) {
             throw new InvalidArgumentException("Multipoint is a homogeneous collection which "
-                    . "contains only Point objects, found " + $_point->getGeometryType());
+                    . "contains only Point objects, found " . $point->getGeometryType());
         }
-        $this->geometries[$offset] = $_point;
+        return $point;
     }
     
     /**

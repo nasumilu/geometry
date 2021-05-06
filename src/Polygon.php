@@ -26,6 +26,8 @@ use function key;
 use function next;
 use function current;
 use function reset;
+use function array_values;
+use function array_slice;
 
 /**
  * Polygon is a planar Surface defined by 1 exterior boundary and 0 or more interior
@@ -58,22 +60,30 @@ class Polygon extends Surface
      * constructed with the same <code>GeometryFactory</code>.
      *
      * @param GeometryFactory $geometryFactory
-     * @param LineString $linestrings
+     * @param LineString ...$linestrings
      */
     public function __construct(GeometryFactory $geometryFactory, LineString ...$linestrings)
     {
         parent::__construct($geometryFactory);
         // make sure it has at least one empty linestring element
-        $this->linestrings = count($linestrings) === 0 ? [$geometryFactory->createLineString()] : $linestrings;
+        if(0 === count($linestrings)) {
+            $linestrings = [$geometryFactory->createLineString()];
+        }
+        $this->linestrings = $linestrings;
     }
 
     /**
      * Gets the exterior ring of the Polygon
      * @return LineString
      */
-    public function getExternalRing(): LineString
+    public function getExteriorRing(): LineString
     {
         return $this->linestrings[0];
+    }
+
+    public function getInteriorRings(): array
+    {
+        return array_slice($this->linestrings, 1);
     }
 
     /**
@@ -87,10 +97,11 @@ class Polygon extends Surface
 
     public function getInteriorRingN(int $offset): LineString
     {
-        if (!isset($this->linestrings[$offset + 1])) {
+        $offset += 1;
+        if (!isset($this->linestrings[$offset])) {
             throw new OutOfRangeException("Offset $offset not found!");
         }
-        return $this->linestrings[$offset + 1];
+        return $this->linestrings[$offset];
     }
 
     /**
@@ -153,6 +164,44 @@ class Polygon extends Surface
     public function valid(): bool
     {
         return key($this->linestrings) !== null;
+    }
+
+    /**
+     * @internal ArrayAccess::offsetExists implementation
+     * {@inheritDoc}
+     */
+    public function offsetExists($offset): bool
+    {
+        return isset($this->linestrings[$offset]);
+    }
+
+    /**
+     * @internal ArrayAccess::offsetGet implementation
+     * {@inheritDoc}
+     */
+    public function offsetGet($offset): LineString
+    {
+        return $this->linestrings[$offset];
+    }
+
+    /**
+     * @internal ArrayAccess::offsetSet implementation
+     * {@inheritDoc}
+     */
+    public function offsetSet($offset, $value): void
+    {
+        $linestring = $this->factory->createLineString($value);
+        $this->linestrings[$offset ?? $this->count()] = $linestring;
+    }
+
+    /**
+     * @internal ArrayAccess::offsetUnset implementation
+     * {@inheritDoc}
+     */
+    public function offsetUnset($offset): void
+    {
+        unset($this->linestrings[$offset]);
+        $this->linestrings = array_values($this->linestrings);
     }
 
 }

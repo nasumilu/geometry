@@ -92,4 +92,11 @@ abstract class Geometry
      * @return string the Geometry object's instantiable subtype simple name
      */
     public abstract function getGeometryType(): string;
+    
+    /**
+     * Indicates whether a Geometry is empty or not
+     * 
+     * @return bool
+     */
+    public abstract function isEmpty(): bool;
 }

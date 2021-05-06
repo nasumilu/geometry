@@ -46,7 +46,7 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
     private $isMeasured;
 
     /** @var PrecisionModel */
-    private PrecisionModel $precisionModel;
+    private $precisionModel;
 
     /** @var GeometryBuilder[] */
     private $builders = [];
@@ -202,6 +202,9 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
         return new Polygon($this, ...$linestrings);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public function createMultiPoint(array $coordinates = []): MultiPoint
     {
         $points = [];

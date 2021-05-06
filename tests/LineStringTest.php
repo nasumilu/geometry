@@ -28,13 +28,14 @@ use Nasumilu\Spatial\Geometry\{
 };
 
 /**
- * @covers Nasumilu\Spatial\Geometry\Linestring
+ * @covers \Nasumilu\Spatial\Geometry\LineString
+ * @covers \Nasumilu\Spatial\Geometry\Curve
  */
 class LineStringTest extends AbstractGeometryTest
 {
 
     private static array $data;
-    
+
     /**
      * @beforeClass
      */
@@ -42,18 +43,74 @@ class LineStringTest extends AbstractGeometryTest
     {
         self::$data = require __DIR__ . '/Resources/php/linestring.php';
     }
-    
-    public function testConstructor()
+
+    /**
+     * Test the Linestring::__constructor
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\LineString::__construct
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::is3D
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::isMeasured
+     * @covers \Nasumilu\Spatial\Geometry\AbstractGeometryFactory::createPoint
+     * @dataProvider factoryOptions
+     * @param array $options
+     */
+    public function testConstructor(array $options)
     {
         $points = [];
-        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [$options]);
         foreach (self::$data['coordinates'] as $coordinate) {
             $points[] = $factory->createPoint($coordinate);
         }
         $linestring = new LineString($factory, ...$points);
         $this->assertInstanceOf(LineString::class, $linestring);
+        if ($options['3d']) {
+            $this->assertTrue($linestring->is3D());
+        } else {
+            $this->assertFalse($linestring->is3D());
+        }
+
+        if ($options['measured']) {
+            $this->assertTrue($linestring->isMeasured());
+        } else {
+            $this->assertFalse($linestring->isMeasured());
+        }
     }
 
+    /**
+     * Tests the Iterator implementation
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\LineString::valid
+     * @covers \Nasumilu\Spatial\Geometry\LineString::next
+     * @covers \Nasumilu\Spatial\Geometry\LineString::rewind
+     * @covers \Nasumilu\Spatial\Geometry\LineString::key
+     * @covers \Nasumilu\Spatial\Geometry\LineString::current
+     * @covers \Nasumilu\Spatial\Geometry\AbstractGeometryFactory::create
+     * 
+     * @dataProvider factoryOptions
+     * @param array $options
+     */
+    public function testIterator(array $options)
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [$options]);
+        $linestring = $factory->create(self::$data);
+        while ($linestring->valid()) {
+            $this->assertInstanceOf(Point::class, $linestring->current());
+            $linestring->next();
+        }
+        $linestring->rewind();
+        $this->assertTrue($linestring->valid());
+        $this->assertEquals(0, $linestring->key());
+    }
+
+    /**
+     * Test LineString::getPointN
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\LineString::getPointN
+     * @covers \Nasumilu\Spatial\Geometry\Curve::offsetGet
+     * @covers \Nasumilu\Spatial\Geometry\Curve::__get
+     * @covers ::\Nasumilu\Spatial\Geometry\static_cast_int
+     * @covers \Nasumilu\Spatial\Geometry\AbstractGeometryFactory::createPoint
+     */
     public function testGetPointN()
     {
         $points = [];
@@ -72,6 +129,13 @@ class LineStringTest extends AbstractGeometryTest
         $linestring[$invalidOffset];
     }
 
+    /**
+     * Tests LineString::hasPoint
+     * @covers \Nasumilu\Spatial\Geometry\LineString::hasPointN
+     * @covers \Nasumilu\Spatial\Geometry\LineString::offsetExists
+     * @covers \Nasumilu\Spatial\Geometry\LineString::__isset
+     * @covers ::\Nasumilu\Spatial\Geometry\static_cast_int
+     */
     public function testHasPointN()
     {
         $points = [];
@@ -81,16 +145,31 @@ class LineStringTest extends AbstractGeometryTest
         }
         $linestring = new LineString($factory, ...$points);
         foreach ($points as $offset => $point) {
+            $this->assertInstanceOf(Point::class, $point);
             $this->assertTrue($linestring->hasPointN($offset));
             $this->assertTrue(isset($linestring[$offset]));
+            $this->assertTrue($linestring->offsetExists($offset));
             $this->assertTrue(isset($linestring->{$offset}));
+            $this->assertTrue($linestring->__isset($offset));
         }
         $invalidOffset = count($linestring) + 1;
         $this->assertFalse($linestring->hasPointN($invalidOffset));
         $this->assertFalse(isset($linestring[$invalidOffset]));
+        $this->assertFalse($linestring->offsetExists($invalidOffset));
         $this->assertFalse(isset($linestring->{$invalidOffset}));
+        $this->assertFalse($linestring->__isset($invalidOffset));
     }
 
+    /**
+     * Test LineString::removePointN
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\LineString::removePointN
+     * @covers \Nasumilu\Spatial\Geometry\LineString::getNumPoints
+     * @covers \Nasumilu\Spatial\Geometry\Curve::count
+     * @covers \Nasumilu\Spatial\Geometry\Curve::__unset
+     * @covers \Nasumilu\Spatial\Geometry\Curve::offsetUnset
+     * @covers ::\Nasumilu\Spatial\Geometry\static_cast_int
+     */
     public function testRemovePointN()
     {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
@@ -100,13 +179,24 @@ class LineStringTest extends AbstractGeometryTest
         }
         unset($linestring[$linestring->getNumPoints() - 1]);
         $this->assertCount(count(self::$data['coordinates']) - 1, $linestring);
-        
-        $this->assertInstanceOf(Point::class, $linestring->removePointN(count($linestring) - 1));
+        $linestring->__unset($linestring->getNumPoints() - 1);
+        $this->assertCount(count(self::$data['coordinates']) - 2, $linestring);
+        $linestring->offsetUnset($linestring->getNumPoints() - 1);
+        $this->assertCount(count(self::$data['coordinates']) - 3, $linestring);
         $this->expectException(\OutOfRangeException::class);
-        $linestring->removePointN(1000);
-       
+        $this->assertInstanceOf(Point::class, $linestring->removePointN(count($linestring) - 1));
     }
 
+    /**
+     * Test LineString::setPointN
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\LineString::setPointN
+     * @covers \Nasumilu\Spatial\Geometry\LineString::getNumPoints
+     * @covers \Nasumilu\Spatial\Geometry\Curve::count
+     * @covers \Nasumilu\Spatial\Geometry\Curve::__set
+     * @covers \Nasumilu\Spatial\Geometry\Curve::offsetSet
+     * @covers ::\Nasumilu\Spatial\Geometry\static_cast_int
+     */
     public function testSetPointN()
     {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
@@ -116,16 +206,17 @@ class LineStringTest extends AbstractGeometryTest
         }
         $linestring[] = require __DIR__ . '/Resources/php/point.php';
         $this->assertCount(count(self::$data['coordinates']) + 1, $linestring);
+        $linestring->__set($linestring->getNumPoints(), require __DIR__ . '/Resources/php/point.php');
+        $this->assertCount($linestring->getNumPoints(), $linestring);
+        $this->{$linestring->getNumPoints()} = require __DIR__ . '/Resources/php/point.php';
+        $this->assertCount($linestring->getNumPoints(), $linestring);
     }
 
-    public function testNumPoints()
-    {
-        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
-        $linestring = new LineString($factory);
-        $this->assertCount(0, $linestring);
-        $this->assertEquals(count($linestring), $linestring->getNumPoints());
-    }
-
+    /**
+     * Test the LineString::getDimension
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::getDimension
+     */
     public function testGetDimension()
     {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
@@ -133,11 +224,70 @@ class LineStringTest extends AbstractGeometryTest
         $this->assertEquals(1, $linestring->getDimension());
     }
 
+    /**
+     * Test the LineString::getGeometryType
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::getGeometryType
+     */
     public function testGetGeometryType()
     {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
         $linestring = new LineString($factory);
         $this->assertEquals(LineString::WKT_TYPE, $linestring->getGeometryType());
+    }
+
+    /**
+     * Test the LineString::getStartPoint & LineString::getEndPoint
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Curve::getStartPoint
+     * @covers \Nasumilu\Spatial\Geometry\Curve::getEndPoint
+     */
+    public function testSartPoint()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $linestring = new LineString($factory);
+        $linestring[] = require __DIR__ . '/Resources/php/point.php';
+        $this->assertSame($linestring[0], $linestring->getStartPoint());
+        $this->assertSame($linestring->getStartPoint(), $linestring->getEndPoint());
+
+        $linestring->setPointN(require __DIR__ . '/Resources/php/point.php');
+        $this->assertNotSame($linestring->getEndPoint(), $linestring->getStartPoint());
+    }
+
+    /**
+     * Test the LineString::getLength
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Curve::getLength
+     */
+    public function testGetLength()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+
+        $linestring = new LineString($factory);
+        $this->assertEquals(0, $linestring->getLength());
+        $expected = 12.214;
+        $linestring[] = ['type' => 'point', 'coordinates' => [-85.25631, 29.345665]];
+        $linestring[] = require __DIR__ . '/Resources/php/point.php';
+        $factory->method('length')->willReturn($expected);
+        $this->assertEquals($expected, $linestring->getLength());
+    }
+
+    /**
+     * Test the LineString::isClosed
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Curve::isClosed
+     */
+    public function testIsClosed()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+
+        $linestring = new LineString($factory);
+        $this->assertFalse($linestring->isClosed());
+        $linestring[] = ['type' => 'point', 'coordinates' => [-85.25631, 29.345665]];
+        $linestring[] = require __DIR__ . '/Resources/php/point.php';
+        $linestring[] = ['type' => 'point'];
+        $linestring[] = ['type' => 'point', 'coordinates' => [-85.25631, 29.345665]];
+        $this->assertTrue($linestring->isClosed());
     }
 
 }

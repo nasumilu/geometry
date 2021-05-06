@@ -26,9 +26,13 @@ use function key;
 use function next;
 use function intval;
 use function array_key_exists;
+use function is_nan;
 
 /**
- *
+ * A Point is a 0-dimensional geometric object and represents a single location 
+ * in coordinate space.
+ * 
+ * @link https://www.ogc.org/standards/sfa Simple Feature Access - Part 1: Common Architecture
  */
 class Point extends Geometry implements Coordinate
 {
@@ -118,7 +122,10 @@ class Point extends Geometry implements Coordinate
     // Utility method to convert an offset to an integer
     private function ordinate($offset): int
     {
-        return intval(self::ORDIANTES[$offset] ?? $offset);
+        if(!is_numeric($offset)) {
+            $offset = self::ORDIANTES[$offset];
+        }
+        return intval($offset);
     }
 
     /**
@@ -304,6 +311,11 @@ class Point extends Geometry implements Coordinate
     {
         return $this->hasOrdinate($this->ordinate($name));
     }
+    
+    public function __unset($name)
+    {
+        $this->offsetUnset($name);
+    }
 
     /**
      * {@inheritDoc}
@@ -319,6 +331,15 @@ class Point extends Geometry implements Coordinate
     public function getGeometryType(): string
     {
         return self::WKT_TYPE;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function isEmpty(): bool
+    {
+        return is_nan($this->coordinates[self::X]) 
+            || is_nan($this->coordinates[self::Y]);
     }
 
 }
