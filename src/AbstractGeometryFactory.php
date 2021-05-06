@@ -213,5 +213,14 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
         }
         return new MultiPoint($this, ...$points);
     }
+    
+    public function createMultiLineString(array $coordinates = []): MultiLineString
+    {
+        $linestrings = [];
+        foreach($coordinates as $linestring) {
+            $linestrings[] = $this->createLineString($linestring);
+        }
+        return new MultiLineString($this, ...$linestrings);
+    }
 
 }
