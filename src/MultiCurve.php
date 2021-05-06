@@ -20,8 +20,6 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Geometry;
 
-use InvalidArgumentException;
-
 /**
  * A MultiCurve is a 1-dimensional GeometryCollection whose elements
  * are Curves.
