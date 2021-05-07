@@ -32,6 +32,16 @@ use Nasumilu\Spatial\Geometry\{
 class MultiPolygonTest extends AbstractGeometryTest
 {
 
+    private static $data;
+    
+    /**
+     * @before
+     */
+    public static function setUpBeforeClass(): void
+    {
+        self::$data = require __DIR__.'/Resources/php/multipolygon.php';
+    }
+    
     /**
      * @test
      * @covers \Nasumilu\Spatial\Geometry\MultiSurface::getArea
@@ -90,7 +100,7 @@ class MultiPolygonTest extends AbstractGeometryTest
     public function testArrayAccessOffsetSet(array $options) {
         
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [$options]);
-        $multipolygon = $factory->createMultiPolygon();
+        $multipolygon = $factory->create(self::$data);
         $multipolygon[] = ['type' => 'polygon'];
         $this->expectException(\InvalidArgumentException::class);
         $multipolygon[] = ['type' => 'point'];
