@@ -72,14 +72,14 @@ interface SpatialEngine
      * @param Polgyonal $surface
      * @return float
      */
-    public function area(Polygonal $surface): float;
+    public function area(Polygonal $polygonal): float;
 
     /**
      * Get the length of a Lineal object
      * @param Lineal $geometry
      * @return float
      */
-    public function length(Lineal $geometry): float;
+    public function length(Lineal $lineal): float;
 
     /**
      * Gets the mathematical centroid of a Surface. The result is not 
@@ -87,14 +87,14 @@ interface SpatialEngine
      * @param Surface $surface
      * @return Point
      */
-    public function centroid(Surface $surface): Point;
+    public function centroid(Polygonal $polygonal): Point;
 
     /**
      * Gets a Point guaranteed to be on the Surface
      * @param Surface $surface
      * @return Point
      */
-    public function pointOnSurface(Surface $surface): Point;
+    public function pointOnSurface(Polygonal $polygonal): Point;
 
     /**
      * Indicates whether two Geometry objects are spatially disjoint.

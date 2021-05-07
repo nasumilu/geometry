@@ -25,20 +25,48 @@ namespace Nasumilu\Spatial\Geometry;
  * 
  * @link https://www.ogc.org/standards/sfa Simple Feature Access - Part 1: Common Architecture
  */
-class MultiSurface extends GeometryCollection
+abstract class MultiSurface extends GeometryCollection implements Polygonal
 {
-    
+
+    /**
+     * @param GeometryFactory $factory
+     * @param Surface $surface
+     */
     public function __construct(GeometryFactory $factory, Surface ...$surface)
     {
         parent::__construct($factory, ...$surface);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function getDimension(): int
     {
-        return parent::getDimension();
+        return self::DIMENSION;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getArea(): float
+    {
+        return $this->factory->getSpatialEngine()->area($this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCentroid(): Point
+    {
+        return $this->factory->getSpatialEngine()->centroid($this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPointOnSurface(): Point
+    {
+        return $this->factory->getSpatialEngine()->pointOnSurface($this);
+    }
+
 }

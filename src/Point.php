@@ -34,7 +34,7 @@ use function is_nan;
  * 
  * @link https://www.ogc.org/standards/sfa Simple Feature Access - Part 1: Common Architecture
  */
-class Point extends Geometry implements Coordinate
+class Point extends Geometry implements Coordinate, Puntal
 {
 
     /** The well-known text type value */
@@ -322,7 +322,7 @@ class Point extends Geometry implements Coordinate
      */
     public function getDimension(): int
     {
-        return 0;
+        return self::DIMENSION;
     }
 
     /**

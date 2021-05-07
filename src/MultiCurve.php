@@ -52,7 +52,7 @@ abstract class MultiCurve extends GeometryCollection implements Lineal
      */
     public function getDimension(): int
     {
-        return 1;
+        return self::DIMENSION;
     }
 
     /**

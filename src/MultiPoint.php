@@ -25,7 +25,7 @@ use InvalidArgumentException;
 /**
  * Description of MultiPoint
  */
-class MultiPoint extends GeometryCollection
+class MultiPoint extends GeometryCollection implements Puntal
 {
     /** The well-known text type value */
     public const WKT_TYPE = 'multipoint';
@@ -66,7 +66,7 @@ class MultiPoint extends GeometryCollection
      */
     public function getDimension(): int
     {
-        return 0;
+        return self::DIMENSION;
     }
     
     /**

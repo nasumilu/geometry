@@ -111,7 +111,7 @@ abstract class Curve extends Geometry implements ArrayAccess, Iterator, Countabl
      */
     public function getDimension(): int
     {
-        return 1;
+        return self::DIMENSION;
     }
 
     /**

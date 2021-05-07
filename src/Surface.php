@@ -31,7 +31,7 @@ use Countable;
  */
 abstract class Surface extends Geometry implements Iterator, ArrayAccess, Countable, Polygonal
 {
-
+    
     /**
      * Gets the exterior ring of the Surface
      * @return Curve
@@ -96,7 +96,7 @@ abstract class Surface extends Geometry implements Iterator, ArrayAccess, Counta
      */
     public function getDimension(): int
     {
-        return 2;
+        return self::DIMENSION;
     }
 
 }

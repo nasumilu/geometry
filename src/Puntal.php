@@ -21,13 +21,13 @@ declare(strict_types=1);
 namespace Nasumilu\Spatial\Geometry;
 
 /**
- * Polygonal is used to identify 2-dimensional Geometry subclasses.
+ * Puntal identifies 0-dimension Geometry objects.
  */
-interface Polygonal
+interface Puntal
 {
 
-    /** Polygonal dimension value */
-    public const DIMENSION = 2;
+    /** Puntal dimension value */
+    public const DIMENSION = 0;
 
     /**
      * The inherent dimension of <i>this</i> geometric object, which must be 
@@ -35,27 +35,7 @@ interface Polygonal
      * collections, this will return the largest topological dimension of the
      * contained objects.
      * @link https://www.ogc.org/standards/sfa Simple Feature Access - Part 1: Common Architecture
-     * @return int the Polygonal object's dimension; (MUST BE 2)
+     * @return int the Puntal object's dimension; (MUST BE 0)
      */
     public function getDimension(): int;
-
-    /**
-     * Gets the area
-     * @return float
-     */
-    public function getArea(): float;
-
-    /**
-     * Gets the mathematical centroid. 
-     * 
-     * The results are not guaranteed to be on the Polygonal
-     * @return Point
-     */
-    public function getCentroid(): Point;
-
-    /**
-     * Gets a Point guaranteed to be on the Polygonal
-     * @return Point
-     */
-    public function getPointOnSurface(): Point;
 }

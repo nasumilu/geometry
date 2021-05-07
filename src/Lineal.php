@@ -26,6 +26,19 @@ namespace Nasumilu\Spatial\Geometry;
 interface Lineal
 {
 
+    /** Lineal dimension value */
+    public const DIMENSION = 1;
+    
+    /**
+     * The inherent dimension of <i>this</i> geometric object, which must be 
+     * less than or equal to the coordinate dimension. In non-homogeneous 
+     * collections, this will return the largest topological dimension of the
+     * contained objects.
+     * @link https://www.ogc.org/standards/sfa Simple Feature Access - Part 1: Common Architecture
+     * @return int the Lineal object's dimension; (MUST BE 1)
+     */
+    public function getDimension(): int;
+    
     /**
      * Gets the length
      * @return float
