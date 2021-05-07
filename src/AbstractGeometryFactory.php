@@ -214,6 +214,9 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
         return new MultiPoint($this, ...$points);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public function createMultiLineString(array $coordinates = []): MultiLineString
     {
         $linestrings = [];
@@ -221,6 +224,18 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
             $linestrings[] = $this->createLineString($linestring);
         }
         return new MultiLineString($this, ...$linestrings);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function createMultiPolygon(array $coordinates = []): MultiPolygon
+    {
+        $polygons = [];
+        foreach($coordinates as $coordinate) {
+            $polygons[] = $this->createPolygon($coordinate);
+        }
+        return new MultiPolygon($this, ...$polygons);
     }
 
 }
