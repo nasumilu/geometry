@@ -48,9 +48,9 @@ class MultiLineString extends MultiCurve
     protected function createAllowedGeometry($geometry): LineString
     {
         $linestring = $this->factory->create($geometry);
-        if (!$linestring instanceof Point) {
+        if (!$linestring instanceof LineString) {
             throw new InvalidArgumentException("MultiLineString is a homogeneous collection which "
-                            . "contains only LineString objects, found " + $linestring->getGeometryType());
+                            . "contains only LineString objects, found " . $linestring->getGeometryType());
         }
         return $linestring;
     }

@@ -28,12 +28,42 @@ use Nasumilu\Spatial\Geometry\{
 /**
  * @covers Nasumilu\Spatial\Geometry\MultiLineString
  */
-class MultiLineStringTest extends AbstractGeometryTest 
+class MultiLineStringTest extends AbstractGeometryTest
 {
- 
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\MultiCurve::getLength
+     * @covers \Nasumilu\Spatial\Geometry\MultiCurve::__construct
+     */
+    public function testGetLength()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $multilinestring = new MultiLineString($factory);
+        $expected = 1234.2233;
+        $factory->method('length')->willReturn($expected);
+        $this->assertEquals($expected, $multilinestring->getLength());
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\MultiCurve::isClosed
+     */
+    public function isClosed()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $multilinestring = new MultiLineString($factory);
+        $this->assertTrue($multilinestring->isClosed());
+        $multilinestring[] = require __DIR__ . '/Resources/php/linestring.php';
+        $this->assertFalse($multilinestring->isClosed());
+        $multilinestring[0][] = $multilinestring[0][0];
+        $this->assertTrue($multilinestring->isClosed());
+    }
+
     /**
      * Tests the MultiLineString::getDimension method
      * @test
+     * @covers \Nasumilu\Spatial\Geometry\MultiCurve::getDimension
      */
     public function testGetDimension()
     {
@@ -45,12 +75,26 @@ class MultiLineStringTest extends AbstractGeometryTest
     /**
      * Test the MultiLineString::getGeometryType method
      * @test
+     * @covers \Nasumilu\Spatial\Geometry\MultiCurve::getGeometryType
      */
     public function testGetGeometryType()
     {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
         $multilinestring = new MultiLineString($factory);
         $this->assertEquals(MultiLineString::WKT_TYPE, $multilinestring->getGeometryType());
+    }
+
+    /**
+     * Test the MultiLineString::getGeometryType method
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\MultiCurve::getGeometryType
+     */
+    public function testOffsetSet()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $multilinestring = new MultiLineString($factory);
+        $this->expectException(\InvalidArgumentException::class);
+        $multilinestring[] = ['type' => 'point'];
     }
 
 }

@@ -27,20 +27,26 @@ namespace Nasumilu\Spatial\Geometry;
  */
 abstract class MultiCurve extends GeometryCollection implements Lineal
 {
-    
+
+    /**
+     * Constructs a MultiCurve with the GeometryFactory and set of LineString(s)
+     *
+     * @param GeometryFactory $factory
+     * @param Curve ...$curves
+     */
     public function __construct(GeometryFactory $factory, Curve ...$curves)
     {
         parent::__construct($factory, ...$curves);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function getLength(): float
     {
-        $this->factory->getSpatialEngine()->length($this);
+        return $this->factory->getSpatialEngine()->length($this);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -48,17 +54,18 @@ abstract class MultiCurve extends GeometryCollection implements Lineal
     {
         return 1;
     }
-    
+
     /**
      * {@inheritDoc}
      */
-    public function isClosed(): bool {
-        foreach($this->geometries as $curve) {
-            if(!$curve->isClosed()) {
+    public function isClosed(): bool
+    {
+        foreach ($this->geometries as $curve) {
+            if (!$curve->isClosed()) {
                 return false;
             }
         }
         return true;
     }
-    
+
 }
