@@ -44,8 +44,6 @@ class MultiPolygonTest extends AbstractGeometryTest
     
     /**
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\MultiSurface::getArea
-     * @covers \Nasumilu\Spatial\Geometry\MultiSurface::__construct
      */
     public function testGetArea()
     {
@@ -57,8 +55,6 @@ class MultiPolygonTest extends AbstractGeometryTest
 
     /**
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\MultiSurface::getCentroid
-     * @covers \Nasumilu\Spatial\Geometry\MultiSurface::getPointOnSurface
      */
     public function testGetCentroid()
     {
@@ -83,7 +79,6 @@ class MultiPolygonTest extends AbstractGeometryTest
 
     /**
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\MultiSurface::getGeometryType
      */
     public function testGetGeometryType()
     {
@@ -94,7 +89,6 @@ class MultiPolygonTest extends AbstractGeometryTest
     
     /**
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\MultiPolygon::offsetSet
      * @dataProvider factoryOptions
      */
     public function testArrayAccessOffsetSet(array $options) {

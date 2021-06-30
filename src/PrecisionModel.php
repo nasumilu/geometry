@@ -82,7 +82,7 @@ final class PrecisionModel
         if (ini_get('precision') < $precision) {
             throw new InvalidArgumentException(sprintf('Invalid precision! '
                                     . 'The core php.ini `precision` setting is %d, less than this '
-                                    . 'model\'s precision of %d.', ini_get($precision), $precision));
+                                    . 'model\'s precision of %d.', ini_get('precision'), $precision));
         }
         $this->precision = $precision;
     }

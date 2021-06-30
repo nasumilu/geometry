@@ -44,12 +44,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Test the Point class Iterator interface
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Point::valid
-     * @covers \Nasumilu\Spatial\Geometry\Point::next
-     * @covers \Nasumilu\Spatial\Geometry\Point::current
-     * @covers \Nasumilu\Spatial\Geometry\Point::rewind
-     * @covers \Nasumilu\Spatial\Geometry\Point::key
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -79,12 +73,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Test the Point ArrayAccess implementation
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Point::__unset
-     * @covers \Nasumilu\Spatial\Geometry\Point::offsetGet
-     * @covers \Nasumilu\Spatial\Geometry\Point::offsetUnset
-     * @covers \Nasumilu\Spatial\Geometry\Point::offsetSet
-     * @covers \Nasumilu\Spatial\Geometry\Point::offsetExists
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -117,10 +105,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Test the Point::hasOrdinate 
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Point::hasOrdinate
-     * @covers \Nasumilu\Spatial\Geometry\Point::offsetExists
-     * @covers \Nasumilu\Spatial\Geometry\Point::offsetGet
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -171,10 +155,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Tests the Point::getX method
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Point::__get
-     * @covers \Nasumilu\Spatial\Geometry\Point::getX
-     * @covers \Nasumilu\Spatial\Geometry\Point::getOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -195,10 +175,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Test Point::setX method
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Point::__set
-     * @covers \Nasumilu\Spatial\Geometry\Point::setX
-     * @covers \Nasumilu\Spatial\Geometry\Point::setOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -222,10 +198,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Tests the Point::getY method
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Point::__get
-     * @covers \Nasumilu\Spatial\Geometry\Point::getY
-     * @covers \Nasumilu\Spatial\Geometry\Point::getOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -246,10 +218,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Test Point::sety method
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Point::__set
-     * @covers \Nasumilu\Spatial\Geometry\Point::setY
-     * @covers \Nasumilu\Spatial\Geometry\Point::setOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -273,10 +241,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Tests the Point::getZ method
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Point::__get
-     * @covers \Nasumilu\Spatial\Geometry\Point::getZ
-     * @covers \Nasumilu\Spatial\Geometry\Point::getOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -303,10 +267,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Test Point::setZ method
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Point::__set
-     * @covers \Nasumilu\Spatial\Geometry\Point::setZ
-     * @covers \Nasumilu\Spatial\Geometry\Point::setOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -336,10 +296,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Tests the Point::getM method
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Point::__get
-     * @covers \Nasumilu\Spatial\Geometry\Point::getM
-     * @covers \Nasumilu\Spatial\Geometry\Point::getOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -366,10 +322,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Test Point::setM method
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Point::__set
-     * @covers \Nasumilu\Spatial\Geometry\Point::setM
-     * @covers \Nasumilu\Spatial\Geometry\Point::setOrdinate
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -399,8 +351,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Test the Point::getDimension
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::__construct
-     * @covers \Nasumilu\Spatial\Geometry\Geometry::getDimension
      */
     public function testGetDimension()
     {
@@ -425,7 +375,6 @@ class PointTest extends AbstractGeometryTest
     /**
      * Test Point::isEmpty
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Point::isEmpty
      */
     public function testIsEmpty()
     {
