@@ -23,6 +23,7 @@ namespace Nasumilu\Spatial\Geometry;
 use function array_unique;
 use function array_merge;
 use function array_search;
+use RuntimeException;
 use Nasumilu\Spatial\Geometry\Builder\{
     CloneGeometryBuilder,
     ArrayGeometryBuilder,
@@ -236,6 +237,15 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
             $polygons[] = $this->createPolygon($coordinate);
         }
         return new MultiPolygon($this, ...$polygons);
+    }
+    
+    public function createGeometryCollection(array $geometries = []): GeometryCollection
+    {
+        $_geometries = [];
+        foreach ($geometries as $geometry) {
+            $_geometries[] = $this->create($geometry);
+        }
+        return new GeometryCollection($this, ...$_geometries);
     }
 
 }

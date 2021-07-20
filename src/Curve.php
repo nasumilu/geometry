@@ -20,7 +20,6 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Geometry;
 
-use function Nasumilu\Spatial\Geometry\static_cast_int;
 use ArrayAccess;
 use Iterator;
 use Countable;
@@ -192,12 +191,12 @@ abstract class Curve extends Geometry implements ArrayAccess, Iterator, Countabl
     }
 
     /**
-     * @internal magic method __get, delegates to Curve::gePointN
+     * @internal magic method __get, delegates to Curve::getPointN
      * {@inheritDoc}
      */
     public function __get($name)
     {
-        return $this->getPointN(static_cast_int($name));
+        return $this->getPointN((int) $name);
     }
 
     /**
@@ -206,7 +205,7 @@ abstract class Curve extends Geometry implements ArrayAccess, Iterator, Countabl
      */
     public function __set($name, $value)
     {
-        $this->setPointN($value, static_cast_int($name));
+        $this->setPointN($value, (int) $name);
     }
 
     /**
@@ -216,13 +215,13 @@ abstract class Curve extends Geometry implements ArrayAccess, Iterator, Countabl
      */
     public function __isset($name)
     {
-        return $this->hasPointN(static_cast_int($name));
+        return $this->hasPointN((int) $name);
     }
 
     public function __unset($name)
     {
 
-        $this->removePointN(static_cast_int($name));
+        $this->removePointN((int) $name);
     }
 
 }

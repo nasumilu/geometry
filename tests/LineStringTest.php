@@ -108,7 +108,6 @@ class LineStringTest extends AbstractGeometryTest
      * @covers \Nasumilu\Spatial\Geometry\LineString::getPointN
      * @covers \Nasumilu\Spatial\Geometry\Curve::offsetGet
      * @covers \Nasumilu\Spatial\Geometry\Curve::__get
-     * @covers ::\Nasumilu\Spatial\Geometry\static_cast_int
      * @covers \Nasumilu\Spatial\Geometry\AbstractGeometryFactory::createPoint
      */
     public function testGetPointN()
@@ -134,7 +133,6 @@ class LineStringTest extends AbstractGeometryTest
      * @covers \Nasumilu\Spatial\Geometry\LineString::hasPointN
      * @covers \Nasumilu\Spatial\Geometry\LineString::offsetExists
      * @covers \Nasumilu\Spatial\Geometry\LineString::__isset
-     * @covers ::\Nasumilu\Spatial\Geometry\static_cast_int
      */
     public function testHasPointN()
     {
@@ -168,7 +166,6 @@ class LineStringTest extends AbstractGeometryTest
      * @covers \Nasumilu\Spatial\Geometry\Curve::count
      * @covers \Nasumilu\Spatial\Geometry\Curve::__unset
      * @covers \Nasumilu\Spatial\Geometry\Curve::offsetUnset
-     * @covers ::\Nasumilu\Spatial\Geometry\static_cast_int
      */
     public function testRemovePointN()
     {
@@ -195,7 +192,6 @@ class LineStringTest extends AbstractGeometryTest
      * @covers \Nasumilu\Spatial\Geometry\Curve::count
      * @covers \Nasumilu\Spatial\Geometry\Curve::__set
      * @covers \Nasumilu\Spatial\Geometry\Curve::offsetSet
-     * @covers ::\Nasumilu\Spatial\Geometry\static_cast_int
      */
     public function testSetPointN()
     {

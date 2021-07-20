@@ -25,7 +25,6 @@ use Countable;
 use ArrayAccess;
 use OutOfRangeException;
 use InvalidArgumentException;
-use function Nasumilu\Spatial\Geometry\static_cast_int;
 use function current;
 use function next;
 use function key;
@@ -249,7 +248,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      */
     public function __isset($name)
     {
-        return $this->hasGeometry(static_cast_int($name));
+        return $this->hasGeometry((int) $name);
     }
 
     /**
@@ -258,7 +257,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      */
     public function __set($name, $value)
     {
-        $this->setGeometryN($value, static_cast_int($name));
+        $this->setGeometryN($value, (int) $name);
     }
 
     /**
@@ -267,7 +266,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      */
     public function __get($name)
     {
-        return $this->getGeometryN(static_cast_int($name));
+        return $this->getGeometryN((int) $name);
     }
 
 }

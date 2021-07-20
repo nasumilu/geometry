@@ -21,14 +21,14 @@ return [
         require __DIR__ . '/point.php',
         require __DIR__ . '/linestring.php',
         require __DIR__ . '/polygon.php',
-        require __DIR__ / '/multipoint.php',
+        require __DIR__ . '/multipoint.php',
         [
             'type' => 'geometrycollection',
             'geometries' => [
                 require __DIR__ . '/point.php',
                 require __DIR__ . '/linestring.php',
                 require __DIR__ . '/polygon.php',
-                require __DIR__ / '/multipoint.php'
+                require __DIR__ . '/multipoint.php'
             ]
         ]
     ]
