@@ -41,7 +41,9 @@ class MultiLineStringTest extends AbstractGeometryTest
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
         $multilinestring = new MultiLineString($factory);
         $expected = 1234.2233;
-        $factory->method('length')->willReturn($expected);
+        $factory->expects($this->atLeastOnce())
+                ->method('length')
+                ->willReturn($expected);
         $this->assertEquals($expected, $multilinestring->getLength());
     }
 

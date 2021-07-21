@@ -165,7 +165,9 @@ class PolygonTest extends AbstractGeometryTest
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
         $polygon = new Polygon($factory);
         $expected = $factory->createPoint();
-        $factory->method('centroid')->willReturn($expected);
+        $factory->expects($this->atLeastOnce())
+                ->method('centroid')
+                ->willReturn($expected);
         $this->assertSame($expected, $polygon->getCentroid());
     }
 

@@ -264,7 +264,9 @@ class LineStringTest extends AbstractGeometryTest
         $expected = 12.214;
         $linestring[] = ['type' => 'point', 'coordinates' => [-85.25631, 29.345665]];
         $linestring[] = require __DIR__ . '/Resources/php/point.php';
-        $factory->method('length')->willReturn($expected);
+        $factory->expects($this->atLeastOnce())
+                ->method('length')
+                ->willReturn($expected);
         $this->assertEquals($expected, $linestring->getLength());
     }
 
