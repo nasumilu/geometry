@@ -53,7 +53,7 @@ abstract class Geometry
      */
     public function getSrid(): int
     {
-        return $this->factory->getCoordianteSystem()->srid();
+        return $this->factory->getCoordianteSystem()->getSrid();
     }
 
     /**
