@@ -43,19 +43,19 @@ interface CoordinateSystem
      * Gets the coordinate systems spatial reference system id (SRID)
      * @return int
      */
-    public function srid(): int;
+    public function getSrid(): int;
 
     /**
      * Gets the coordinate dimension as: (x,y) = 2, (x,y,m) = 3, (x,y,z) = 3, 
      * (x,y,z,m) = 4.
      * @return int
      */
-    public function coordinateDimension(): int;
+    public function getCoordinateDimension(): int;
 
     /**
      * Gets the spatial dimension as: (x,y) = 2, (x,y,m) = 2, (x,y,z) = 3, and
      * (x,y,z,m) = 3
      * @return int
      */
-    public function spatialDimension(): int;
+    public function getSpatialDimension(): int;
 }
