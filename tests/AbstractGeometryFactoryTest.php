@@ -86,6 +86,96 @@ class AbstractGeometryFactoryTest extends TestCase
         $this->assertEquals($options['srid'], $factory->getSrid());
     }
 
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::getEnvelope
+     */
+    public function testGetEnvelope()
+    {
+
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $expected = $factory->createPolygon();
+        $factory->expects($this->atLeastOnce())
+                ->method('envelope')
+                ->willReturn($expected);
+        $geometry = $factory->createMultiLineString();
+        $envelope = $geometry->getEnvelope();
+        $this->assertEquals($expected, $envelope);
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::isSimple
+     */
+    public function testIsSimple()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory->expects($this->atLeastOnce())
+                ->method('isSimple')
+                ->willReturn(true);
+        $geometry = $factory->createLineString();
+        $this->assertTrue($geometry->isSimple());
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::getBoundary
+     */
+    public function testGetBoundary()
+    {
+
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $expected = $factory->createPolygon();
+        $factory->expects($this->atLeastOnce())
+                ->method('boundary')
+                ->willReturn($expected);
+        $geometry = $factory->createMultiLineString();
+        $boundary = $geometry->getBoundary();
+        $this->assertEquals($expected, $boundary);
+    }
+    
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::disjoint
+     */
+    public function testDisjoint() {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory->expects($this->atLeastOnce())
+                ->method('disjoint')
+                ->willReturn(false);
+        $geometry = $factory->createPoint();
+        $other = $factory->createPolygon();
+        $this->assertFalse($geometry->disjoint($other));
+    }
+    
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::intersects
+     */
+    public function testIntersects() {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory->expects($this->atLeastOnce())
+                ->method('intersects')
+                ->willReturn(true);
+        $geometry = $factory->createPoint();
+        $other = $factory->createPolygon();
+        $this->assertTrue($geometry->intersects($other));
+    }
+    
+        /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::touches
+     */
+    public function testTouches() {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory->expects($this->atLeastOnce())
+                ->method('touches')
+                ->willReturn(false);
+        $geometry = $factory->createPoint();
+        $other = $factory->createPolygon();
+        $this->assertFalse($geometry->touches($other));
+    }
+
     public function dataProvider(): array
     {
         return require __DIR__ . '/Resources/php/factory_options.php';

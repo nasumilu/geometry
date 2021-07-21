@@ -75,6 +75,54 @@ abstract class Geometry
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function getEnvelope(): Geometry
+    {
+        return $this->factory->getSpatialEngine()->envelope($this);
+    }
+
+    public function isSimple(): bool
+    {
+        return $this->factory->getSpatialEngine()->isSimple($this);
+    }
+
+    public function getBoundary(): Geometry
+    {
+        return $this->factory->getSpatialEngine()->boundary($this);
+    }
+
+    /**
+     * Indicates whether <code>$other</code> spatially disjoint.
+     * @param Geometry $other
+     * @return bool
+     */
+    public function disjoint(Geometry $other): bool
+    {
+        return $this->factory->getSpatialEngine()->disjoint($this, $other);
+    }
+
+    /**
+     * Indicates whether <code>$other</code> spatially intersects.
+     * @param Geometry $other
+     * @return bool
+     */
+    public function intersects(Geometry $other): bool
+    {
+        return $this->factory->getSpatialEngine()->intersects($this, $other);
+    }
+
+    /**
+     * Indicates whether <code>$other</code> spatially touches.
+     * @param Geometry $other
+     * @return bool
+     */
+    public function touches(Geometry $other): bool
+    {
+        return $this->factory->getSpatialEngine()->touches($this, $other);
+    }
+
+    /**
      * The inherent dimension of <i>this</i> geometric object, which must be 
      * less than or equal to the coordinate dimension. In non-homogeneous 
      * collections, this will return the largest topological dimension of the
@@ -92,7 +140,7 @@ abstract class Geometry
      * @return string the Geometry object's instantiable subtype simple name
      */
     public abstract function getGeometryType(): string;
-    
+
     /**
      * Indicates whether a Geometry is empty or not
      * 

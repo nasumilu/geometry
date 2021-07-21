@@ -104,8 +104,20 @@ interface SpatialEngine
      */
     public function disjoint(Geometry $geometry, Geometry $other): bool;
 
+    /**
+     * Indicates whether two Geometry objects spatially intersect.
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @return bool
+     */
     public function intersects(Geometry $geometry, Geometry $other): bool;
 
+    /**
+     * Indicates whether two Geometry objects spatially touch.
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @return bool
+     */
     public function touches(Geometry $geometry, Geometry $other): bool;
 
     public function crosses(Geometry $geometry, Geometry $other): bool;
