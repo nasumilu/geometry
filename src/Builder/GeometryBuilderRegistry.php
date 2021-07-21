@@ -37,4 +37,12 @@ interface GeometryBuilderRegistry
      * @param GeometryBuilder $builers
      */
     public function unregisterBuilder(GeometryBuilder ...$builers);
+    
+    /**
+     * Indicates whether a GeometryBuilder has been registered or not
+     * 
+     * @param GeometryBuilder $builder
+     * @return bool
+     */
+    public function hasBuilder(GeometryBuilder $builder): bool;
 }
