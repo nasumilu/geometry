@@ -133,12 +133,13 @@ class AbstractGeometryFactoryTest extends TestCase
         $boundary = $geometry->getBoundary();
         $this->assertEquals($expected, $boundary);
     }
-    
+
     /**
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::disjoint
      */
-    public function testDisjoint() {
+    public function testDisjoint()
+    {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
         $factory->expects($this->atLeastOnce())
                 ->method('disjoint')
@@ -147,12 +148,13 @@ class AbstractGeometryFactoryTest extends TestCase
         $other = $factory->createPolygon();
         $this->assertFalse($geometry->disjoint($other));
     }
-    
+
     /**
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::intersects
      */
-    public function testIntersects() {
+    public function testIntersects()
+    {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
         $factory->expects($this->atLeastOnce())
                 ->method('intersects')
@@ -161,12 +163,13 @@ class AbstractGeometryFactoryTest extends TestCase
         $other = $factory->createPolygon();
         $this->assertTrue($geometry->intersects($other));
     }
-    
-        /**
+
+    /**
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::touches
      */
-    public function testTouches() {
+    public function testTouches()
+    {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
         $factory->expects($this->atLeastOnce())
                 ->method('touches')
@@ -174,6 +177,51 @@ class AbstractGeometryFactoryTest extends TestCase
         $geometry = $factory->createPoint();
         $other = $factory->createPolygon();
         $this->assertFalse($geometry->touches($other));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::crosses
+     */
+    public function testCrosses()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory->expects($this->atLeastOnce())
+                ->method('crosses')
+                ->willReturn(true);
+        $geometry = $factory->createPoint();
+        $other = $factory->createPolygon();
+        $this->assertTrue($geometry->crosses($other));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::crosses
+     */
+    public function testWithin()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory->expects($this->atLeastOnce())
+                ->method('within')
+                ->willReturn(true);
+        $geometry = $factory->createPoint();
+        $other = $factory->createPolygon();
+        $this->assertTrue($geometry->within($other));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::crosses
+     */
+    public function testContains()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory->expects($this->atLeastOnce())
+                ->method('contains')
+                ->willReturn(true);
+        $geometry = $factory->createPoint();
+        $other = $factory->createPolygon();
+        $this->assertTrue($geometry->contains($other));
     }
 
     public function dataProvider(): array

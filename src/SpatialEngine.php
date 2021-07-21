@@ -120,10 +120,30 @@ interface SpatialEngine
      */
     public function touches(Geometry $geometry, Geometry $other): bool;
 
+    /**
+     * Indicates whether two Geometry objects spatial cross.
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @return bool
+     */
     public function crosses(Geometry $geometry, Geometry $other): bool;
 
+    /**
+     * Indicates whether <code>$other</code> Geometry object is spatially within
+     * <code>$geometry</code> Geometry object.
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @return bool
+     */
     public function within(Geometry $geometry, Geometry $other): bool;
 
+    /**
+     * Indicates whether <code>$other</code> Geometry object is spatially contained
+     * by <code>$geoemtry</code> Geometry object.
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @return bool
+     */
     public function contains(Geometry $geometry, Geometry $other): bool;
 
     public function overlaps(Geometry $geometry, Geometry $other): bool;

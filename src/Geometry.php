@@ -123,6 +123,39 @@ abstract class Geometry
     }
 
     /**
+     * Indicates whether <code>$other</code> spatially crosses.
+     * @param Geometry $other
+     * @return bool
+     */
+    public function crosses(Geometry $other): bool
+    {
+        return $this->factory->getSpatialEngine()->crosses($this, $other);
+    }
+
+    /**
+     * Indicates whether <code>$other</code> is spatially within this Geometry
+     * object.
+     * @param Geometry $other
+     * @return bool
+     */
+    public function within(Geometry $other): bool
+    {
+        return $this->factory->getSpatialEngine()->within($this, $other);
+    }
+
+    /**
+     * Indicates whether <code>$other</code> is spatially contained
+     * by this Geometry
+     * object.
+     * @param Geometry $other
+     * @return bool
+     */
+    public function contains(Geometry $other): bool
+    {
+        return $this->factory->getSpatialEngine()->contains($this, $other);
+    }
+
+    /**
      * The inherent dimension of <i>this</i> geometric object, which must be 
      * less than or equal to the coordinate dimension. In non-homogeneous 
      * collections, this will return the largest topological dimension of the
