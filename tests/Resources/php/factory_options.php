@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * Copyright 2021 mlucas.
  *
@@ -18,24 +16,10 @@ declare(strict_types=1);
  * limitations under the License.
  */
 
-namespace Nasumilu\Spatial\Tests\Geometry;
-
-use function array_merge;
-use PHPUnit\Framework\TestCase;
-
-/**
- * Description of AbstractGeometryTest
- */
-abstract class AbstractGeometryTest extends TestCase
-{
-    
-    public function factoryOptions(): array
-    {
-        return require __DIR__.'/Resources/php/factory_options.php';
-    }
-    
-    public abstract function testGetDimension();
-    
-    public abstract function testGetGeometryType();
-    
-}
+$options = ['srid' => 3857, '3d' => false, 'measured' => false];
+return [
+    'xy' => [$options],
+    'xyz' => [array_merge($options, ['3d' => true])],
+    'xym' => [array_merge($options, ['measured' => true])],
+    'xyzm' => [array_merge($options, ['3d' => true, 'measured' => true])]
+];
