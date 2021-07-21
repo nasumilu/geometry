@@ -3,4 +3,5 @@ php:
   - '7.4'
   - '8.0'
   - nightly
-script: phpunit --configuration phpunit.dist.xml --no-coverage
+before_script: composer update
+script: vendor/bin/phpunit --configuration phpunit.dist.xml --no-coverage
