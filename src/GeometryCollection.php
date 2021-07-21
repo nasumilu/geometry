@@ -84,6 +84,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
         foreach ($this->geometries as $geometry) {
             $dimension = max($dimension, $geometry->getDimension());
         }
+        return $dimension;
     }
     
     public function isEmpty(): bool
@@ -145,9 +146,6 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      */
     public function getGeometryN(int $offset): Geometry
     {
-        if (!isset($this->geometries)) {
-            throw new OutOfRangeException("No geometry at offset $offset found!");
-        }
         return $this->geometries[$offset];
     }
     
@@ -179,9 +177,6 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      */
     public function removeGeometryN(int $offset): Geometry
     {
-        if (!isset($this->geometries)) {
-            throw new OutOfRangeException("No geometry at offset $offset found!");
-        }
         $oldValue = $this->geometries[$offset];
         unset($this->geometries[$offset]);
         $this->geometries = array_values($this->geometries);
