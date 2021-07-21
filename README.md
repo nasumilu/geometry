@@ -1,4 +1,4 @@
-# nasumilu/geometry
+# nasumilu/geometry [![Build Status](https://app.travis-ci.com/nasumilu/geometry.svg?branch=main)](https://app.travis-ci.com/nasumilu/geometry)
 
 ## Usage
 
