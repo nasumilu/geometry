@@ -176,7 +176,7 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
                 return $geometry;
             }
         }
-        throw new RuntimeException('Uable to build Geometry!');
+        throw new RuntimeException('Unable to build Geometry!');
     }
 
     /**
