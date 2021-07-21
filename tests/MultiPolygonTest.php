@@ -28,20 +28,21 @@ use Nasumilu\Spatial\Geometry\{
 
 /**
  * @covers \Nasumilu\Spatial\Geometry\MultiPolygon
+ * @covers \Nasumilu\Spatial\Geometry\MultiSurface
  */
 class MultiPolygonTest extends AbstractGeometryTest
 {
 
     private static $data;
-    
+
     /**
      * @before
      */
     public static function setUpBeforeClass(): void
     {
-        self::$data = require __DIR__.'/Resources/php/multipolygon.php';
+        self::$data = require __DIR__ . '/Resources/php/multipolygon.php';
     }
-    
+
     /**
      * @test
      */
@@ -49,7 +50,9 @@ class MultiPolygonTest extends AbstractGeometryTest
     {
         $expected = 958654.655656;
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
-        $factory->method('area')->willReturn($expected);
+        $factory->expects($this->atLeastOnce())
+                ->method('area')
+                ->willReturn($expected);
         $this->assertEquals($expected, $factory->createMultiPolygon()->getArea());
     }
 
@@ -60,8 +63,12 @@ class MultiPolygonTest extends AbstractGeometryTest
     {
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
         $expected = $factory->createPoint();
-        $factory->method('centroid')->willReturn($expected);
-        $factory->method('pointOnSurface')->willReturn($expected);
+        $factory->expects($this->atLeastOnce())
+                ->method('centroid')
+                ->willReturn($expected);
+        $factory->expects($this->atLeastOnce())
+                ->method('pointOnSurface')
+                ->willReturn($expected);
         $this->assertSame($expected, $factory->createMultiPolygon()->getCentroid());
         $this->assertSame($expected, $factory->createMultiPolygon()->getPointOnSurface());
     }
@@ -86,19 +93,18 @@ class MultiPolygonTest extends AbstractGeometryTest
         $multipolygon = $factory->createMultiPolygon();
         $this->assertEquals(MultiPolygon::WKT_TYPE, $multipolygon->getGeometryType());
     }
-    
+
     /**
      * @test
      * @dataProvider factoryOptions
      */
-    public function testArrayAccessOffsetSet(array $options) {
-        
+    public function testArrayAccessOffsetSet(array $options)
+    {
+
         $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [$options]);
         $multipolygon = $factory->create(self::$data);
         $multipolygon[] = ['type' => 'polygon'];
         $this->expectException(\InvalidArgumentException::class);
         $multipolygon[] = ['type' => 'point'];
-        
     }
-
 }
