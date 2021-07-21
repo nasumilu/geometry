@@ -109,11 +109,19 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
             }
         }
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public final function hasBuilder(GeometryBuilder $builder): bool
+    {
+        return false !== array_search($builder, $this->builders, true);
+    }
 
     /**
      * {@inheritDoc}
      */
-    public function coordinateDimension(): int
+    public function getCoordinateDimension(): int
     {
         $dimension = 2;
         if ($this->is3D) {
@@ -144,7 +152,7 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
     /**
      * {@inheritDoc}
      */
-    public function spatialDimension(): int
+    public function getSpatialDimension(): int
     {
         return ($this->is3D) ? 3 : 2;
     }
@@ -152,7 +160,7 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
     /**
      * {@inheritDoc}
      */
-    public function srid(): int
+    public function getSrid(): int
     {
         return $this->srid;
     }
