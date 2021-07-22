@@ -28,7 +28,7 @@ class CoordinateException extends \InvalidArgumentException
     /**
      * Utility method for generating a CoordinateException when a <code>$ordinate</code>
      * is not supported.
-     * @param int $ordinate
+     * @param mixed $ordinate
      * @return CoordinateException
      */
     public static function ordinateNotSupported($ordinate)

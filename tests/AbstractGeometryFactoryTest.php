@@ -353,6 +353,152 @@ class AbstractGeometryFactoryTest extends TestCase
         $geometry->locateBetween(10, 20);
     }
 
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::distance
+     */
+    public function testDistance()
+    {
+        $expected = (float) rand(1000, 9999); // some random number
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory->expects($this->atLeastOnce())
+                ->method('distance')
+                ->willReturn($expected);
+        $geometry = $factory->createPoint();
+        $other = $factory->createPoint();
+        $this->assertEquals($expected, $geometry->distance($other));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::buffer
+     */
+    public function testBuffer()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $expected = $factory->createPolygon();
+        $factory->expects($this->atLeastOnce())
+                ->method('buffer')
+                ->willReturn($expected);
+        $geometry = $factory->createPoint();
+        $this->assertSame($expected, $geometry->buffer(10));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::convexHull
+     */
+    public function testConvexHull()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $expected = $factory->createPolygon();
+        $factory->expects($this->atLeastOnce())
+                ->method('convexHull')
+                ->willReturn($expected);
+        $geometry = $factory->createPolygon();
+        $this->assertSame($expected, $geometry->convexHull());
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::intersection
+     */
+    public function testIntersection()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $expected = $factory->createPolygon();
+        $factory->expects($this->atLeastOnce())
+                ->method('intersection')
+                ->willReturn($expected);
+        $geometry = $factory->createPolygon();
+        $other = $factory->createPolygon();
+        $this->assertSame($expected, $geometry->intersection($other));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::union
+     */
+    public function testUnion()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $expected = $factory->createPolygon();
+        $factory->expects($this->atLeastOnce())
+                ->method('union')
+                ->willReturn($expected);
+        $geometry = $factory->createPolygon();
+        $other = $factory->createPolygon();
+        $this->assertSame($expected, $geometry->union($other));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::difference
+     */
+    public function testDifference()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $expected = $factory->createPolygon();
+        $factory->expects($this->atLeastOnce())
+                ->method('difference')
+                ->willReturn($expected);
+        $geometry = $factory->createPolygon();
+        $other = $factory->createPolygon();
+        $this->assertSame($expected, $geometry->difference($other));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::symDifference
+     */
+    public function testSymDifference()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $expected = $factory->createPolygon();
+        $factory->expects($this->atLeastOnce())
+                ->method('symDifference')
+                ->willReturn($expected);
+        $geometry = $factory->createPolygon();
+        $other = $factory->createPolygon();
+        $this->assertSame($expected, $geometry->symDifference($other));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::transform
+     */
+    public function testTransformSameSridAKAClone()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $transform = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $expected = $transform->createPolygon();
+        $factory->expects($this->atLeastOnce())
+                ->method('transform')
+                ->willReturn($expected);
+        $geometry = $factory->createPolygon();
+        $transformGeometry = $geometry->transform($transform);
+        $this->assertSame($expected, $transformGeometry);
+        $this->assertSame($transform, $transformGeometry->getFactory());
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::transform
+     */
+    public function testTransformDiffSrid()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [['srid' => 3857]]);
+        $transform = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [['srid' => 2387]]);
+        $expected = $transform->createPolygon();
+        $factory->expects($this->atLeastOnce())
+                ->method('transform')
+                ->willReturn($expected);
+        $geometry = $factory->createPolygon();
+        $transformGeometry = $geometry->transform($transform);
+        $this->assertSame($expected, $transformGeometry);
+        $this->assertSame($transform, $transformGeometry->getFactory());
+    }
+
     public function dataProvider(): array
     {
         return require __DIR__ . '/Resources/php/factory_options.php';

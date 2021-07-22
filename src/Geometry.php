@@ -236,7 +236,7 @@ abstract class Geometry
      */
     public function distance(Geometry $other): float
     {
-        return $this->factory->getSpatialEngine()->disjoint($this, $other);
+        return $this->factory->getSpatialEngine()->distance($this, $other);
     }
 
     /**
@@ -316,11 +316,7 @@ abstract class Geometry
      */
     public function transform(GeometryFactory $factory): Geometry
     {
-        if ($this->factory->getCoordianteSystem()->getSrid() ===
-                $factory->getCoordianteSystem()->getSrid()) {
-            return $factory->create($this);
-        }
-        return $this->factory->getSpatialEngine()->transform($this, $factory);
+        return $factory->create($this);
     }
 
     /**
