@@ -23,6 +23,7 @@ namespace Nasumilu\Spatial\Tests\Geometry;
 use PHPUnit\Framework\TestCase;
 use Nasumilu\Spatial\Geometry\AbstractGeometryFactory;
 use Nasumilu\Spatial\Geometry\Builder\GeometryBuilder;
+use Nasumilu\Spatial\Geometry\CoordinateException;
 
 /**
  * Description of AbstractGeometryFactoryTest
@@ -196,7 +197,7 @@ class AbstractGeometryFactoryTest extends TestCase
 
     /**
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Geometry::crosses
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::within
      */
     public function testWithin()
     {
@@ -211,7 +212,7 @@ class AbstractGeometryFactoryTest extends TestCase
 
     /**
      * @test
-     * @covers \Nasumilu\Spatial\Geometry\Geometry::crosses
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::contains
      */
     public function testContains()
     {
@@ -222,6 +223,134 @@ class AbstractGeometryFactoryTest extends TestCase
         $geometry = $factory->createPoint();
         $other = $factory->createPolygon();
         $this->assertTrue($geometry->contains($other));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::overlaps
+     */
+    public function testOverlaps()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory->expects($this->atLeastOnce())
+                ->method('overlaps')
+                ->willReturn(true);
+        $geometry = $factory->createPoint();
+        $other = $factory->createPolygon();
+        $this->assertTrue($geometry->overlaps($other));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::relate
+     */
+    public function testRelate()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory->expects($this->atLeastOnce())
+                ->method('relate')
+                ->willReturn(true);
+        $geometry = $factory->createPoint();
+        $other = $factory->createPolygon();
+        $this->assertTrue($geometry->relate($other, 'T*F**FFF*'));
+        $this->assertTrue($geometry->relate($other, 't*f**tff*'));
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid DE-9IM model! Model must only '
+                . 'contain 9 characters of T, F, or *');
+        $geometry->relate($other, 'T*F**FFFFFF*');
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::relate
+     */
+    public function testRelateError()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $geometry = $factory->createPoint();
+        $other = $factory->createPolygon();
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid DE-9IM model! Model must only '
+                . 'contain 9 characters of T, F, or *');
+        $geometry->relate($other, '123456789');
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::locateAlong
+     */
+    public function testLocateAlong()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [['measured' => true]]);
+        $expected = $factory->createMultiPoint();
+        $factory->expects($this->atLeastOnce())
+                ->method('locateAlong')
+                ->willReturn($expected);
+        $geometry = $factory->createMultiLineString();
+        $this->assertSame($expected, $geometry->locateAlong(10));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::locateAlong
+     */
+    public function testLocateAlongNotMeasured()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [['measured' => false]]);
+        $geometry = $factory->createMultiLineString();
+        $this->expectException(CoordinateException::class);
+        $geometry->locateAlong(10);
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::locateAlong
+     */
+    public function testLocateAlongPolygonal()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [['measured' => false]]);
+        $geometry = $factory->createPolygon();
+        $this->expectException(\InvalidArgumentException::class);
+        $geometry->locateAlong(10);
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::locateBetween
+     */
+    public function testLocateBetween()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [['measured' => true]]);
+        $expected = $factory->createMultiPoint();
+        $factory->expects($this->atLeastOnce())
+                ->method('locateBetween')
+                ->willReturn($expected);
+        $geometry = $factory->createMultiLineString();
+        $this->assertSame($expected, $geometry->locateBetween(10, 20));
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::locateBetween
+     */
+    public function testLocateBetweenNotMeasured()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [['measured' => false]]);
+        $geometry = $factory->createMultiLineString();
+        $this->expectException(CoordinateException::class);
+        $geometry->locateBetween(1, 20);
+    }
+
+    /**
+     * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::locateBetween
+     */
+    public function testLocateBetweenPolygonal()
+    {
+        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class, [['measured' => false]]);
+        $geometry = $factory->createPolygon();
+        $this->expectException(\InvalidArgumentException::class);
+        $geometry->locateBetween(10, 20);
     }
 
     public function dataProvider(): array

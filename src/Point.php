@@ -122,10 +122,14 @@ class Point extends Geometry implements Coordinate, Puntal
     // Utility method to convert an offset to an integer
     private function ordinate($offset): int
     {
+        $ordinate = $offset;
         if(!is_numeric($offset)) {
-            $offset = self::ORDIANTES[$offset];
+            $ordinate = self::ORDIANTES[$offset] ?? null;
         }
-        return intval($offset);
+        if(null === $ordinate) {
+            throw CoordinateException::ordinateNotSupported($offset);
+        }
+        return intval($ordinate);
     }
 
     /**

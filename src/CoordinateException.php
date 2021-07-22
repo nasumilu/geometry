@@ -31,7 +31,7 @@ class CoordinateException extends \InvalidArgumentException
      * @param int $ordinate
      * @return CoordinateException
      */
-    public static function ordinateNotSupported(int $ordinate)
+    public static function ordinateNotSupported($ordinate)
     {
         if (false === $key = array_search($ordinate, Coordinate::ORDIANTES, true)) {
             $key = $ordinate;

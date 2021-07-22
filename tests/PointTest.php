@@ -66,7 +66,7 @@ class PointTest extends AbstractGeometryTest
             }
         }
         $point->rewind();
-        $this->expectError();
+        $this->expectException(CoordinateException::class);
         $point['d'];
     }
 
@@ -241,6 +241,7 @@ class PointTest extends AbstractGeometryTest
     /**
      * Tests the Point::getZ method
      * @test
+     * @covers Nasumilu\Spatial\Geometry\CoordinateException::ordinateNotSupported
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -267,6 +268,7 @@ class PointTest extends AbstractGeometryTest
     /**
      * Test Point::setZ method
      * @test
+     * @covers Nasumilu\Spatial\Geometry\CoordinateException::ordinateNotSupported
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -296,6 +298,7 @@ class PointTest extends AbstractGeometryTest
     /**
      * Tests the Point::getM method
      * @test
+     * @covers Nasumilu\Spatial\Geometry\CoordinateException::ordinateNotSupported
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */
@@ -322,6 +325,7 @@ class PointTest extends AbstractGeometryTest
     /**
      * Test Point::setM method
      * @test
+     * @covers Nasumilu\Spatial\Geometry\CoordinateException::ordinateNotSupported
      * @dataProvider factoryOptions
      * @param array $factoryOptions
      */

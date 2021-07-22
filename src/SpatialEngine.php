@@ -46,7 +46,7 @@ interface SpatialEngine
 
     /**
      * Indicates whether a Geometry is empty.
-     * @param Geometry $geometry use to chek if empty
+     * @param Geometry $geometry use to check if empty
      * @return bool if Geometry represents an empty point set ∅ for the 
      *              coordinate space.
      */
@@ -69,14 +69,14 @@ interface SpatialEngine
 
     /**
      * Gets the area of a Polygonal objects
-     * @param Polgyonal $surface
+     * @param Polgyonal $polygonal
      * @return float
      */
     public function area(Polygonal $polygonal): float;
 
     /**
      * Get the length of a Lineal object
-     * @param Lineal $geometry
+     * @param Lineal $lineal
      * @return float
      */
     public function length(Lineal $lineal): float;
@@ -84,20 +84,21 @@ interface SpatialEngine
     /**
      * Gets the mathematical centroid of a Surface. The result is not 
      * guaranteed to be on the Surface
-     * @param Surface $surface
+     * @param Surface $polygonal
      * @return Point
      */
     public function centroid(Polygonal $polygonal): Point;
 
     /**
      * Gets a Point guaranteed to be on the Surface
-     * @param Surface $surface
+     * @param Surface $polygonal
      * @return Point
      */
     public function pointOnSurface(Polygonal $polygonal): Point;
 
     /**
-     * Indicates whether two Geometry objects are spatially disjoint.
+     * Indicates whether <code>$geometry</code> object is spatially 
+     * disjoint to <code>$other</code> Geometry object
      * @param Geometry $geometry
      * @param Geometry $other
      * @return bool
@@ -105,7 +106,8 @@ interface SpatialEngine
     public function disjoint(Geometry $geometry, Geometry $other): bool;
 
     /**
-     * Indicates whether two Geometry objects spatially intersect.
+     * Indicates whether <code>$geometry</code> object spatially 
+     * intersects <code>$other</code> Geometry object
      * @param Geometry $geometry
      * @param Geometry $other
      * @return bool
@@ -113,7 +115,8 @@ interface SpatialEngine
     public function intersects(Geometry $geometry, Geometry $other): bool;
 
     /**
-     * Indicates whether two Geometry objects spatially touch.
+     * Indicates whether <code>$geometry</code> object spatially touches
+     * <code>$other</code> Geometry object
      * @param Geometry $geometry
      * @param Geometry $other
      * @return bool
@@ -121,7 +124,8 @@ interface SpatialEngine
     public function touches(Geometry $geometry, Geometry $other): bool;
 
     /**
-     * Indicates whether two Geometry objects spatial cross.
+     * Indicates whether <code>$geometry</code> object spatial crosses 
+     * <code>$other</code> Geometry object
      * @param Geometry $geometry
      * @param Geometry $other
      * @return bool
@@ -129,8 +133,8 @@ interface SpatialEngine
     public function crosses(Geometry $geometry, Geometry $other): bool;
 
     /**
-     * Indicates whether <code>$other</code> Geometry object is spatially within
-     * <code>$geometry</code> Geometry object.
+     * Indicates whether <code>$geometry</code> object is spatially within
+     * <code>$other</code> Geometry object
      * @param Geometry $geometry
      * @param Geometry $other
      * @return bool
@@ -138,36 +142,124 @@ interface SpatialEngine
     public function within(Geometry $geometry, Geometry $other): bool;
 
     /**
-     * Indicates whether <code>$other</code> Geometry object is spatially contained
-     * by <code>$geoemtry</code> Geometry object.
+     * Indicates whether <code>$geometry</code> object is spatially 
+     * contains <code>$other</code> Geometry object
      * @param Geometry $geometry
      * @param Geometry $other
      * @return bool
      */
     public function contains(Geometry $geometry, Geometry $other): bool;
 
+    /**
+     * Indicates whether <code>$geometry</code> object spatially 
+     * overlaps <code>$other</code> Geometry object
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @return bool
+     */
     public function overlaps(Geometry $geometry, Geometry $other): bool;
 
+    /**
+     * Indicates whether <code>$geometry</code> object is spatially 
+     * related to <code>$other</code> by testing for intersections between the
+     * interior boundary and exterior of the two Geometry objects specified by 
+     * the values in the <code>$matrix</code>.
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @param string $matrix
+     * @return bool
+     */
     public function relate(Geometry $geometry, Geometry $other, string $matrix): bool;
 
+    /**
+     * Gets a derived Geometry value that matches the specified <em>m</em> 
+     * -coordinate value.
+     * @param Geometry $geometry
+     * @param float $mValue
+     * @return Geometry
+     */
     public function locateAlong(Geometry $geometry, float $mValue): Geometry;
 
+    /**
+     * Gets a derived Geometry value that matches the specified range of <em>m</em>
+     * -coordinate values inclusively. 
+     * @param Geometry $geometry
+     * @param float $mStart
+     * @param float $mEnd
+     * @return Geometry
+     */
     public function locateBetween(Geometry $geometry, float $mStart, float $mEnd): Geometry;
 
-    // analysis
+    /**
+     * Gets the shortest distance between any two Points in two Geometry objects.
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @return float
+     */
     public function distance(Geometry $geometry, Geometry $other): float;
 
+    /**
+     * Gets a Geometry object that represents all Points whose distance from 
+     * the <code>$geometry</code> object is less than or equal to 
+     * <code>$distance</code>.
+     * @param Geometry $geometry
+     * @param float $distance
+     * @return Geometry
+     */
     public function buffer(Geometry $geometry, float $distance): Geometry;
 
+    /**
+     * Gets a Geometry object that represents the convex hull of <code>$geometry
+     * </code>.
+     * @param Geometry $geometry
+     * @return Geometry
+     */
     public function convexHull(Geometry $geometry): Geometry;
 
+    /**
+     * Gets a Geometry object that represents the Point set intersection of 
+     * <code>Geometry</code> object with <code>$other</code> Geometry
+     * object.
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @return Geometry
+     */
     public function intersection(Geometry $geometry, Geometry $other): Geometry;
 
+    /**
+     * Gets a Geometry object that represents the Point set union of <code>$geometry
+     * </code> object with <code>$other</code> Geometry object.
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @return Geometry
+     */
     public function union(Geometry $geometry, Geometry $other): Geometry;
 
+    /**
+     * Get a Geometry object that represents the Point set difference of
+     * <code>$geometry</code> object with <code>$other</code> Geometry object.
+     * 
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @return Geometry
+     */
     public function difference(Geometry $geometry, Geometry $other): Geometry;
 
+    /**
+     * Get the Geometry object that represents the Point set symmetric difference
+     * of <code>$geometry</code> object with <code>$other</code> Geometry object.
+     * @param Geometry $geometry
+     * @param Geometry $other
+     * @return Geometry
+     */
     public function symDifference(Geometry $geometry, Geometry $other): Geometry;
 
+    /**
+     * Gets a new Geometry object with its coordinates transformed to a different
+     * spatial reference system contained in the <code>$factory</code>
+     * @param Geometry $geometry
+     * @param GeometryFactory $factory
+     * @return Geometry
+     */
     public function transform(Geometry $geometry, GeometryFactory $factory): Geometry;
 }
