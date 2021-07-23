@@ -4,7 +4,8 @@
     "type": "library",
     "homepage": "https://nasumilu.net",
     "license": "Apache-2.0",
-    "keywords": ["gis", 
+    "keywords": ["gis",
+        "feature",
         "geometry", 
         "point",
         "linestring",
@@ -14,25 +15,31 @@
         "geometrycollection",
         "tin",
         "triangle",
-        "polyhedralsurface"
+        "polyhedralsurface",
+        "wkt",
+        "wkb",
+        "well-known text",
+        "well-known binary"
     ],
     "authors": [
         {
             "name": "Michael Lucas",
-            "email": "nasumilu-owner@gmail.com"
+            "email": "nasumilu@gmail.com"
         }
     ],
     "require": {
-        "php": ">=7.4"
+        "php": ">=7.4",
+        "symfony/serializer": "v5.3.2",
+        "doctrine/lexer": "^1.2"
     },
     "autoload": {
         "psr-4": {
-            "Nasumilu\\Spatial\\Geometry\\": "src/"
+            "Nasumilu\\Spatial\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Nasumilu\\Spatial\\Tests\\Geometry\\": "tests/"
+            "Nasumilu\\Spatial\\Tests\\": "tests/"
         }
     },
     "require-dev": {
