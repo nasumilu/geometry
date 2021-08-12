@@ -37,10 +37,16 @@ use function array_values;
 class LineString extends Curve
 {
 
+    /** The well-known text type */
     public const WKT_TYPE = 'linestring';
+
+    /** The well-known binary type */
     public const WKB_TYPE = 2;
 
-    private $points;
+    /**
+     * @var Point[]
+     */
+    private array $points;
 
     /**
      * Constructs a LineString with the GeometryFactory and set of Point(s)

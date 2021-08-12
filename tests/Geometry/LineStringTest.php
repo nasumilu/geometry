@@ -24,8 +24,7 @@ use function count;
 use Nasumilu\Spatial\Geometry\{
     Point,
     LineString,
-    GeometryFactory,
-    AbstractGeometryFactory
+    GeometryFactory
 };
 
 /**
@@ -57,7 +56,7 @@ class LineStringTest extends AbstractGeometryTest
      */
     public function testConstructor(array $options)
     {
-        $factory  = $this->getMockGeometryFactory($options);
+        $factory = $this->getMockGeometryFactory($options);
         $points = [];
         foreach (self::$data['coordinates'] as $coordinate) {
             $points[] = $factory->createPoint($coordinate);
@@ -286,6 +285,19 @@ class LineStringTest extends AbstractGeometryTest
         $linestring[] = ['type' => 'point'];
         $linestring[] = ['type' => 'point', 'coordinates' => [-85.25631, 29.345665]];
         $this->assertTrue($linestring->isClosed());
+    }
+
+    public function testOutput()
+    {
+        $linestring = $this->getMockGeometryFactory(['srid' => 3857, 'measured' => true, '3d' => true])
+                ->create(require __DIR__ . '/../Resources/php/linestring.php');
+
+        $expectedWkt = file_get_contents(__DIR__ . '/../Resources/wkt/xyzm/linestring.wkt');
+        $this->assertEquals($expectedWkt, $linestring->asText());
+        $expectedEwkt = file_get_contents(__DIR__ . '/../Resources/ewkt/xyzm/linestring.wkt');
+        $this->assertEquals($expectedEwkt, $linestring->asText(['extended' => true]));
+        $this->assertEquals($expectedWkt, $linestring->output('wkt'));
+        $this->assertEquals($expectedEwkt, $linestring->output('ewkt'));
     }
 
 }

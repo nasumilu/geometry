@@ -342,4 +342,22 @@ abstract class Geometry
      * @return bool
      */
     public abstract function isEmpty(): bool;
+    
+    public function output(string $format, array $context = []): string
+    {
+        return $this->factory->getSpatialEngine()
+                ->output($this, $format, $context);
+    }
+    
+    public function asText(array $context = []): string
+    {
+        return $this->factory->getSpatialEngine()
+                ->asText($this, $context);
+    }
+    
+    public function asBinary(array $context = []): string
+    {
+        return $this->factory->getSpatialEngine()
+                ->asBinary($this, $context);
+    }
 }

@@ -49,7 +49,7 @@ class Polygon extends Surface
      * outer boundary. Preceding LineString represents holes.
      * @var LineString[]
      */
-    private $linestrings = [];
+    private array $linestrings = [];
 
     /**
      * Constructs a Polygon with the GeometryFactory and set of LineStirng objects.

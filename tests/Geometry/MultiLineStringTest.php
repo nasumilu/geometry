@@ -21,7 +21,6 @@ declare(strict_types=1);
 namespace Nasumilu\Spatial\Tests\Geometry;
 
 use Nasumilu\Spatial\Geometry\{
-    AbstractGeometryFactory,
     MultiLineString
 };
 
@@ -97,6 +96,19 @@ class MultiLineStringTest extends AbstractGeometryTest
         $multilinestring = new MultiLineString($factory);
         $this->expectException(\InvalidArgumentException::class);
         $multilinestring[] = ['type' => 'point'];
+    }
+
+    public function testOutput()
+    {
+        $linestring = $this->getMockGeometryFactory(['srid' => 3857, 'measured' => true, '3d' => true])
+                ->create(require __DIR__ . '/../Resources/php/multilinestring.php');
+
+        $expectedWkt = file_get_contents(__DIR__ . '/../Resources/wkt/xyzm/multilinestring.wkt');
+        $this->assertEquals($expectedWkt, $linestring->asText());
+        $expectedEwkt = file_get_contents(__DIR__ . '/../Resources/ewkt/xyzm/multilinestring.wkt');
+        $this->assertEquals($expectedEwkt, $linestring->asText(['extended' => true]));
+        $this->assertEquals($expectedWkt, $linestring->output('wkt'));
+        $this->assertEquals($expectedEwkt, $linestring->output('ewkt'));
     }
 
 }

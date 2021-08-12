@@ -34,7 +34,7 @@ class GeometryTest extends AbstractGeometryTest
 
     public function testConstructor(): Geometry
     {
-        $factory = $this->getMockGeometryFactory(['srid'=>4326]);
+        $factory = $this->getMockGeometryFactory(['srid'=>4326, '3d'=>true, 'measured' => true]);
 
         $geometry = $this->getMockForAbstractClass(Geometry::class, [$factory]);
         $this->assertSame($factory, $geometry->getFactory());
@@ -57,7 +57,7 @@ class GeometryTest extends AbstractGeometryTest
     public function testGetIs3d(Geometry $geometry)
     {
         $this->assertTrue($geometry->is3D());
-        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory = $this->getMockGeometryFactory();
         $geometry = $this->getMockForAbstractClass(Geometry::class, [$factory]);
         $this->assertFalse($geometry->is3D());
     }
@@ -69,7 +69,7 @@ class GeometryTest extends AbstractGeometryTest
     public function testGetIsMeasured(Geometry $geometry)
     {
         $this->assertTrue($geometry->isMeasured());
-        $factory = $this->getMockForAbstractClass(AbstractGeometryFactory::class);
+        $factory = $this->getMockGeometryFactory();
         $geometry = $this->getMockForAbstractClass(Geometry::class, [$factory]);
         $this->assertFalse($geometry->isMeasured());
     }

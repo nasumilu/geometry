@@ -20,68 +20,35 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Serializer\Encoder;
 
-use function in_array;
-use Nasumilu\Spatial\Serializer\Encoder\Wkb\{
-    WkbWriter,
-    WkbReader
-};
-use Symfony\Component\Serializer\Encoder\{
-    EncoderInterface,
-    DecoderInterface
-};
+use Symfony\Component\Serializer\Encoder\ChainEncoder;
 
 /**
  * Description of WkbEncoder
  */
-class WkbEncoder implements EncoderInterface, DecoderInterface
+class WkbEncoder extends ChainEncoder
 {
+    
+    /** Little-endian */
+    public const NDR = 'NDR';
 
-    public const BYTEORDER = 'byteorder';
-    public const XDR = 0; //big-endian
-    public const NDR = 1; //little-endian
-    public const WKB = 'wkb';
-    public const EWKB = 'ewkb';
-    public const HEX_WKB = 'hex_wkb';
-    public const HEX_EWKB = 'hex_ewkb';
-    public const FORMATS = [
-        self::WKB,
-        self::EWKB,
-        self::HEX_EWKB,
-        self::HEX_WKB
-    ];
+    /** Big-endian */
+    public const XDR = 'XDR';
+    
+    public const HEX_STR = 'hex_str';
 
-    private $defaultByteOrder;
+    /** Byteorder (endianness) context option */
+    public const ENDIANNESS = 'endianness';
 
-    public function __construct(?int $defaultByteOrder = null)
+    /** Default byteorder (endianness) */
+    private string $defaultEndianness = self::NDR;
+    
+    public function __construct(string $defaultEndianness = self::NDR)
     {
-        $this->defaultByteOrder = $defaultByteOrder ?? self::NDR;
+        parent::__construct([
+            new Wkb\Wkb11Encoder($defaultEndianness),
+            new Wkb\Wkb12Encoder($defaultEndianness),
+            new Wkb\EwkbEncoder($defaultEndianness)
+        ]);
     }
-
-    public function encode($data, string $format, array $context = []): string
-    {
-        $writer = new WkbWriter($data, $context[self::BYTEORDER] ??  $this->defaultByteOrder);
-        $wkb = $writer->write();
-        if(stripos($format, 'hex_')) {
-            return pack('H*', $wkb);
-        }
-        return $wkb;
-    }
-
-    public function supportsEncoding(string $format): bool
-    {
-        return in_array($format, self::FORMATS, true);
-    }
-
-    public function decode(string $data, string $format, array $context = []): mixed
-    {
-        $reader = new WkbReader($data);
-        return $reader->read();
-    }
-
-    public function supportsDecoding(string $format): bool
-    {
-        return $this->supportsEncoding($format);
-    }
-
-   
+    
 }

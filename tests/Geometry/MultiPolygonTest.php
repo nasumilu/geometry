@@ -22,7 +22,6 @@ namespace Nasumilu\Spatial\Tests\Geometry;
 
 use Nasumilu\Spatial\Geometry\{
     Polygonal,
-    AbstractGeometryFactory,
     MultiPolygon
 };
 
@@ -107,4 +106,18 @@ class MultiPolygonTest extends AbstractGeometryTest
         $this->expectException(\InvalidArgumentException::class);
         $multipolygon[] = ['type' => 'point'];
     }
+
+    public function testOutput()
+    {
+        $linestring = $this->getMockGeometryFactory(['srid' => 3857, 'measured' => true, '3d' => true])
+                ->create(require __DIR__ . '/../Resources/php/multipolygon.php');
+
+        $expectedWkt = file_get_contents(__DIR__ . '/../Resources/wkt/xyzm/multipolygon.wkt');
+        $this->assertEquals($expectedWkt, $linestring->asText());
+        $expectedEwkt = file_get_contents(__DIR__ . '/../Resources/ewkt/xyzm/multipolygon.wkt');
+        $this->assertEquals($expectedEwkt, $linestring->asText(['extended' => true]));
+        $this->assertEquals($expectedWkt, $linestring->output('wkt'));
+        $this->assertEquals($expectedEwkt, $linestring->output('ewkt'));
+    }
+
 }

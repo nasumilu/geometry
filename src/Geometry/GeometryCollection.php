@@ -47,7 +47,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
     /**
      * @var Geometry[]
      */
-    protected $geometries;
+    protected array $geometries = [];
 
     /**
      * Constructs a GeometryCollection with the GeometryFactory and set of Geometry
@@ -241,7 +241,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      * @internal Magic __isset implementation
      * {@inheritDoc}
      */
-    public function __isset($name)
+    public function __isset($name): bool
     {
         return $this->hasGeometry((int) $name);
     }
@@ -250,7 +250,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      * @internal Magic __set implementation
      * {@inheritDoc}
      */
-    public function __set($name, $value)
+    public function __set($name, $value): void
     {
         $this->setGeometryN($value, (int) $name);
     }
@@ -259,7 +259,7 @@ class GeometryCollection extends Geometry implements ArrayAccess, Iterator, Coun
      * @internal Magic __get implementation
      * {@inheritDoc}
      */
-    public function __get($name)
+    public function __get($name): Geometry
     {
         return $this->getGeometryN((int) $name);
     }

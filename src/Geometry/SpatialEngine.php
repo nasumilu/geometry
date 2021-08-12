@@ -263,9 +263,29 @@ interface SpatialEngine
      */
     public function transform(Geometry $geometry, GeometryFactory $factory): Geometry;
     
+    /**
+     * Outputs the <code>$geometry</code> object to the <code>$format</code>
+     * 
+     * @param Geometry $geometry the Geometry object to output
+     * @param string $format the output format
+     * @param array $context any extra context need to output the geometry
+     */
+    public function output(Geometry $geometry, string $format, array $context = []);
     
-    public function asText(Geometry $geometry, bool $ewkt = false): string;
+    /**
+     * Outputs the <code>$geometry</code> as well-known text
+     * 
+     * @param Geometry $geometry
+     * @param array $context
+     * @return string
+     */
+    public function asText(Geometry $geometry, array $context = []): string;
     
-    
-    public function asBinary(Geometry $geometry, bool $ewkb = false): string;
+    /**
+     * Outputs the <code>$geometry</code> as well-known binary
+     * @param Geometry $geometry
+     * @param array $context
+     * @return string
+     */
+    public function asBinary(Geometry $geometry, array $context = []): string;
 }

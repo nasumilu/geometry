@@ -48,7 +48,7 @@ class Point extends Geometry implements Coordinate, Puntal
      *
      * @var float[]
      */
-    private $coordinates = [];
+    private array $coordinates = [];
 
     /**
      * Constructs a Point from an array of float values.
@@ -99,7 +99,7 @@ class Point extends Geometry implements Coordinate, Puntal
      * @param float $value the ordinate value to set
      * @throws CoordinateException when the ordinate is not supported
      */
-    public function setOrdinate(int $ordinate, float $value): void
+    public function setOrdinate(int $ordinate, float $value = NAN): void
     {
         if (!$this->hasOrdinate($ordinate)) {
             throw CoordinateException::ordinateNotSupported($ordinate);
@@ -295,7 +295,7 @@ class Point extends Geometry implements Coordinate, Puntal
     /**
      * {@inheritDoc}
      */
-    public function __set($name, $value)
+    public function __set($name, $value): void
     {
         $this->setOrdinate($this->ordinate($name), $value);
     }
@@ -303,7 +303,7 @@ class Point extends Geometry implements Coordinate, Puntal
     /**
      * {@inheritDoc}
      */
-    public function __get($name)
+    public function __get($name): float
     {
         return $this->getOrdinate($this->ordinate($name));
     }
@@ -311,12 +311,12 @@ class Point extends Geometry implements Coordinate, Puntal
     /**
      * {@inheritDoc}
      */
-    public function __isset($name)
+    public function __isset($name): bool
     {
         return $this->hasOrdinate($this->ordinate($name));
     }
     
-    public function __unset($name)
+    public function __unset($name): void
     {
         $this->offsetUnset($name);
     }

@@ -23,11 +23,22 @@ namespace Nasumilu\Spatial\Geometry;
 use function array_unique;
 use function array_merge;
 use function array_search;
-use Symfony\Component\Serializer\SerializerInterface;
 use RuntimeException;
+use Nasumilu\Spatial\Serializer\{
+    Normalizer\GeometryNormalizer,
+    Encoder\WkbEncoder,
+    Encoder\WktEncoder,
+    Decoder\WkbDecoder,
+    Decoder\WktDecoder
+};
+use Symfony\Component\Serializer\{
+    SerializerInterface,
+    Serializer
+};
 use Nasumilu\Spatial\Geometry\Builder\{
     CloneGeometryBuilder,
     ArrayGeometryBuilder,
+    SerializeGeometryBuilder,
     GeometryBuilder,
     GeometryBuilderRegistry
 };
@@ -37,6 +48,24 @@ use Nasumilu\Spatial\Geometry\Builder\{
  */
 abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuilderRegistry, CoordinateSystem, SpatialEngine
 {
+
+    /** SRID option offset value */
+    public const OPTION_SRID = 'srid';
+
+    /** 3d options offset value */
+    public const OPTION_3d = '3d';
+
+    /** measured options offset value */
+    public const OPTION_MEASURED = 'measured';
+
+    /** serializer options offset value */
+    public const OPTION_SERIALIZER = 'serializer';
+
+    /** precision_model options offset value */
+    public const OPTION_PRECISION_MODEL = 'precision_model';
+
+    /** builders options offset value */
+    public const OPTION_BUILDERS = 'builders';
 
     /** @var int */
     private int $srid;
@@ -49,7 +78,6 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
 
     /** @var PrecisionModel */
     private PrecisionModel $precisionModel;
-    
     private SerializerInterface $serializer;
 
     /** @var GeometryBuilder[] */
@@ -57,24 +85,46 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
 
     public function __construct(array $options = [])
     {
-        $this->srid = intval($options['srid'] ?? -1);
-        $this->is3D = boolval($options['3d'] ?? false);
-        $this->isMeasured = boolval($options['measured'] ?? false);
-        $this->precisionModel = $options['precision_model'] ?? new PrecisionModel();
+        $this->srid = intval($options[self::OPTION_SRID] ?? -1);
+        $this->is3D = boolval($options[self::OPTION_3d] ?? false);
+        $this->isMeasured = boolval($options[self::OPTION_MEASURED] ?? false);
+        $this->serializer = $options[self::OPTION_SERIALIZER];
+        $this->precisionModel = $options[self::OPTION_PRECISION_MODEL] ?? new PrecisionModel();
+
+        if (!isset($options[self::OPTION_SERIALIZER])) {
+            $options[self::OPTION_SERIALIZER] = new Serializer([new GeometryNormalizer()], [
+                new WktEncoder(),
+                new WkbEncoder(),
+                new WktDecoder(),
+                new WkbDecoder()
+            ]);
+        }
+        $this->serializer = $options[self::OPTION_SERIALIZER];
         $builders = array_merge([
             new ArrayGeometryBuilder(),
-            new CloneGeometryBuilder()]
-                , (array) ($options['builders'] ?? []));
+            new CloneGeometryBuilder(),
+            new SerializeGeometryBuilder($this->serializer)]
+                , (array) ($options[self::OPTION_BUILDERS] ?? []));
 
         $this->registerBuilder(...$builders);
-        $this->serializer = $options['serializer'];
     }
-    
+
+    /**
+     * Gets the SerializerInterface used to outp and create Goemetry 
+     * @return SerializerInterface
+     */
     public function getSerializer(): SerializerInterface
     {
         return $this->serializer;
     }
-    
+
+    /**
+     * Sets the SerializerInterface used to output and create Geometry from
+     * serialized data
+     * 
+     * @param SerializerInterface $serializer
+     * @return SpatialEngine
+     */
     public function setSerializer(SerializerInterface $serializer): SpatialEngine
     {
         $this->serializer = $serializer;
@@ -124,7 +174,7 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
             }
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -225,43 +275,43 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
         }
         return new Polygon($this, ...$linestrings);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function createMultiPoint(array $coordinates = []): MultiPoint
     {
         $points = [];
-        foreach($coordinates as $coordinate) {
+        foreach ($coordinates as $coordinate) {
             $points[] = $this->createPoint($coordinate);
         }
         return new MultiPoint($this, ...$points);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function createMultiLineString(array $coordinates = []): MultiLineString
     {
         $linestrings = [];
-        foreach($coordinates as $linestring) {
+        foreach ($coordinates as $linestring) {
             $linestrings[] = $this->createLineString($linestring);
         }
         return new MultiLineString($this, ...$linestrings);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function createMultiPolygon(array $coordinates = []): MultiPolygon
     {
         $polygons = [];
-        foreach($coordinates as $coordinate) {
+        foreach ($coordinates as $coordinate) {
             $polygons[] = $this->createPolygon($coordinate);
         }
         return new MultiPolygon($this, ...$polygons);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -273,28 +323,31 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
         }
         return new GeometryCollection($this, ...$_geometries);
     }
-    
-    public function serialize(Geometry $geometry, string $format, array $context = [])
+
+    /**
+     * {@inheritDoc}
+     */
+    public function output(Geometry $geometry, string $format, array $context = [])
     {
         return $this->serializer->serialize($geometry, $format, $context);
     }
-    
+
     /**
      * {@inheritDoc}
      */
-    public function asText(Geometry $geometry, bool $ewkt = false): string
+    public function asText(Geometry $geometry, array $context = []): string
     {
-        $format = $ewkt ? 'ewkt' : 'wkt';
-        return $this->serialize($geometry, $format);
+        $format = (bool) ($context['extended'] ?? false) ? 'ewkt' : 'wkt';
+        return $this->output($geometry, $format, $context);
     }
-    
+
     /**
      * {@inheritDoc}
      */
-    public function asBinary(Geometry $geometry, bool $ewkb = false): string
+    public function asBinary(Geometry $geometry, array $context = []): string
     {
-        $format = $ewkb ? 'ewkb' : 'wkb';
-        return $this->serialize($geometry, $format);
+        $format = (bool) ($context['extended'] ?? false) ? 'ewkb' : 'wkb';
+        return $this->output($geometry, $format, $context);
     }
 
 }

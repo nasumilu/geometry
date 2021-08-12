@@ -21,7 +21,6 @@ declare(strict_types=1);
 namespace Nasumilu\Spatial\Tests\Geometry;
 
 use Nasumilu\Spatial\Geometry\GeometryCollection;
-use Nasumilu\Spatial\Geometry\AbstractGeometryFactory;
 
 /**
  * Description of GeometryCollectionTest
@@ -103,10 +102,22 @@ class GeometryCollectionTest extends AbstractGeometryTest
         $firstGeometry = $geometry->getGeometryN(0);
         unset($geometry[0]);
         $this->assertCount(count($data['geometries']) - 2, $geometry);
-        foreach($geometry as $shape) {
+        foreach ($geometry as $shape) {
             $this->assertNotSame($firstGeometry, $shape);
         }
-       
+    }
+
+    public function testOutput()
+    {
+        $linestring = $this->getMockGeometryFactory(['srid' => 3857, 'measured' => true, '3d' => true])
+                ->create(require __DIR__ . '/../Resources/php/geometrycollection.php');
+
+        $expectedWkt = file_get_contents(__DIR__ . '/../Resources/wkt/xyzm/geometrycollection.wkt');
+        $this->assertEquals($expectedWkt, $linestring->asText());
+        $expectedEwkt = file_get_contents(__DIR__ . '/../Resources/ewkt/xyzm/geometrycollection.wkt');
+        $this->assertEquals($expectedEwkt, $linestring->asText(['extended' => true]));
+        $this->assertEquals($expectedWkt, $linestring->output('wkt'));
+        $this->assertEquals($expectedEwkt, $linestring->output('ewkt'));
     }
 
 }

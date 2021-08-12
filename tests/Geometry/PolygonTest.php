@@ -22,7 +22,6 @@ namespace Nasumilu\Spatial\Tests\Geometry;
 
 use PHPUnit\Framework\TestCase;
 use Nasumilu\Spatial\Geometry\{
-    AbstractGeometryFactory,
     LineString,
     Polygon
 };
@@ -81,20 +80,20 @@ class PolygonTest extends AbstractGeometryTest
         $factory = $this->getMockGeometryFactory($options);
         $polygon = $factory->create(self::$data);
         $polygon->rewind();
-        while($polygon->valid()) {
+        while ($polygon->valid()) {
             $this->assertInstanceOf(LineString::class, $polygon->current());
             $polygon->next();
         }
         $this->assertFalse($polygon->valid());
         $polygon->rewind();
         $this->assertTrue($polygon->valid());
-        foreach($polygon as $key=>$value) {
+        foreach ($polygon as $key => $value) {
             $this->assertEquals($key, $polygon->key());
             $this->assertSame($polygon[$key], $value);
             $this->assertTrue($polygon->offsetExists($key));
             $this->assertTrue(isset($polygon[$key]));
         }
-        
+
         unset($polygon[count($polygon) - 1]);
         $this->assertCount(3, $polygon);
     }
@@ -212,6 +211,19 @@ class PolygonTest extends AbstractGeometryTest
         $polygon[0] = self::$data['coordinates'][0];
         $this->assertFalse($polygon->isEmpty());
         $this->assertTrue($polygon->getExteriorRing()->isClosed());
+    }
+
+    public function testOutput()
+    {
+        $linestring = $this->getMockGeometryFactory(['srid' => 3857, 'measured' => true, '3d' => true])
+                ->create(require __DIR__ . '/../Resources/php/polygon.php');
+
+        $expectedWkt = file_get_contents(__DIR__ . '/../Resources/wkt/xyzm/polygon.wkt');
+        $this->assertEquals($expectedWkt, $linestring->asText());
+        $expectedEwkt = file_get_contents(__DIR__ . '/../Resources/ewkt/xyzm/polygon.wkt');
+        $this->assertEquals($expectedEwkt, $linestring->asText(['extended' => true]));
+        $this->assertEquals($expectedWkt, $linestring->output('wkt'));
+        $this->assertEquals($expectedEwkt, $linestring->output('ewkt'));
     }
 
 }

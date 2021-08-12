@@ -145,7 +145,7 @@ abstract class Curve extends Geometry implements ArrayAccess, Iterator, Countabl
      * Curve::getNumPoints
      * {@inheritDoc}
      */
-    public function count()
+    public function count(): int
     {
         return $this->getNumPoints();
     }
@@ -194,7 +194,7 @@ abstract class Curve extends Geometry implements ArrayAccess, Iterator, Countabl
      * @internal magic method __get, delegates to Curve::getPointN
      * {@inheritDoc}
      */
-    public function __get($name)
+    public function __get($name): Point
     {
         return $this->getPointN((int) $name);
     }
@@ -203,7 +203,7 @@ abstract class Curve extends Geometry implements ArrayAccess, Iterator, Countabl
      * @internal magic method __set, delegates to Curve::setPointN
      * {@inheritDoc}
      */
-    public function __set($name, $value)
+    public function __set($name, $value): void
     {
         $this->setPointN($value, (int) $name);
     }
@@ -213,12 +213,12 @@ abstract class Curve extends Geometry implements ArrayAccess, Iterator, Countabl
      * of the existing array_** functions; delegates to Curve::hasPointN
      * {@inheritDoc}
      */
-    public function __isset($name)
+    public function __isset($name): bool
     {
         return $this->hasPointN((int) $name);
     }
 
-    public function __unset($name)
+    public function __unset($name): void
     {
 
         $this->removePointN((int) $name);

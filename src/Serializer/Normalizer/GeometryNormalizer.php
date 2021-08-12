@@ -20,8 +20,9 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Serializer\Normalizer;
 
-use function \is_subclass_of;
-use function \array_merge;
+use function is_subclass_of;
+use function array_merge;
+use function get_class;
 use Symfony\Component\Serializer\Normalizer\{
     NormalizerInterface,
     DenormalizerInterface
@@ -33,14 +34,15 @@ use Nasumilu\Spatial\Geometry\{
     Polygon,
     MultiPoint,
     MultiLineString,
-    MultiPolygon
+    MultiPolygon,
+    GeometryCollection
 };
 
 /**
  * GeometryNormalizer (de)normalizes a Geometry object.
- * 
+ *
  * [
- *  'type' => &lt;string&gt;,
+ *  'type' => &lt;string|int&gt;,
  *  'crs'  => [
  *      'srid'     => &lt;integer&gt;,
  *      '3d'       => &lt;boolean&gt;,
@@ -51,22 +53,26 @@ use Nasumilu\Spatial\Geometry\{
  */
 class GeometryNormalizer implements NormalizerInterface, DenormalizerInterface
 {
-
+    
+    public const FACTORY = 'factory';
+    
     /**
      * {@inheritDoc}
      */
     public function normalize($object, string $format = null, array $context = array())
     {
         $crs = $object->getFactory()->getCoordianteSystem();
-        return array_merge([
+        return array_filter(array_merge([
             'type' => $object->getGeometryType(),
+            'binary_type' => constant(get_class($object)."::WKB_TYPE"),
             'crs' => [
                 'srid' => $crs->getSrid(),
                 '3d' => $crs->is3D(),
-                'measured' => $crs->isMeasured()]
-                ],
-                $this->normalizeCoordinates($object)
-        );
+                'measured' => $crs->isMeasured(),
+                'dimension' => $crs->getCoordinateDimension()]
+                        ],
+                        $this->normalizeCoordinates($object)
+        ));
     }
 
     /**
@@ -98,19 +104,19 @@ class GeometryNormalizer implements NormalizerInterface, DenormalizerInterface
 
     /**
      * Normalizes a Geometry objects coordinates values
-     * 
+     *
      * @param Geometry $geometry
      * @return array
      */
     public function normalizeCoordinates(Geometry $geometry): array
     {
-        if($geometry->isEmpty()) {
+        if ($geometry->isEmpty()) {
             return [];
         }
-        
-        return [
-            'coordinates' => call_user_func([$this, 'normalize' . $geometry->getGeometryType()], $geometry)
-        ];
+        $type = $geometry->getGeometryType();
+        $coordinates = call_user_func([$this, "normalize$type"], $geometry);
+        $key = GeometryCollection::WKT_TYPE === $type ? 'geometries' : 'coordinates';
+        return [ $key => $coordinates ];
     }
 
     /**
@@ -185,7 +191,7 @@ class GeometryNormalizer implements NormalizerInterface, DenormalizerInterface
         }
         return $coordinates;
     }
-    
+
     /**
      * Normalizes a MultiPolygon objects coordinate values
      * @param MultiPolygon $multipolygon
@@ -194,10 +200,18 @@ class GeometryNormalizer implements NormalizerInterface, DenormalizerInterface
     public function normalizeMultiPolygon(MultiPolygon $multipolygon): array
     {
         $coordinates = [];
-        foreach($multipolygon as $polygon) {
+        foreach ($multipolygon as $polygon) {
             $coordinates[] = $this->normalizePolygon($polygon);
         }
         return $coordinates;
     }
 
+    public function normalizegeometrycollection(GeometryCollection $collection): array
+    {
+        $geometries = [];
+        foreach($collection as $geometry) {
+            $geometries[] = $this->normalize($geometry);
+        }
+        return $geometries;
+    }
 }

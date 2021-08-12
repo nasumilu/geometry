@@ -22,7 +22,6 @@ namespace Nasumilu\Spatial\Tests\Geometry;
 
 use InvalidArgumentException;
 use Nasumilu\Spatial\Geometry\{
-    AbstractGeometryFactory,
     Point,
     MultiPoint
 };
@@ -52,24 +51,24 @@ class MultiPointTest extends AbstractGeometryTest
     {
         $factory = $this->getMockGeometryFactory($options);
         $points = [];
-        foreach(self::$data['coordinates'] as $coordinate) {
+        foreach (self::$data['coordinates'] as $coordinate) {
             $points[] = new Point($factory, $coordinate);
         }
         $multipoint = new MultiPoint($factory, ...$points);
         $this->assertInstanceOf(MultiPoint::class, $multipoint);
-        if($options['3d']) {
+        if ($options['3d']) {
             $this->assertTrue($multipoint->is3D());
         } else {
             $this->assertFalse($multipoint->is3D());
         }
-        
-        if($options['measured']) {
+
+        if ($options['measured']) {
             $this->assertTrue($multipoint->isMeasured());
         } else {
             $this->assertFalse($multipoint->isMeasured());
         }
     }
-    
+
     /**
      * @test
      * @param MultiPoint $multipoint
@@ -78,18 +77,19 @@ class MultiPointTest extends AbstractGeometryTest
     {
         $factory = $this->getMockGeometryFactory();
         $points = [];
-        foreach(self::$data['coordinates'] as $coordinate) {
+        foreach (self::$data['coordinates'] as $coordinate) {
             $points[] = new Point($factory, $coordinate);
         }
         $multipoint = new MultiPoint($factory, ...$points);
-        foreach($multipoint as $point) {
+        foreach ($multipoint as $point) {
             $this->assertInstanceOf(Point::class, $point);
         }
     }
-    
+
     /**
      */
-    public function testsetGeometryN() {
+    public function testsetGeometryN()
+    {
         $factory = $this->getMockGeometryFactory();
         $multipoint = new MultiPoint($factory);
         $multipoint[] = ['type' => 'point'];
@@ -98,7 +98,7 @@ class MultiPointTest extends AbstractGeometryTest
         $this->assertCount(2, $multipoint);
         $multipoint->{2} = ['type' => 'point'];
         $this->expectException(InvalidArgumentException::class);
-        $multipoint[] = ['type' => 'linestring']; 
+        $multipoint[] = ['type' => 'linestring'];
     }
 
     /**
@@ -121,6 +121,19 @@ class MultiPointTest extends AbstractGeometryTest
         $factory = $this->getMockGeometryFactory();
         $multipoint = new MultiPoint($factory);
         $this->assertEquals(MultiPoint::WKT_TYPE, $multipoint->getGeometryType());
+    }
+
+    public function testOutput()
+    {
+        $linestring = $this->getMockGeometryFactory(['srid' => 3857, 'measured' => true, '3d' => true])
+                ->create(require __DIR__ . '/../Resources/php/multipoint.php');
+
+        $expectedWkt = file_get_contents(__DIR__ . '/../Resources/wkt/xyzm/multipoint.wkt');
+        $this->assertEquals($expectedWkt, $linestring->asText());
+        $expectedEwkt = file_get_contents(__DIR__ . '/../Resources/ewkt/xyzm/multipoint.wkt');
+        $this->assertEquals($expectedEwkt, $linestring->asText(['extended' => true]));
+        $this->assertEquals($expectedWkt, $linestring->output('wkt'));
+        $this->assertEquals($expectedEwkt, $linestring->output('ewkt'));
     }
 
 }

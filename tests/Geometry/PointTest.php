@@ -69,6 +69,19 @@ class PointTest extends AbstractGeometryTest
         $point['d'];
     }
 
+    public function testOutput()
+    {
+        $point = $this->getMockGeometryFactory(['srid' => 3857, 'measured' => true, '3d' => true])
+                ->create(require __DIR__.'/../Resources/php/point.php');
+        
+        $expectedWkt = file_get_contents(__DIR__.'/../Resources/wkt/xyzm/point.wkt');
+        $this->assertEquals($expectedWkt, $point->asText());
+        $expectedEwkt = file_get_contents(__DIR__.'/../Resources/ewkt/xyzm/point.wkt');
+        $this->assertEquals($expectedEwkt, $point->asText(['extended' => true]));
+        $this->assertEquals($expectedWkt, $point->output('wkt'));
+        $this->assertEquals($expectedEwkt, $point->output('ewkt'));
+    }
+    
     /**
      * Test the Point ArrayAccess implementation
      * @test

@@ -22,11 +22,16 @@ namespace Nasumilu\Spatial\Tests\Geometry;
 
 use function array_merge;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\{
+    Serializer,
+    SerializerInterface
+};
 use Nasumilu\Spatial\Serializer\{
     Normalizer\GeometryNormalizer,
     Encoder\WktEncoder,
-    Encoder\WkbEncoder
+    Decoder\WktDecoder,
+    Encoder\WkbEncoder,
+    Decoder\WkbDecoder
 };
 use Nasumilu\Spatial\Geometry\{
     AbstractGeometryFactory,
@@ -48,7 +53,8 @@ abstract class AbstractGeometryTest extends TestCase
 
     protected function getMockGeometryFactory(array $options = []): GeometryFactory
     {
-        return $this->getMockForAbstractClass(AbstractGeometryFactory::class, [array_merge(['serializer' => self::getSerializer()], $options)]);
+        return $this->getMockForAbstractClass(AbstractGeometryFactory::class,
+                        [array_merge(['serializer' => self::getSerializer()], $options)]);
     }
 
     public function factoryProvider(): array
@@ -60,10 +66,12 @@ abstract class AbstractGeometryTest extends TestCase
         return $data;
     }
 
-    protected static function getSerializer()
+    protected static function getSerializer(): SerializerInterface
     {
         if (null === self::$serializer) {
-            self::$serializer = new Serializer([new GeometryNormalizer()], [new WktEncoder(), new WkbEncoder()]);
+            self::$serializer = new Serializer([new GeometryNormalizer()], [
+                new WktEncoder(), new WkbEncoder(), new WktDecoder(), new WkbDecoder()
+            ]);
         }
         return self::$serializer;
     }

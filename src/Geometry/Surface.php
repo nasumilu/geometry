@@ -31,13 +31,13 @@ use Countable;
  */
 abstract class Surface extends Geometry implements Iterator, ArrayAccess, Countable, Polygonal
 {
-    
+
     /**
      * Gets the exterior ring of the Surface
      * @return Curve
      */
     public abstract function getExteriorRing(): Curve;
-    
+
     /**
      * Gets the interior rings (holes).
      * 
@@ -51,7 +51,9 @@ abstract class Surface extends Geometry implements Iterator, ArrayAccess, Counta
      */
     public function getBoundary(): MultiCurve
     {
-        return $this->factory->getSpatialEngine()->boundary($this);
+        return $this->factory
+                        ->getSpatialEngine()
+                        ->boundary($this);
     }
 
     /**
@@ -59,7 +61,9 @@ abstract class Surface extends Geometry implements Iterator, ArrayAccess, Counta
      */
     public function getArea(): float
     {
-        return $this->factory->getSpatialEngine()->area($this);
+        return $this->factory
+                        ->getSpatialEngine()
+                        ->area($this);
     }
 
     /**
@@ -67,7 +71,9 @@ abstract class Surface extends Geometry implements Iterator, ArrayAccess, Counta
      */
     public function getCentroid(): Point
     {
-        return $this->factory->getSpatialEngine()->centroid($this);
+        return $this->factory
+                        ->getSpatialEngine()
+                        ->centroid($this);
     }
 
     /**
@@ -75,7 +81,9 @@ abstract class Surface extends Geometry implements Iterator, ArrayAccess, Counta
      */
     public function getPointOnSurface(): Point
     {
-        return $this->factory->getSpatialEngine()->pointOnSurface($this);
+        return $this->factory
+                        ->getSpatialEngine()
+                        ->pointOnSurface($this);
     }
 
     /**
