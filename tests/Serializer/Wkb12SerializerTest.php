@@ -24,6 +24,7 @@ namespace Nasumilu\Spatial\Serializer\Tests;
  * Wkb12SerializerTest test all of the well-known binary v1.2.0 fixtures
  * 
  * @covers \Nasumilu\Spatial\Serializer\Encoder\Wkb\Wkb12Encoder
+ * @covers \Nasumilu\Spatial\Serializer\Decoder\Wkb\Wkb12Decoder
  */
 class Wkb12SerializerTest extends AbstractWkbSerializerTest
 {

@@ -24,6 +24,7 @@ namespace Nasumilu\Spatial\Serializer\Tests;
  * Wkt11SerializerTest tests the well-known text v1.1.0 fixtures
  * 
  * @covers \Nasumilu\Spatial\Serializer\Encoder\Wkt\Wkt11Encoder
+ * @covers \Nasumilu\Spatial\Serializer\Decoder\Wkt\Wkt11Decoder
  */
 class Wkt11SerializerTest extends AbstractWktSerializerTest
 {

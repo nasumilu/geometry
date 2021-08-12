@@ -23,6 +23,7 @@ namespace Nasumilu\Spatial\Serializer\Tests;
 /**
  * Description of EwkbSerializerTest
  * @covers \Nasumilu\Spatial\Serializer\Encoder\Wkb\EwkbEncoder
+ * @covers \Nasumilu\Spatial\Serializer\Decoder\Wkb\EwkbDecoder
  */
 class EwkbSerializerTest extends AbstractWkbSerializerTest
 {

@@ -24,6 +24,7 @@ namespace Nasumilu\Spatial\Serializer\Tests;
  * EwktSerializerTest test extended well-known text fixtures
  * 
  * @covers \Nasumilu\Spatial\Serializer\Encoder\Wkt\EwktEncoder
+ * @covers \Nasumilu\Spatial\Serializer\Decoder\Wkt\EwktDecoder
  */
 class EwktSerializerTest extends AbstractWktSerializerTest
 {

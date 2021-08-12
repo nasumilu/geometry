@@ -64,9 +64,10 @@ abstract class AbstractSerializerTest extends AbstractGeometryTest
 
     /**
      * @covers \Nasumilu\Spatial\Serializer\Encoder\WkbEncoder
-     * @covers \Nasumilu\Spatial\Serializer\Encoder\WkbDecoder
+     * @covers \Nasumilu\Spatial\Serializer\Decoder\WkbDecoder
      * @covers \Nasumilu\Spatial\Serializer\Encoder\WktEncoder
-     * @covers \Nasumilu\Spatial\Serializer\Encoder\WktDecoder
+     * @covers \Nasumilu\Spatial\Serializer\Decoder\WktDecoder
+     * @covers \Nasumilu\Spatial\Serializer\Normalizer\GeometryNormalizer
      * 
      * @dataProvider dataProvider
      * @param array $data

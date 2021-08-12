@@ -23,6 +23,7 @@ namespace Nasumilu\Spatial\Serializer\Tests;
 /**
  * Wkb11SerializerTest test well-known binary version 1.1.0 fixtures
  * @covers \Nasumilu\Spatial\Serializer\Encoder\Wkb\Wkb11Encoder
+ * @covers \Nasumilu\Spatial\Serializer\Decoder\Wkb\Wkb11Decoder
  */
 class Wkb11SerializerTest extends AbstractWkbSerializerTest
 {
