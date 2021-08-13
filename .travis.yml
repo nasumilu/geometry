@@ -5,6 +5,6 @@ php:
   - nightly
 before_script: composer update
 script: 
-    - vendor/bin/phpunit --coverage-clover coverage.xml
+    - vendor/bin/phpunit --configuration phpunit.dist.xml --coverage-clover coverage.xml
 after_success:
     - bash <(curl -s https://codecov.io/bash)
