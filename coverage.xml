@@ -1,0 +1,1341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1628869472">
+  <project timestamp="1628869472">
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/AbstractGeometryFactory.php">
+      <class name="Nasumilu\Spatial\Geometry\AbstractGeometryFactory" namespace="global">
+        <metrics complexity="41" methods="25" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="64" elements="102" coveredelements="83"/>
+      </class>
+      <line num="86" type="method" name="__construct" visibility="public" complexity="2" crap="2.07" count="55"/>
+      <line num="88" type="stmt" count="55"/>
+      <line num="89" type="stmt" count="55"/>
+      <line num="90" type="stmt" count="55"/>
+      <line num="91" type="stmt" count="55"/>
+      <line num="92" type="stmt" count="55"/>
+      <line num="94" type="stmt" count="55"/>
+      <line num="95" type="stmt" count="0"/>
+      <line num="96" type="stmt" count="0"/>
+      <line num="97" type="stmt" count="0"/>
+      <line num="98" type="stmt" count="0"/>
+      <line num="99" type="stmt" count="0"/>
+      <line num="102" type="stmt" count="55"/>
+      <line num="103" type="stmt" count="55"/>
+      <line num="104" type="stmt" count="55"/>
+      <line num="105" type="stmt" count="55"/>
+      <line num="106" type="stmt" count="55"/>
+      <line num="107" type="stmt" count="55"/>
+      <line num="109" type="stmt" count="55"/>
+      <line num="110" type="stmt" count="55"/>
+      <line num="116" type="method" name="getSerializer" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="118" type="stmt" count="0"/>
+      <line num="128" type="method" name="setSerializer" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="130" type="stmt" count="0"/>
+      <line num="131" type="stmt" count="0"/>
+      <line num="137" type="method" name="getPrecisionModel" visibility="public" complexity="1" crap="1" count="25"/>
+      <line num="139" type="stmt" count="25"/>
+      <line num="145" type="method" name="getCoordianteSystem" visibility="public" complexity="1" crap="1" count="29"/>
+      <line num="147" type="stmt" count="29"/>
+      <line num="153" type="method" name="getSpatialEngine" visibility="public" complexity="1" crap="1" count="29"/>
+      <line num="155" type="stmt" count="29"/>
+      <line num="161" type="method" name="registerBuilder" visibility="public" complexity="1" crap="1" count="55"/>
+      <line num="163" type="stmt" count="55"/>
+      <line num="164" type="stmt" count="55"/>
+      <line num="169" type="method" name="unregisterBuilder" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="171" type="stmt" count="1"/>
+      <line num="172" type="stmt" count="1"/>
+      <line num="173" type="stmt" count="1"/>
+      <line num="176" type="stmt" count="1"/>
+      <line num="181" type="method" name="hasBuilder" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="183" type="stmt" count="1"/>
+      <line num="189" type="method" name="getCoordinateDimension" visibility="public" complexity="3" crap="3" count="4"/>
+      <line num="191" type="stmt" count="4"/>
+      <line num="192" type="stmt" count="4"/>
+      <line num="193" type="stmt" count="2"/>
+      <line num="195" type="stmt" count="4"/>
+      <line num="196" type="stmt" count="2"/>
+      <line num="198" type="stmt" count="4"/>
+      <line num="204" type="method" name="is3D" visibility="public" complexity="1" crap="1" count="33"/>
+      <line num="206" type="stmt" count="33"/>
+      <line num="212" type="method" name="isMeasured" visibility="public" complexity="1" crap="1" count="33"/>
+      <line num="214" type="stmt" count="33"/>
+      <line num="220" type="method" name="getSpatialDimension" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="222" type="stmt" count="4"/>
+      <line num="228" type="method" name="getSrid" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="230" type="stmt" count="4"/>
+      <line num="236" type="method" name="create" visibility="public" complexity="3" crap="3" count="25"/>
+      <line num="238" type="stmt" count="25"/>
+      <line num="239" type="stmt" count="25"/>
+      <line num="240" type="stmt" count="25"/>
+      <line num="241" type="stmt" count="24"/>
+      <line num="244" type="stmt" count="1"/>
+      <line num="250" type="method" name="createPoint" visibility="public" complexity="1" crap="1" count="30"/>
+      <line num="252" type="stmt" count="30"/>
+      <line num="258" type="method" name="createLineString" visibility="public" complexity="2" crap="2" count="32"/>
+      <line num="260" type="stmt" count="32"/>
+      <line num="261" type="stmt" count="32"/>
+      <line num="262" type="stmt" count="10"/>
+      <line num="264" type="stmt" count="32"/>
+      <line num="270" type="method" name="createPolygon" visibility="public" complexity="2" crap="2" count="27"/>
+      <line num="272" type="stmt" count="27"/>
+      <line num="273" type="stmt" count="27"/>
+      <line num="274" type="stmt" count="6"/>
+      <line num="276" type="stmt" count="27"/>
+      <line num="282" type="method" name="createMultiPoint" visibility="public" complexity="2" crap="2" count="6"/>
+      <line num="284" type="stmt" count="6"/>
+      <line num="285" type="stmt" count="6"/>
+      <line num="286" type="stmt" count="4"/>
+      <line num="288" type="stmt" count="6"/>
+      <line num="294" type="method" name="createMultiLineString" visibility="public" complexity="2" crap="2" count="8"/>
+      <line num="296" type="stmt" count="8"/>
+      <line num="297" type="stmt" count="8"/>
+      <line num="298" type="stmt" count="2"/>
+      <line num="300" type="stmt" count="8"/>
+      <line num="306" type="method" name="createMultiPolygon" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="308" type="stmt" count="2"/>
+      <line num="309" type="stmt" count="2"/>
+      <line num="310" type="stmt" count="2"/>
+      <line num="312" type="stmt" count="2"/>
+      <line num="318" type="method" name="createGeometryCollection" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="320" type="stmt" count="2"/>
+      <line num="321" type="stmt" count="2"/>
+      <line num="322" type="stmt" count="2"/>
+      <line num="324" type="stmt" count="2"/>
+      <line num="330" type="method" name="output" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="332" type="stmt" count="0"/>
+      <line num="338" type="method" name="asText" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="340" type="stmt" count="0"/>
+      <line num="341" type="stmt" count="0"/>
+      <line num="347" type="method" name="asBinary" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="349" type="stmt" count="0"/>
+      <line num="350" type="stmt" count="0"/>
+      <metrics loc="353" ncloc="247" classes="1" methods="25" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="64" elements="102" coveredelements="83"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/Builder/ArrayGeometryBuilder.php">
+      <class name="Nasumilu\Spatial\Geometry\Builder\ArrayGeometryBuilder" namespace="global">
+        <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+      </class>
+      <line num="39" type="method" name="build" visibility="public" complexity="3" crap="3" count="15"/>
+      <line num="41" type="stmt" count="15"/>
+      <line num="42" type="stmt" count="15"/>
+      <line num="44" type="stmt" count="14"/>
+      <line num="45" type="stmt" count="14"/>
+      <metrics loc="48" ncloc="27" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/Builder/CloneGeometryBuilder.php">
+      <class name="Nasumilu\Spatial\Geometry\Builder\CloneGeometryBuilder" namespace="global">
+        <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+      </class>
+      <line num="34" type="method" name="build" visibility="public" complexity="3" crap="3" count="15"/>
+      <line num="36" type="stmt" count="15"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="40" type="stmt" count="14"/>
+      <line num="41" type="stmt" count="7"/>
+      <line num="43" type="stmt" count="7"/>
+      <metrics loc="47" ncloc="29" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/Builder/SerializeGeometryBuilder.php">
+      <class name="Nasumilu\Spatial\Geometry\Builder\SerializeGeometryBuilder" namespace="global">
+        <metrics complexity="5" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="4" elements="10" coveredelements="5"/>
+      </class>
+      <line num="46" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="15"/>
+      <line num="48" type="stmt" count="15"/>
+      <line num="49" type="stmt" count="15"/>
+      <line num="54" type="method" name="build" visibility="public" complexity="4" crap="8.74" count="1"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="57" type="stmt" count="1"/>
+      <line num="60" type="stmt" count="0"/>
+      <line num="62" type="stmt" count="0"/>
+      <line num="63" type="stmt" count="0"/>
+      <line num="67" type="stmt" count="0"/>
+      <metrics loc="71" ncloc="40" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="4" elements="10" coveredelements="5"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/CoordinateException.php">
+      <class name="Nasumilu\Spatial\Geometry\CoordinateException" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+      </class>
+      <line num="25" type="stmt" count="0"/>
+      <line num="34" type="method" name="ordinateNotSupported" visibility="public" complexity="2" crap="2" count="19"/>
+      <line num="36" type="stmt" count="19"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="39" type="stmt" count="19"/>
+      <line num="40" type="stmt" count="19"/>
+      <metrics loc="43" ncloc="22" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="4" elements="6" coveredelements="5"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/Curve.php">
+      <class name="Nasumilu\Spatial\Geometry\Curve" namespace="global">
+        <metrics complexity="19" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="38" coveredelements="38"/>
+      </class>
+      <line num="82" type="method" name="getStartPoint" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="84" type="stmt" count="2"/>
+      <line num="90" type="method" name="getLength" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="92" type="stmt" count="1"/>
+      <line num="93" type="stmt" count="1"/>
+      <line num="95" type="stmt" count="1"/>
+      <line num="102" type="method" name="getEndPoint" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="104" type="stmt" count="2"/>
+      <line num="105" type="stmt" count="2"/>
+      <line num="111" type="method" name="getDimension" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="113" type="stmt" count="1"/>
+      <line num="124" type="method" name="isClosed" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="126" type="stmt" count="1"/>
+      <line num="127" type="stmt" count="1"/>
+      <line num="138" type="method" name="isEmpty" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="140" type="stmt" count="1"/>
+      <line num="148" type="method" name="count" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="150" type="stmt" count="7"/>
+      <line num="158" type="method" name="offsetSet" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="160" type="stmt" count="5"/>
+      <line num="161" type="stmt" count="5"/>
+      <line num="168" type="method" name="offsetGet" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="170" type="stmt" count="2"/>
+      <line num="178" type="method" name="offsetExists" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="180" type="stmt" count="1"/>
+      <line num="188" type="method" name="offsetUnset" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="190" type="stmt" count="1"/>
+      <line num="191" type="stmt" count="1"/>
+      <line num="197" type="method" name="__get" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="199" type="stmt" count="1"/>
+      <line num="206" type="method" name="__set" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="208" type="stmt" count="1"/>
+      <line num="209" type="stmt" count="1"/>
+      <line num="216" type="method" name="__isset" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="218" type="stmt" count="1"/>
+      <line num="221" type="method" name="__unset" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="224" type="stmt" count="1"/>
+      <line num="225" type="stmt" count="1"/>
+      <metrics loc="227" ncloc="106" classes="1" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="38" coveredelements="38"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/Geometry.php">
+      <class name="Nasumilu\Spatial\Geometry\Geometry" namespace="global">
+        <metrics complexity="34" methods="29" coveredmethods="26" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="40" elements="75" coveredelements="66"/>
+      </class>
+      <line num="35" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="21"/>
+      <line num="37" type="stmt" count="21"/>
+      <line num="38" type="stmt" count="21"/>
+      <line num="45" type="method" name="getFactory" visibility="public" complexity="1" crap="1" count="15"/>
+      <line num="47" type="stmt" count="15"/>
+      <line num="54" type="method" name="getSrid" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="63" type="method" name="is3D" visibility="public" complexity="1" crap="1" count="9"/>
+      <line num="65" type="stmt" count="9"/>
+      <line num="72" type="method" name="isMeasured" visibility="public" complexity="1" crap="1" count="9"/>
+      <line num="74" type="stmt" count="9"/>
+      <line num="80" type="method" name="getEnvelope" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="82" type="stmt" count="1"/>
+      <line num="85" type="method" name="isSimple" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="87" type="stmt" count="1"/>
+      <line num="90" type="method" name="getBoundary" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="92" type="stmt" count="1"/>
+      <line num="101" type="method" name="disjoint" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="103" type="stmt" count="1"/>
+      <line num="112" type="method" name="intersects" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="114" type="stmt" count="1"/>
+      <line num="123" type="method" name="touches" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="125" type="stmt" count="1"/>
+      <line num="134" type="method" name="crosses" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="136" type="stmt" count="1"/>
+      <line num="145" type="method" name="within" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="147" type="stmt" count="1"/>
+      <line num="156" type="method" name="contains" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="158" type="stmt" count="1"/>
+      <line num="167" type="method" name="overlaps" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="169" type="stmt" count="1"/>
+      <line num="181" type="method" name="relate" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="183" type="stmt" count="2"/>
+      <line num="184" type="stmt" count="2"/>
+      <line num="185" type="stmt" count="2"/>
+      <line num="187" type="stmt" count="1"/>
+      <line num="198" type="method" name="locateAlong" visibility="public" complexity="3" crap="3" count="3"/>
+      <line num="200" type="stmt" count="3"/>
+      <line num="201" type="stmt" count="1"/>
+      <line num="202" type="stmt" count="1"/>
+      <line num="204" type="stmt" count="2"/>
+      <line num="205" type="stmt" count="1"/>
+      <line num="207" type="stmt" count="1"/>
+      <line num="219" type="method" name="locateBetween" visibility="public" complexity="3" crap="3" count="3"/>
+      <line num="221" type="stmt" count="3"/>
+      <line num="222" type="stmt" count="1"/>
+      <line num="223" type="stmt" count="1"/>
+      <line num="225" type="stmt" count="2"/>
+      <line num="226" type="stmt" count="1"/>
+      <line num="228" type="stmt" count="1"/>
+      <line num="237" type="method" name="distance" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="239" type="stmt" count="1"/>
+      <line num="249" type="method" name="buffer" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="251" type="stmt" count="1"/>
+      <line num="259" type="method" name="convexHull" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="261" type="stmt" count="1"/>
+      <line num="271" type="method" name="intersection" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="273" type="stmt" count="1"/>
+      <line num="282" type="method" name="union" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="284" type="stmt" count="1"/>
+      <line num="294" type="method" name="difference" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="296" type="stmt" count="1"/>
+      <line num="306" type="method" name="symDifference" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="308" type="stmt" count="1"/>
+      <line num="317" type="method" name="transform" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="319" type="stmt" count="2"/>
+      <line num="346" type="method" name="output" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="348" type="stmt" count="0"/>
+      <line num="349" type="stmt" count="0"/>
+      <line num="352" type="method" name="asText" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="354" type="stmt" count="0"/>
+      <line num="355" type="stmt" count="0"/>
+      <line num="358" type="method" name="asBinary" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="360" type="stmt" count="0"/>
+      <line num="361" type="stmt" count="0"/>
+      <metrics loc="363" ncloc="184" classes="1" methods="29" coveredmethods="26" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="40" elements="75" coveredelements="66"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/GeometryCollection.php">
+      <class name="Nasumilu\Spatial\Geometry\GeometryCollection" namespace="global">
+        <metrics complexity="23" methods="22" coveredmethods="22" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="36" elements="58" coveredelements="58"/>
+      </class>
+      <line num="64" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="23"/>
+      <line num="66" type="stmt" count="23"/>
+      <line num="67" type="stmt" count="23"/>
+      <line num="68" type="stmt" count="23"/>
+      <line num="73" type="method" name="getGeometryType" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="75" type="stmt" count="2"/>
+      <line num="81" type="method" name="getDimension" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="83" type="stmt" count="1"/>
+      <line num="84" type="stmt" count="1"/>
+      <line num="85" type="stmt" count="1"/>
+      <line num="87" type="stmt" count="1"/>
+      <line num="90" type="method" name="isEmpty" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="92" type="stmt" count="4"/>
+      <line num="99" type="method" name="count" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="101" type="stmt" count="6"/>
+      <line num="108" type="method" name="current" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="110" type="stmt" count="5"/>
+      <line num="117" type="method" name="key" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="119" type="stmt" count="1"/>
+      <line num="126" type="method" name="next" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="128" type="stmt" count="5"/>
+      <line num="129" type="stmt" count="5"/>
+      <line num="136" type="method" name="hasGeometry" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="138" type="stmt" count="1"/>
+      <line num="147" type="method" name="getGeometryN" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="149" type="stmt" count="2"/>
+      <line num="152" type="method" name="createAllowedGeometry" visibility="protected" complexity="1" crap="1" count="1"/>
+      <line num="154" type="stmt" count="1"/>
+      <line num="166" type="method" name="setGeometryN" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="168" type="stmt" count="2"/>
+      <line num="169" type="stmt" count="2"/>
+      <line num="178" type="method" name="removeGeometryN" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="180" type="stmt" count="1"/>
+      <line num="181" type="stmt" count="1"/>
+      <line num="182" type="stmt" count="1"/>
+      <line num="183" type="stmt" count="1"/>
+      <line num="190" type="method" name="offsetExists" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="192" type="stmt" count="1"/>
+      <line num="199" type="method" name="offsetGet" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="201" type="stmt" count="2"/>
+      <line num="208" type="method" name="offsetSet" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="210" type="stmt" count="2"/>
+      <line num="211" type="stmt" count="2"/>
+      <line num="217" type="method" name="offsetUnset" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="219" type="stmt" count="1"/>
+      <line num="220" type="stmt" count="1"/>
+      <line num="226" type="method" name="rewind" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="228" type="stmt" count="5"/>
+      <line num="229" type="stmt" count="5"/>
+      <line num="235" type="method" name="valid" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="237" type="stmt" count="5"/>
+      <line num="244" type="method" name="__isset" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="246" type="stmt" count="1"/>
+      <line num="253" type="method" name="__set" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="255" type="stmt" count="1"/>
+      <line num="256" type="stmt" count="1"/>
+      <line num="262" type="method" name="__get" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="264" type="stmt" count="1"/>
+      <metrics loc="267" ncloc="148" classes="1" methods="22" coveredmethods="22" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="36" elements="58" coveredelements="58"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/LineString.php">
+      <class name="Nasumilu\Spatial\Geometry\LineString" namespace="global">
+        <metrics complexity="14" methods="12" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="36" coveredelements="36"/>
+      </class>
+      <line num="62" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="28"/>
+      <line num="64" type="stmt" count="28"/>
+      <line num="65" type="stmt" count="28"/>
+      <line num="66" type="stmt" count="28"/>
+      <line num="71" type="method" name="current" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="73" type="stmt" count="5"/>
+      <line num="79" type="method" name="getGeometryType" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="81" type="stmt" count="2"/>
+      <line num="87" type="method" name="getNumPoints" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="89" type="stmt" count="8"/>
+      <line num="95" type="method" name="getPointN" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="97" type="stmt" count="3"/>
+      <line num="98" type="stmt" count="1"/>
+      <line num="100" type="stmt" count="3"/>
+      <line num="106" type="method" name="hasPointN" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="108" type="stmt" count="5"/>
+      <line num="111" type="method" name="key" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="113" type="stmt" count="4"/>
+      <line num="119" type="method" name="next" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="121" type="stmt" count="5"/>
+      <line num="122" type="stmt" count="5"/>
+      <line num="127" type="method" name="removePointN" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="129" type="stmt" count="1"/>
+      <line num="130" type="stmt" count="1"/>
+      <line num="132" type="stmt" count="1"/>
+      <line num="133" type="stmt" count="1"/>
+      <line num="134" type="stmt" count="1"/>
+      <line num="135" type="stmt" count="1"/>
+      <line num="141" type="method" name="rewind" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="143" type="stmt" count="5"/>
+      <line num="144" type="stmt" count="5"/>
+      <line num="149" type="method" name="setPointN" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="151" type="stmt" count="5"/>
+      <line num="152" type="stmt" count="5"/>
+      <line num="158" type="method" name="valid" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="160" type="stmt" count="5"/>
+      <metrics loc="163" ncloc="96" classes="1" methods="12" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="36" coveredelements="36"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/MultiCurve.php">
+      <class name="Nasumilu\Spatial\Geometry\MultiCurve" namespace="global">
+        <metrics complexity="6" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="12" coveredelements="12"/>
+      </class>
+      <line num="37" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="39" type="stmt" count="3"/>
+      <line num="40" type="stmt" count="3"/>
+      <line num="45" type="method" name="getLength" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="53" type="method" name="getDimension" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="55" type="stmt" count="1"/>
+      <line num="61" type="method" name="isClosed" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="63" type="stmt" count="1"/>
+      <line num="64" type="stmt" count="1"/>
+      <line num="65" type="stmt" count="1"/>
+      <line num="68" type="stmt" count="1"/>
+      <metrics loc="71" ncloc="36" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="12" coveredelements="12"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/MultiLineString.php">
+      <class name="Nasumilu\Spatial\Geometry\MultiLineString" namespace="global">
+        <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+      </class>
+      <line num="38" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="40" type="stmt" count="8"/>
+      <line num="41" type="stmt" count="8"/>
+      <line num="43" type="method" name="getGeometryType" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="45" type="stmt" count="2"/>
+      <line num="48" type="method" name="createAllowedGeometry" visibility="protected" complexity="2" crap="2" count="2"/>
+      <line num="50" type="stmt" count="2"/>
+      <line num="51" type="stmt" count="2"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="53" type="stmt" count="1"/>
+      <line num="55" type="stmt" count="1"/>
+      <metrics loc="58" ncloc="37" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/MultiPoint.php">
+      <class name="Nasumilu\Spatial\Geometry\MultiPoint" namespace="global">
+        <metrics complexity="5" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="13" coveredelements="13"/>
+      </class>
+      <line num="46" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="13"/>
+      <line num="48" type="stmt" count="13"/>
+      <line num="49" type="stmt" count="13"/>
+      <line num="54" type="method" name="createAllowedGeometry" visibility="protected" complexity="2" crap="2" count="1"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="57" type="stmt" count="1"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="59" type="stmt" count="1"/>
+      <line num="61" type="stmt" count="1"/>
+      <line num="67" type="method" name="getDimension" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="69" type="stmt" count="1"/>
+      <line num="75" type="method" name="getGeometryType" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="77" type="stmt" count="2"/>
+      <metrics loc="79" ncloc="40" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="13" coveredelements="13"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/MultiPolygon.php">
+      <class name="Nasumilu\Spatial\Geometry\MultiPolygon" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="8" coveredelements="8"/>
+      </class>
+      <line num="37" type="method" name="createAllowedGeometry" visibility="protected" complexity="2" crap="2" count="4"/>
+      <line num="39" type="stmt" count="4"/>
+      <line num="40" type="stmt" count="4"/>
+      <line num="41" type="stmt" count="4"/>
+      <line num="42" type="stmt" count="4"/>
+      <line num="44" type="stmt" count="4"/>
+      <line num="47" type="method" name="getGeometryType" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="49" type="stmt" count="2"/>
+      <metrics loc="52" ncloc="32" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="8" coveredelements="8"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/MultiSurface.php">
+      <class name="Nasumilu\Spatial\Geometry\MultiSurface" namespace="global">
+        <metrics complexity="5" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="11" coveredelements="11"/>
+      </class>
+      <line num="35" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="11"/>
+      <line num="37" type="stmt" count="11"/>
+      <line num="38" type="stmt" count="11"/>
+      <line num="43" type="method" name="getDimension" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="51" type="method" name="getArea" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="53" type="stmt" count="1"/>
+      <line num="59" type="method" name="getCentroid" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="61" type="stmt" count="1"/>
+      <line num="67" type="method" name="getPointOnSurface" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="69" type="stmt" count="1"/>
+      <metrics loc="72" ncloc="36" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="11" coveredelements="11"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/Point.php">
+      <class name="Nasumilu\Spatial\Geometry\Point" namespace="global">
+        <metrics complexity="38" methods="29" coveredmethods="25" conditionals="0" coveredconditionals="0" statements="70" coveredstatements="66" elements="99" coveredelements="91"/>
+      </class>
+      <line num="59" type="method" name="__construct" visibility="public" complexity="4" crap="4" count="62"/>
+      <line num="61" type="stmt" count="62"/>
+      <line num="62" type="stmt" count="62"/>
+      <line num="63" type="stmt" count="62"/>
+      <line num="64" type="stmt" count="62"/>
+      <line num="65" type="stmt" count="62"/>
+      <line num="66" type="stmt" count="62"/>
+      <line num="69" type="stmt" count="62"/>
+      <line num="70" type="stmt" count="62"/>
+      <line num="71" type="stmt" count="62"/>
+      <line num="72" type="stmt" count="62"/>
+      <line num="73" type="stmt" count="1"/>
+      <line num="74" type="stmt" count="1"/>
+      <line num="76" type="stmt" count="62"/>
+      <line num="77" type="stmt" count="1"/>
+      <line num="78" type="stmt" count="1"/>
+      <line num="80" type="stmt" count="62"/>
+      <line num="88" type="method" name="getOrdinate" visibility="public" complexity="2" crap="2" count="29"/>
+      <line num="90" type="stmt" count="29"/>
+      <line num="91" type="stmt" count="8"/>
+      <line num="93" type="stmt" count="21"/>
+      <line num="102" type="method" name="setOrdinate" visibility="public" complexity="2" crap="2" count="17"/>
+      <line num="104" type="stmt" count="17"/>
+      <line num="105" type="stmt" count="8"/>
+      <line num="107" type="stmt" count="9"/>
+      <line num="108" type="stmt" count="9"/>
+      <line num="109" type="stmt" count="9"/>
+      <line num="110" type="stmt" count="9"/>
+      <line num="117" type="method" name="hasOrdinate" visibility="public" complexity="1" crap="1" count="25"/>
+      <line num="119" type="stmt" count="25"/>
+      <line num="123" type="method" name="ordinate" visibility="private" complexity="3" crap="3" count="37"/>
+      <line num="125" type="stmt" count="37"/>
+      <line num="126" type="stmt" count="37"/>
+      <line num="127" type="stmt" count="37"/>
+      <line num="129" type="stmt" count="37"/>
+      <line num="130" type="stmt" count="4"/>
+      <line num="132" type="stmt" count="33"/>
+      <line num="138" type="method" name="current" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="140" type="stmt" count="4"/>
+      <line num="148" type="method" name="getM" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="150" type="stmt" count="1"/>
+      <line num="159" type="method" name="setM" visibility="public" complexity="1" crap="1.12" count="4"/>
+      <line num="161" type="stmt" count="4"/>
+      <line num="162" type="stmt" count="0"/>
+      <line num="169" type="method" name="getX" visibility="public" complexity="1" crap="1" count="9"/>
+      <line num="171" type="stmt" count="9"/>
+      <line num="179" type="method" name="setX" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="181" type="stmt" count="4"/>
+      <line num="182" type="stmt" count="4"/>
+      <line num="189" type="method" name="getY" visibility="public" complexity="1" crap="1" count="9"/>
+      <line num="191" type="stmt" count="9"/>
+      <line num="199" type="method" name="setY" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="201" type="stmt" count="4"/>
+      <line num="202" type="stmt" count="4"/>
+      <line num="210" type="method" name="getZ" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="212" type="stmt" count="1"/>
+      <line num="221" type="method" name="setZ" visibility="public" complexity="1" crap="1.12" count="4"/>
+      <line num="223" type="stmt" count="4"/>
+      <line num="224" type="stmt" count="0"/>
+      <line num="230" type="method" name="key" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="232" type="stmt" count="0"/>
+      <line num="238" type="method" name="next" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="240" type="stmt" count="8"/>
+      <line num="241" type="stmt" count="8"/>
+      <line num="246" type="method" name="offsetExists" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="248" type="stmt" count="8"/>
+      <line num="254" type="method" name="offsetGet" visibility="public" complexity="1" crap="1" count="16"/>
+      <line num="256" type="stmt" count="16"/>
+      <line num="262" type="method" name="offsetSet" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="264" type="stmt" count="8"/>
+      <line num="265" type="stmt" count="8"/>
+      <line num="270" type="method" name="offsetUnset" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="272" type="stmt" count="4"/>
+      <line num="273" type="stmt" count="4"/>
+      <line num="274" type="stmt" count="4"/>
+      <line num="276" type="stmt" count="4"/>
+      <line num="277" type="stmt" count="4"/>
+      <line num="282" type="method" name="rewind" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="284" type="stmt" count="4"/>
+      <line num="285" type="stmt" count="4"/>
+      <line num="290" type="method" name="valid" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="292" type="stmt" count="8"/>
+      <line num="298" type="method" name="__set" visibility="public" complexity="1" crap="1" count="9"/>
+      <line num="300" type="stmt" count="9"/>
+      <line num="301" type="stmt" count="9"/>
+      <line num="306" type="method" name="__get" visibility="public" complexity="1" crap="1" count="20"/>
+      <line num="308" type="stmt" count="20"/>
+      <line num="314" type="method" name="__isset" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="316" type="stmt" count="4"/>
+      <line num="319" type="method" name="__unset" visibility="public" complexity="1" crap="1.12" count="4"/>
+      <line num="321" type="stmt" count="4"/>
+      <line num="322" type="stmt" count="0"/>
+      <line num="327" type="method" name="getDimension" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="329" type="stmt" count="1"/>
+      <line num="335" type="method" name="getGeometryType" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="337" type="stmt" count="2"/>
+      <line num="343" type="method" name="isEmpty" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="345" type="stmt" count="2"/>
+      <line num="346" type="stmt" count="2"/>
+      <metrics loc="349" ncloc="211" classes="1" methods="29" coveredmethods="25" conditionals="0" coveredconditionals="0" statements="70" coveredstatements="66" elements="99" coveredelements="91"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/Polygon.php">
+      <class name="Nasumilu\Spatial\Geometry\Polygon" namespace="global">
+        <metrics complexity="18" methods="16" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="45" coveredelements="45"/>
+      </class>
+      <line num="65" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="26"/>
+      <line num="67" type="stmt" count="26"/>
+      <line num="69" type="stmt" count="26"/>
+      <line num="70" type="stmt" count="11"/>
+      <line num="72" type="stmt" count="26"/>
+      <line num="73" type="stmt" count="26"/>
+      <line num="79" type="method" name="getExteriorRing" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="81" type="stmt" count="6"/>
+      <line num="84" type="method" name="getInteriorRings" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="86" type="stmt" count="4"/>
+      <line num="93" type="method" name="getNumInteriorRings" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="95" type="stmt" count="4"/>
+      <line num="98" type="method" name="getInteriorRingN" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="100" type="stmt" count="4"/>
+      <line num="101" type="stmt" count="4"/>
+      <line num="102" type="stmt" count="4"/>
+      <line num="104" type="stmt" count="4"/>
+      <line num="111" type="method" name="count" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="113" type="stmt" count="8"/>
+      <line num="120" type="method" name="current" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="122" type="stmt" count="5"/>
+      <line num="128" type="method" name="getGeometryType" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="130" type="stmt" count="2"/>
+      <line num="137" type="method" name="key" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="139" type="stmt" count="4"/>
+      <line num="146" type="method" name="next" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="148" type="stmt" count="5"/>
+      <line num="149" type="stmt" count="5"/>
+      <line num="155" type="method" name="rewind" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="157" type="stmt" count="5"/>
+      <line num="158" type="stmt" count="5"/>
+      <line num="164" type="method" name="valid" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="166" type="stmt" count="5"/>
+      <line num="173" type="method" name="offsetExists" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="175" type="stmt" count="4"/>
+      <line num="182" type="method" name="offsetGet" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="184" type="stmt" count="4"/>
+      <line num="191" type="method" name="offsetSet" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="193" type="stmt" count="1"/>
+      <line num="194" type="stmt" count="1"/>
+      <line num="195" type="stmt" count="1"/>
+      <line num="201" type="method" name="offsetUnset" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="203" type="stmt" count="4"/>
+      <line num="204" type="stmt" count="4"/>
+      <line num="205" type="stmt" count="4"/>
+      <metrics loc="207" ncloc="116" classes="1" methods="16" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="45" coveredelements="45"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/PrecisionModel.php">
+      <class name="Nasumilu\Spatial\Geometry\PrecisionModel" namespace="global">
+        <metrics complexity="11" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="24" coveredelements="24"/>
+      </class>
+      <line num="73" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="22"/>
+      <line num="75" type="stmt" count="22"/>
+      <line num="76" type="stmt" count="21"/>
+      <line num="77" type="stmt" count="20"/>
+      <line num="80" type="method" name="setPrecision" visibility="private" complexity="2" crap="2" count="22"/>
+      <line num="82" type="stmt" count="22"/>
+      <line num="83" type="stmt" count="1"/>
+      <line num="85" type="stmt" count="1"/>
+      <line num="87" type="stmt" count="21"/>
+      <line num="88" type="stmt" count="21"/>
+      <line num="91" type="method" name="setMode" visibility="private" complexity="3" crap="3" count="21"/>
+      <line num="93" type="stmt" count="21"/>
+      <line num="94" type="stmt" count="1"/>
+      <line num="96" type="stmt" count="1"/>
+      <line num="98" type="stmt" count="20"/>
+      <line num="99" type="stmt" count="20"/>
+      <line num="108" type="method" name="getPrecision" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="110" type="stmt" count="1"/>
+      <line num="121" type="method" name="getMode" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="123" type="stmt" count="1"/>
+      <line num="126" type="method" name="makePrecise" visibility="public" complexity="3" crap="3" count="18"/>
+      <line num="128" type="stmt" count="18"/>
+      <line num="129" type="stmt" count="1"/>
+      <line num="132" type="stmt" count="17"/>
+      <metrics loc="135" ncloc="71" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="24" coveredelements="24"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Geometry/Surface.php">
+      <class name="Nasumilu\Spatial\Geometry\Surface" namespace="global">
+        <metrics complexity="6" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="20" coveredelements="20"/>
+      </class>
+      <line num="52" type="method" name="getBoundary" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="54" type="stmt" count="1"/>
+      <line num="55" type="stmt" count="1"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="62" type="method" name="getArea" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="64" type="stmt" count="1"/>
+      <line num="65" type="stmt" count="1"/>
+      <line num="66" type="stmt" count="1"/>
+      <line num="72" type="method" name="getCentroid" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="74" type="stmt" count="1"/>
+      <line num="75" type="stmt" count="1"/>
+      <line num="76" type="stmt" count="1"/>
+      <line num="82" type="method" name="getPointOnSurface" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="84" type="stmt" count="1"/>
+      <line num="85" type="stmt" count="1"/>
+      <line num="86" type="stmt" count="1"/>
+      <line num="97" type="method" name="isEmpty" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="99" type="stmt" count="1"/>
+      <line num="105" type="method" name="getDimension" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="107" type="stmt" count="1"/>
+      <metrics loc="110" ncloc="57" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="20" coveredelements="20"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Decoder/Wkb/EwkbDecoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Decoder\Wkb\EwkbDecoder" namespace="global">
+        <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="10" coveredelements="10"/>
+      </class>
+      <line num="46" type="method" name="decodeGeometryType" visibility="protected" complexity="3" crap="3" count="28"/>
+      <line num="48" type="stmt" count="28"/>
+      <line num="49" type="stmt" count="28"/>
+      <line num="50" type="stmt" count="28"/>
+      <line num="51" type="stmt" count="28"/>
+      <line num="58" type="stmt" count="28"/>
+      <line num="59" type="stmt" count="28"/>
+      <line num="61" type="stmt" count="28"/>
+      <line num="62" type="stmt" count="28"/>
+      <line num="64" type="stmt" count="28"/>
+      <metrics loc="67" ncloc="42" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="10" coveredelements="10"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Decoder/Wkb/Wkb11Decoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Decoder\Wkb\Wkb11Decoder" namespace="global">
+        <metrics complexity="28" methods="16" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="67" coveredstatements="65" elements="83" coveredelements="80"/>
+      </class>
+      <line num="58" type="method" name="decode" visibility="public" complexity="2" crap="2" count="28"/>
+      <line num="60" type="stmt" count="28"/>
+      <line num="61" type="stmt" count="28"/>
+      <line num="63" type="stmt" count="28"/>
+      <line num="64" type="stmt" count="28"/>
+      <line num="65" type="stmt" count="28"/>
+      <line num="66" type="stmt" count="28"/>
+      <line num="72" type="method" name="supportsDecoding" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="74" type="stmt" count="1"/>
+      <line num="83" type="method" name="decodeGeometry" visibility="protected" complexity="4" crap="4.18" count="28"/>
+      <line num="85" type="stmt" count="28"/>
+      <line num="86" type="stmt" count="28"/>
+      <line num="87" type="stmt" count="0"/>
+      <line num="88" type="stmt" count="28"/>
+      <line num="89" type="stmt" count="28"/>
+      <line num="91" type="stmt" count="0"/>
+      <line num="93" type="stmt" count="28"/>
+      <line num="94" type="stmt" count="28"/>
+      <line num="95" type="stmt" count="28"/>
+      <line num="103" type="method" name="decodeGeometryType" visibility="protected" complexity="1" crap="1" count="28"/>
+      <line num="105" type="stmt" count="28"/>
+      <line num="106" type="stmt" count="28"/>
+      <line num="114" type="method" name="decodePoint" visibility="protected" complexity="1" crap="1" count="28"/>
+      <line num="116" type="stmt" count="28"/>
+      <line num="117" type="stmt" count="28"/>
+      <line num="125" type="method" name="decodeLineString" visibility="protected" complexity="2" crap="2" count="20"/>
+      <line num="127" type="stmt" count="20"/>
+      <line num="128" type="stmt" count="20"/>
+      <line num="129" type="stmt" count="20"/>
+      <line num="130" type="stmt" count="20"/>
+      <line num="132" type="stmt" count="20"/>
+      <line num="140" type="method" name="decodePolygon" visibility="protected" complexity="2" crap="2" count="12"/>
+      <line num="142" type="stmt" count="12"/>
+      <line num="143" type="stmt" count="12"/>
+      <line num="144" type="stmt" count="12"/>
+      <line num="145" type="stmt" count="12"/>
+      <line num="147" type="stmt" count="12"/>
+      <line num="155" type="method" name="decodeMultiPoint" visibility="protected" complexity="2" crap="2" count="8"/>
+      <line num="157" type="stmt" count="8"/>
+      <line num="158" type="stmt" count="8"/>
+      <line num="159" type="stmt" count="8"/>
+      <line num="160" type="stmt" count="8"/>
+      <line num="162" type="stmt" count="8"/>
+      <line num="170" type="method" name="decodeMultiLineString" visibility="protected" complexity="2" crap="2" count="4"/>
+      <line num="172" type="stmt" count="4"/>
+      <line num="173" type="stmt" count="4"/>
+      <line num="174" type="stmt" count="4"/>
+      <line num="175" type="stmt" count="4"/>
+      <line num="177" type="stmt" count="4"/>
+      <line num="185" type="method" name="decodeMultiPolygon" visibility="protected" complexity="2" crap="2" count="4"/>
+      <line num="187" type="stmt" count="4"/>
+      <line num="188" type="stmt" count="4"/>
+      <line num="189" type="stmt" count="4"/>
+      <line num="190" type="stmt" count="4"/>
+      <line num="192" type="stmt" count="4"/>
+      <line num="200" type="method" name="decodeGeometryCollection" visibility="protected" complexity="2" crap="2" count="4"/>
+      <line num="202" type="stmt" count="4"/>
+      <line num="203" type="stmt" count="4"/>
+      <line num="204" type="stmt" count="4"/>
+      <line num="205" type="stmt" count="4"/>
+      <line num="207" type="stmt" count="4"/>
+      <line num="215" type="method" name="setInput" visibility="protected" complexity="1" crap="1" count="28"/>
+      <line num="217" type="stmt" count="28"/>
+      <line num="218" type="stmt" count="28"/>
+      <line num="219" type="stmt" count="28"/>
+      <line num="226" type="method" name="reset" visibility="protected" complexity="1" crap="1" count="28"/>
+      <line num="228" type="stmt" count="28"/>
+      <line num="229" type="stmt" count="28"/>
+      <line num="230" type="stmt" count="28"/>
+      <line num="236" type="method" name="unpackEndianness" visibility="public" complexity="1" crap="1" count="28"/>
+      <line num="238" type="stmt" count="28"/>
+      <line num="239" type="stmt" count="28"/>
+      <line num="240" type="stmt" count="28"/>
+      <line num="250" type="method" name="unpackUInt32" visibility="public" complexity="2" crap="2" count="28"/>
+      <line num="252" type="stmt" count="28"/>
+      <line num="253" type="stmt" count="28"/>
+      <line num="254" type="stmt" count="28"/>
+      <line num="255" type="stmt" count="28"/>
+      <line num="264" type="method" name="unpackDouble" visibility="public" complexity="2" crap="2" count="28"/>
+      <line num="266" type="stmt" count="28"/>
+      <line num="267" type="stmt" count="28"/>
+      <line num="268" type="stmt" count="28"/>
+      <line num="269" type="stmt" count="28"/>
+      <metrics loc="272" ncloc="164" classes="1" methods="16" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="67" coveredstatements="65" elements="83" coveredelements="80"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Decoder/Wkb/Wkb12Decoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Decoder\Wkb\Wkb12Decoder" namespace="global">
+        <metrics complexity="7" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="17" coveredelements="17"/>
+      </class>
+      <line num="41" type="method" name="decodeGeometryType" visibility="protected" complexity="4" crap="4" count="28"/>
+      <line num="43" type="stmt" count="28"/>
+      <line num="44" type="stmt" count="28"/>
+      <line num="46" type="stmt" count="28"/>
+      <line num="47" type="stmt" count="28"/>
+      <line num="52" type="stmt" count="28"/>
+      <line num="53" type="stmt" count="28"/>
+      <line num="54" type="stmt" count="28"/>
+      <line num="55" type="stmt" count="28"/>
+      <line num="61" type="method" name="decodePoint" visibility="protected" complexity="3" crap="3" count="28"/>
+      <line num="63" type="stmt" count="28"/>
+      <line num="64" type="stmt" count="28"/>
+      <line num="65" type="stmt" count="28"/>
+      <line num="66" type="stmt" count="14"/>
+      <line num="68" type="stmt" count="28"/>
+      <line num="69" type="stmt" count="14"/>
+      <line num="71" type="stmt" count="28"/>
+      <metrics loc="74" ncloc="46" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="17" coveredelements="17"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Decoder/WkbDecoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Decoder\WkbDecoder" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+      </class>
+      <line num="73" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="75" type="stmt" count="0"/>
+      <line num="76" type="stmt" count="0"/>
+      <line num="77" type="stmt" count="0"/>
+      <line num="78" type="stmt" count="0"/>
+      <line num="80" type="stmt" count="0"/>
+      <metrics loc="82" ncloc="47" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Decoder/Wkt/EwktDecoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Decoder\Wkt\EwktDecoder" namespace="global">
+        <metrics complexity="9" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="25" elements="31" coveredelements="28"/>
+      </class>
+      <line num="44" type="method" name="decodeGeometry" visibility="public" complexity="1" crap="1" count="28"/>
+      <line num="46" type="stmt" count="28"/>
+      <line num="47" type="stmt" count="28"/>
+      <line num="48" type="stmt" count="28"/>
+      <line num="49" type="stmt" count="28"/>
+      <line num="50" type="stmt" count="28"/>
+      <line num="51" type="stmt" count="28"/>
+      <line num="52" type="stmt" count="28"/>
+      <line num="55" type="stmt" count="28"/>
+      <line num="56" type="stmt" count="28"/>
+      <line num="63" type="method" name="decodeSrid" visibility="private" complexity="2" crap="2" count="28"/>
+      <line num="65" type="stmt" count="28"/>
+      <line num="66" type="stmt" count="28"/>
+      <line num="67" type="stmt" count="28"/>
+      <line num="68" type="stmt" count="28"/>
+      <line num="69" type="stmt" count="28"/>
+      <line num="70" type="stmt" count="28"/>
+      <line num="71" type="stmt" count="28"/>
+      <line num="73" type="stmt" count="28"/>
+      <line num="79" type="method" name="getCatchablePatterns" visibility="protected" complexity="1" crap="2" count="0"/>
+      <line num="81" type="stmt" count="0"/>
+      <line num="82" type="stmt" count="0"/>
+      <line num="88" type="method" name="getType" visibility="protected" complexity="5" crap="5" count="28"/>
+      <line num="90" type="stmt" count="28"/>
+      <line num="91" type="stmt" count="28"/>
+      <line num="92" type="stmt" count="28"/>
+      <line num="93" type="stmt" count="28"/>
+      <line num="94" type="stmt" count="28"/>
+      <line num="95" type="stmt" count="28"/>
+      <line num="96" type="stmt" count="28"/>
+      <line num="98" type="stmt" count="28"/>
+      <metrics loc="102" ncloc="67" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="25" elements="31" coveredelements="28"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Decoder/Wkt/Wkt11Decoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Decoder\Wkt\Wkt11Decoder" namespace="global">
+        <metrics complexity="40" methods="18" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="99" coveredstatements="91" elements="117" coveredelements="105"/>
+      </class>
+      <line num="63" type="method" name="decode" visibility="public" complexity="1" crap="1" count="28"/>
+      <line num="65" type="stmt" count="28"/>
+      <line num="66" type="stmt" count="28"/>
+      <line num="67" type="stmt" count="28"/>
+      <line num="68" type="stmt" count="28"/>
+      <line num="69" type="stmt" count="28"/>
+      <line num="75" type="method" name="supportsDecoding" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="77" type="stmt" count="1"/>
+      <line num="84" type="method" name="decodeGeometry" visibility="public" complexity="1" crap="1" count="28"/>
+      <line num="86" type="stmt" count="28"/>
+      <line num="87" type="stmt" count="28"/>
+      <line num="88" type="stmt" count="28"/>
+      <line num="95" type="method" name="decodeGeometryType" visibility="protected" complexity="1" crap="1" count="28"/>
+      <line num="97" type="stmt" count="28"/>
+      <line num="98" type="stmt" count="28"/>
+      <line num="105" type="method" name="decodeCoordinate" visibility="protected" complexity="2" crap="2" count="28"/>
+      <line num="107" type="stmt" count="28"/>
+      <line num="108" type="stmt" count="28"/>
+      <line num="109" type="stmt" count="28"/>
+      <line num="110" type="stmt" count="28"/>
+      <line num="112" type="stmt" count="28"/>
+      <line num="119" type="method" name="decodeCoordinateSeq" visibility="protected" complexity="2" crap="2" count="24"/>
+      <line num="121" type="stmt" count="24"/>
+      <line num="122" type="stmt" count="24"/>
+      <line num="123" type="stmt" count="24"/>
+      <line num="124" type="stmt" count="24"/>
+      <line num="126" type="stmt" count="24"/>
+      <line num="134" type="method" name="decodeCoordinates" visibility="protected" complexity="3" crap="3.21" count="28"/>
+      <line num="136" type="stmt" count="28"/>
+      <line num="137" type="stmt" count="28"/>
+      <line num="138" type="stmt" count="28"/>
+      <line num="139" type="stmt" count="28"/>
+      <line num="141" type="stmt" count="0"/>
+      <line num="142" type="stmt" count="0"/>
+      <line num="144" type="stmt" count="28"/>
+      <line num="151" type="method" name="decodePoint" visibility="protected" complexity="1" crap="1" count="8"/>
+      <line num="153" type="stmt" count="8"/>
+      <line num="154" type="stmt" count="8"/>
+      <line num="155" type="stmt" count="8"/>
+      <line num="156" type="stmt" count="8"/>
+      <line num="163" type="method" name="decodeLineString" visibility="protected" complexity="1" crap="1" count="20"/>
+      <line num="165" type="stmt" count="20"/>
+      <line num="166" type="stmt" count="20"/>
+      <line num="167" type="stmt" count="20"/>
+      <line num="168" type="stmt" count="20"/>
+      <line num="175" type="method" name="decodePolygon" visibility="protected" complexity="2" crap="2" count="12"/>
+      <line num="177" type="stmt" count="12"/>
+      <line num="178" type="stmt" count="12"/>
+      <line num="179" type="stmt" count="12"/>
+      <line num="180" type="stmt" count="12"/>
+      <line num="181" type="stmt" count="12"/>
+      <line num="182" type="stmt" count="12"/>
+      <line num="184" type="stmt" count="12"/>
+      <line num="185" type="stmt" count="12"/>
+      <line num="192" type="method" name="decodeMultiPoint" visibility="protected" complexity="1" crap="1" count="8"/>
+      <line num="195" type="stmt" count="8"/>
+      <line num="196" type="stmt" count="8"/>
+      <line num="197" type="stmt" count="8"/>
+      <line num="198" type="stmt" count="8"/>
+      <line num="205" type="method" name="decodeMultiLineString" visibility="protected" complexity="2" crap="2.06" count="4"/>
+      <line num="207" type="stmt" count="4"/>
+      <line num="208" type="stmt" count="4"/>
+      <line num="209" type="stmt" count="4"/>
+      <line num="210" type="stmt" count="4"/>
+      <line num="211" type="stmt" count="0"/>
+      <line num="212" type="stmt" count="0"/>
+      <line num="214" type="stmt" count="4"/>
+      <line num="215" type="stmt" count="4"/>
+      <line num="222" type="method" name="decodeMultiPolygon" visibility="protected" complexity="2" crap="2" count="4"/>
+      <line num="224" type="stmt" count="4"/>
+      <line num="225" type="stmt" count="4"/>
+      <line num="226" type="stmt" count="4"/>
+      <line num="227" type="stmt" count="4"/>
+      <line num="228" type="stmt" count="4"/>
+      <line num="229" type="stmt" count="4"/>
+      <line num="231" type="stmt" count="4"/>
+      <line num="232" type="stmt" count="4"/>
+      <line num="239" type="method" name="decodeGeometryCollection" visibility="protected" complexity="2" crap="2" count="4"/>
+      <line num="241" type="stmt" count="4"/>
+      <line num="242" type="stmt" count="4"/>
+      <line num="243" type="stmt" count="4"/>
+      <line num="244" type="stmt" count="4"/>
+      <line num="245" type="stmt" count="4"/>
+      <line num="246" type="stmt" count="4"/>
+      <line num="248" type="stmt" count="4"/>
+      <line num="249" type="stmt" count="4"/>
+      <line num="255" type="method" name="getCatchablePatterns" visibility="protected" complexity="1" crap="1" count="1"/>
+      <line num="258" type="stmt" count="1"/>
+      <line num="267" type="method" name="getNonCatchablePatterns" visibility="protected" complexity="1" crap="1" count="1"/>
+      <line num="269" type="stmt" count="1"/>
+      <line num="272" type="method" name="getType" visibility="protected" complexity="14" crap="14.66" count="28"/>
+      <line num="274" type="stmt" count="28"/>
+      <line num="275" type="stmt" count="28"/>
+      <line num="277" type="stmt" count="28"/>
+      <line num="278" type="stmt" count="28"/>
+      <line num="279" type="stmt" count="24"/>
+      <line num="280" type="stmt" count="28"/>
+      <line num="281" type="stmt" count="28"/>
+      <line num="282" type="stmt" count="28"/>
+      <line num="283" type="stmt" count="28"/>
+      <line num="284" type="stmt" count="28"/>
+      <line num="285" type="stmt" count="24"/>
+      <line num="286" type="stmt" count="20"/>
+      <line num="287" type="stmt" count="16"/>
+      <line num="288" type="stmt" count="12"/>
+      <line num="289" type="stmt" count="8"/>
+      <line num="290" type="stmt" count="4"/>
+      <line num="291" type="stmt" count="28"/>
+      <line num="292" type="stmt" count="0"/>
+      <line num="293" type="stmt" count="0"/>
+      <line num="295" type="stmt" count="0"/>
+      <line num="307" type="method" name="match" visibility="protected" complexity="2" crap="2.03" count="28"/>
+      <line num="309" type="stmt" count="28"/>
+      <line num="310" type="stmt" count="28"/>
+      <line num="311" type="stmt" count="0"/>
+      <line num="313" type="stmt" count="28"/>
+      <line num="314" type="stmt" count="28"/>
+      <metrics loc="316" ncloc="219" classes="1" methods="18" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="99" coveredstatements="91" elements="117" coveredelements="105"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Decoder/Wkt/Wkt12Decoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Decoder\Wkt\Wkt12Decoder" namespace="global">
+        <metrics complexity="9" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="20" elements="26" coveredelements="23"/>
+      </class>
+      <line num="40" type="method" name="decodeGeometry" visibility="public" complexity="1" crap="1" count="28"/>
+      <line num="42" type="stmt" count="28"/>
+      <line num="43" type="stmt" count="28"/>
+      <line num="44" type="stmt" count="28"/>
+      <line num="45" type="stmt" count="28"/>
+      <line num="46" type="stmt" count="28"/>
+      <line num="48" type="stmt" count="28"/>
+      <line num="49" type="stmt" count="28"/>
+      <line num="56" type="method" name="decodeDimension" visibility="protected" complexity="2" crap="2" count="28"/>
+      <line num="59" type="stmt" count="28"/>
+      <line num="62" type="stmt" count="28"/>
+      <line num="63" type="stmt" count="21"/>
+      <line num="64" type="stmt" count="21"/>
+      <line num="65" type="stmt" count="21"/>
+      <line num="66" type="stmt" count="21"/>
+      <line num="69" type="stmt" count="28"/>
+      <line num="75" type="method" name="getCatchablePatterns" visibility="protected" complexity="1" crap="2" count="0"/>
+      <line num="77" type="stmt" count="0"/>
+      <line num="78" type="stmt" count="0"/>
+      <line num="84" type="method" name="getType" visibility="protected" complexity="5" crap="5" count="28"/>
+      <line num="86" type="stmt" count="28"/>
+      <line num="87" type="stmt" count="28"/>
+      <line num="88" type="stmt" count="28"/>
+      <line num="89" type="stmt" count="28"/>
+      <line num="90" type="stmt" count="21"/>
+      <line num="92" type="stmt" count="28"/>
+      <metrics loc="96" ncloc="61" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="20" elements="26" coveredelements="23"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Decoder/WktDecoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Decoder\WktDecoder" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+      </class>
+      <line num="41" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="43" type="stmt" count="0"/>
+      <line num="44" type="stmt" count="0"/>
+      <line num="45" type="stmt" count="0"/>
+      <line num="46" type="stmt" count="0"/>
+      <line num="48" type="stmt" count="0"/>
+      <metrics loc="50" ncloc="22" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Encoder/Wkb/EwkbEncoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Encoder\Wkb\EwkbEncoder" namespace="global">
+        <metrics complexity="4" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="8" elements="10" coveredelements="8"/>
+      </class>
+      <line num="42" type="method" name="encodeGeometryType" visibility="protected" complexity="4" crap="4.02" count="28"/>
+      <line num="44" type="stmt" count="28"/>
+      <line num="46" type="stmt" count="28"/>
+      <line num="47" type="stmt" count="14"/>
+      <line num="49" type="stmt" count="28"/>
+      <line num="50" type="stmt" count="14"/>
+      <line num="53" type="stmt" count="28"/>
+      <line num="54" type="stmt" count="28"/>
+      <line num="55" type="stmt" count="28"/>
+      <line num="57" type="stmt" count="0"/>
+      <metrics loc="60" ncloc="36" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="8" elements="10" coveredelements="8"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Encoder/Wkb/Wkb11Encoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Encoder\Wkb\Wkb11Encoder" namespace="global">
+        <metrics complexity="35" methods="20" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="57" elements="89" coveredelements="72"/>
+      </class>
+      <line num="47" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="49" type="stmt" count="0"/>
+      <line num="50" type="stmt" count="0"/>
+      <line num="52" type="method" name="setDefaultEndianness" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="54" type="stmt" count="0"/>
+      <line num="55" type="stmt" count="0"/>
+      <line num="56" type="stmt" count="0"/>
+      <line num="58" type="stmt" count="0"/>
+      <line num="59" type="stmt" count="0"/>
+      <line num="62" type="method" name="validateEndianness" visibility="private" complexity="2" crap="2" count="28"/>
+      <line num="64" type="stmt" count="28"/>
+      <line num="67" type="method" name="getDefaultEndianness" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="69" type="stmt" count="0"/>
+      <line num="72" type="method" name="encode" visibility="public" complexity="3" crap="3.47" count="28"/>
+      <line num="74" type="stmt" count="28"/>
+      <line num="75" type="stmt" count="28"/>
+      <line num="76" type="stmt" count="0"/>
+      <line num="77" type="stmt" count="0"/>
+      <line num="79" type="stmt" count="28"/>
+      <line num="80" type="stmt" count="28"/>
+      <line num="81" type="stmt" count="28"/>
+      <line num="83" type="stmt" count="0"/>
+      <line num="86" type="method" name="supportsEncoding" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="88" type="stmt" count="1"/>
+      <line num="97" type="method" name="encodeNormalizedGeometry" visibility="protected" complexity="3" crap="3.04" count="28"/>
+      <line num="99" type="stmt" count="28"/>
+      <line num="100" type="stmt" count="28"/>
+      <line num="101" type="stmt" count="28"/>
+      <line num="102" type="stmt" count="0"/>
+      <line num="104" type="stmt" count="28"/>
+      <line num="105" type="stmt" count="28"/>
+      <line num="114" type="method" name="encodeGeometryType" visibility="protected" complexity="1" crap="1" count="28"/>
+      <line num="116" type="stmt" count="28"/>
+      <line num="125" type="method" name="encodeCoordinate" visibility="protected" complexity="1" crap="1" count="28"/>
+      <line num="127" type="stmt" count="28"/>
+      <line num="136" type="method" name="encodeCoordinateSequence" visibility="protected" complexity="2" crap="2" count="20"/>
+      <line num="138" type="stmt" count="20"/>
+      <line num="139" type="stmt" count="20"/>
+      <line num="140" type="stmt" count="20"/>
+      <line num="142" type="stmt" count="20"/>
+      <line num="152" type="method" name="encodePoint" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="154" type="stmt" count="12"/>
+      <line num="163" type="method" name="encodeLineString" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="165" type="stmt" count="12"/>
+      <line num="174" type="method" name="encodePolygon" visibility="public" complexity="2" crap="2" count="12"/>
+      <line num="176" type="stmt" count="12"/>
+      <line num="177" type="stmt" count="12"/>
+      <line num="178" type="stmt" count="12"/>
+      <line num="180" type="stmt" count="12"/>
+      <line num="189" type="method" name="encodeMultiPoint" visibility="public" complexity="2" crap="2" count="8"/>
+      <line num="191" type="stmt" count="8"/>
+      <line num="192" type="stmt" count="8"/>
+      <line num="193" type="stmt" count="8"/>
+      <line num="194" type="stmt" count="8"/>
+      <line num="195" type="stmt" count="8"/>
+      <line num="196" type="stmt" count="8"/>
+      <line num="197" type="stmt" count="8"/>
+      <line num="200" type="stmt" count="8"/>
+      <line num="209" type="method" name="encodeMultiLineString" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="211" type="stmt" count="4"/>
+      <line num="212" type="stmt" count="4"/>
+      <line num="213" type="stmt" count="4"/>
+      <line num="214" type="stmt" count="4"/>
+      <line num="215" type="stmt" count="4"/>
+      <line num="216" type="stmt" count="4"/>
+      <line num="217" type="stmt" count="4"/>
+      <line num="220" type="stmt" count="4"/>
+      <line num="229" type="method" name="encodeMultiPolygon" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="231" type="stmt" count="4"/>
+      <line num="232" type="stmt" count="4"/>
+      <line num="233" type="stmt" count="4"/>
+      <line num="234" type="stmt" count="4"/>
+      <line num="235" type="stmt" count="4"/>
+      <line num="236" type="stmt" count="4"/>
+      <line num="237" type="stmt" count="4"/>
+      <line num="240" type="stmt" count="4"/>
+      <line num="250" type="method" name="encodeGeometryCollection" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="252" type="stmt" count="4"/>
+      <line num="253" type="stmt" count="4"/>
+      <line num="254" type="stmt" count="4"/>
+      <line num="256" type="stmt" count="4"/>
+      <line num="264" type="method" name="encodeEndianness" visibility="protected" complexity="2" crap="2" count="28"/>
+      <line num="266" type="stmt" count="28"/>
+      <line num="275" type="method" name="packUInt32" visibility="protected" complexity="2" crap="2" count="28"/>
+      <line num="277" type="stmt" count="28"/>
+      <line num="278" type="stmt" count="28"/>
+      <line num="287" type="method" name="packDouble" visibility="protected" complexity="2" crap="2" count="28"/>
+      <line num="289" type="stmt" count="28"/>
+      <line num="290" type="stmt" count="28"/>
+      <metrics loc="293" ncloc="187" classes="1" methods="20" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="57" elements="89" coveredelements="72"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Encoder/Wkb/Wkb12Encoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Encoder\Wkb\Wkb12Encoder" namespace="global">
+        <metrics complexity="4" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
+      </class>
+      <line num="42" type="method" name="encodeCoordinate" visibility="protected" complexity="1" crap="1" count="28"/>
+      <line num="44" type="stmt" count="28"/>
+      <line num="50" type="method" name="encodeGeometryType" visibility="protected" complexity="3" crap="3" count="28"/>
+      <line num="52" type="stmt" count="28"/>
+      <line num="53" type="stmt" count="28"/>
+      <line num="54" type="stmt" count="14"/>
+      <line num="56" type="stmt" count="28"/>
+      <line num="57" type="stmt" count="14"/>
+      <line num="59" type="stmt" count="28"/>
+      <metrics loc="62" ncloc="32" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Encoder/WkbEncoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Encoder\WkbEncoder" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+      </class>
+      <line num="45" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="48" type="stmt" count="0"/>
+      <line num="49" type="stmt" count="0"/>
+      <line num="50" type="stmt" count="0"/>
+      <line num="52" type="stmt" count="0"/>
+      <metrics loc="54" ncloc="32" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Encoder/Wkt/EwktEncoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Encoder\Wkt\EwktEncoder" namespace="global">
+        <metrics complexity="6" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="10" elements="14" coveredelements="11"/>
+      </class>
+      <line num="37" type="method" name="encodeGeometryType" visibility="protected" complexity="2" crap="2" count="28"/>
+      <line num="39" type="stmt" count="28"/>
+      <line num="40" type="stmt" count="28"/>
+      <line num="41" type="stmt" count="28"/>
+      <line num="43" type="stmt" count="28"/>
+      <line num="49" type="method" name="encodeGeometryCollection" visibility="public" complexity="4" crap="4.25" count="4"/>
+      <line num="51" type="stmt" count="4"/>
+      <line num="52" type="stmt" count="4"/>
+      <line num="53" type="stmt" count="4"/>
+      <line num="54" type="stmt" count="4"/>
+      <line num="55" type="stmt" count="0"/>
+      <line num="56" type="stmt" count="0"/>
+      <line num="58" type="stmt" count="4"/>
+      <line num="60" type="stmt" count="4"/>
+      <metrics loc="63" ncloc="36" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="10" elements="14" coveredelements="11"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Encoder/Wkt/Wkt11Encoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Encoder\Wkt\Wkt11Encoder" namespace="global">
+        <metrics complexity="20" methods="13" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="31" elements="45" coveredelements="43"/>
+      </class>
+      <line num="42" type="method" name="encode" visibility="public" complexity="1" crap="1" count="28"/>
+      <line num="44" type="stmt" count="28"/>
+      <line num="50" type="method" name="supportsEncoding" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="61" type="method" name="encodeNormalizedGeometry" visibility="protected" complexity="3" crap="3.07" count="28"/>
+      <line num="63" type="stmt" count="28"/>
+      <line num="64" type="stmt" count="28"/>
+      <line num="65" type="stmt" count="0"/>
+      <line num="67" type="stmt" count="28"/>
+      <line num="68" type="stmt" count="28"/>
+      <line num="77" type="method" name="encodeGeometryType" visibility="protected" complexity="1" crap="1" count="28"/>
+      <line num="79" type="stmt" count="28"/>
+      <line num="88" type="method" name="encodeCoordinate" visibility="protected" complexity="1" crap="1" count="28"/>
+      <line num="90" type="stmt" count="28"/>
+      <line num="99" type="method" name="encodeCoordinateSequence" visibility="protected" complexity="2" crap="2" count="24"/>
+      <line num="101" type="stmt" count="24"/>
+      <line num="102" type="stmt" count="24"/>
+      <line num="103" type="stmt" count="24"/>
+      <line num="105" type="stmt" count="24"/>
+      <line num="115" type="method" name="encodePoint" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="117" type="stmt" count="8"/>
+      <line num="126" type="method" name="encodeLineString" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="128" type="stmt" count="8"/>
+      <line num="137" type="method" name="encodePolygon" visibility="public" complexity="2" crap="2" count="12"/>
+      <line num="139" type="stmt" count="12"/>
+      <line num="140" type="stmt" count="12"/>
+      <line num="141" type="stmt" count="12"/>
+      <line num="143" type="stmt" count="12"/>
+      <line num="152" type="method" name="encodeMultiPoint" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="154" type="stmt" count="8"/>
+      <line num="163" type="method" name="encodeMultiLineString" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="165" type="stmt" count="4"/>
+      <line num="166" type="stmt" count="4"/>
+      <line num="167" type="stmt" count="4"/>
+      <line num="169" type="stmt" count="4"/>
+      <line num="178" type="method" name="encodeMultiPolygon" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="180" type="stmt" count="4"/>
+      <line num="181" type="stmt" count="4"/>
+      <line num="182" type="stmt" count="4"/>
+      <line num="184" type="stmt" count="4"/>
+      <line num="194" type="method" name="encodeGeometryCollection" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="196" type="stmt" count="4"/>
+      <line num="197" type="stmt" count="4"/>
+      <line num="198" type="stmt" count="4"/>
+      <line num="200" type="stmt" count="4"/>
+      <metrics loc="203" ncloc="108" classes="1" methods="13" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="31" elements="45" coveredelements="43"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Encoder/Wkt/Wkt12Encoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Encoder\Wkt\Wkt12Encoder" namespace="global">
+        <metrics complexity="4" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
+      </class>
+      <line num="38" type="method" name="encodeGeometryType" visibility="protected" complexity="3" crap="3" count="28"/>
+      <line num="40" type="stmt" count="28"/>
+      <line num="41" type="stmt" count="28"/>
+      <line num="42" type="stmt" count="14"/>
+      <line num="44" type="stmt" count="28"/>
+      <line num="45" type="stmt" count="14"/>
+      <line num="47" type="stmt" count="28"/>
+      <line num="56" type="method" name="encodeCoordinate" visibility="protected" complexity="1" crap="1" count="28"/>
+      <line num="58" type="stmt" count="28"/>
+      <metrics loc="62" ncloc="31" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Encoder/WktEncoder.php">
+      <class name="Nasumilu\Spatial\Serializer\Encoder\WktEncoder" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+      </class>
+      <line num="31" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="33" type="stmt" count="0"/>
+      <line num="34" type="stmt" count="0"/>
+      <line num="35" type="stmt" count="0"/>
+      <line num="36" type="stmt" count="0"/>
+      <line num="38" type="stmt" count="0"/>
+      <metrics loc="40" ncloc="22" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+    </file>
+    <file name="/home/mlucas/Projects/php/geometry/src/Serializer/Normalizer/GeometryNormalizer.php">
+      <class name="Nasumilu\Spatial\Serializer\Normalizer\GeometryNormalizer" namespace="global">
+        <metrics complexity="24" methods="12" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="50" coveredstatements="48" elements="62" coveredelements="58"/>
+      </class>
+      <line num="62" type="method" name="normalize" visibility="public" complexity="1" crap="1" count="168"/>
+      <line num="64" type="stmt" count="168"/>
+      <line num="65" type="stmt" count="168"/>
+      <line num="66" type="stmt" count="168"/>
+      <line num="67" type="stmt" count="168"/>
+      <line num="69" type="stmt" count="168"/>
+      <line num="70" type="stmt" count="168"/>
+      <line num="71" type="stmt" count="168"/>
+      <line num="72" type="stmt" count="168"/>
+      <line num="74" type="stmt" count="168"/>
+      <line num="81" type="method" name="supportsNormalization" visibility="public" complexity="1" crap="1" count="168"/>
+      <line num="83" type="stmt" count="168"/>
+      <line num="89" type="method" name="denormalize" visibility="public" complexity="2" crap="2.15" count="168"/>
+      <line num="91" type="stmt" count="168"/>
+      <line num="92" type="stmt" count="0"/>
+      <line num="94" type="stmt" count="168"/>
+      <line num="100" type="method" name="supportsDenormalization" visibility="public" complexity="2" crap="2" count="168"/>
+      <line num="102" type="stmt" count="168"/>
+      <line num="111" type="method" name="normalizeCoordinates" visibility="public" complexity="3" crap="3.04" count="168"/>
+      <line num="113" type="stmt" count="168"/>
+      <line num="114" type="stmt" count="0"/>
+      <line num="116" type="stmt" count="168"/>
+      <line num="117" type="stmt" count="168"/>
+      <line num="118" type="stmt" count="168"/>
+      <line num="119" type="stmt" count="168"/>
+      <line num="127" type="method" name="normalizePoint" visibility="public" complexity="3" crap="3" count="168"/>
+      <line num="129" type="stmt" count="168"/>
+      <line num="130" type="stmt" count="168"/>
+      <line num="131" type="stmt" count="84"/>
+      <line num="133" type="stmt" count="168"/>
+      <line num="134" type="stmt" count="84"/>
+      <line num="136" type="stmt" count="168"/>
+      <line num="144" type="method" name="normalizeLineString" visibility="public" complexity="2" crap="2" count="120"/>
+      <line num="146" type="stmt" count="120"/>
+      <line num="147" type="stmt" count="120"/>
+      <line num="148" type="stmt" count="120"/>
+      <line num="150" type="stmt" count="120"/>
+      <line num="158" type="method" name="normalizePolygon" visibility="public" complexity="2" crap="2" count="72"/>
+      <line num="160" type="stmt" count="72"/>
+      <line num="161" type="stmt" count="72"/>
+      <line num="162" type="stmt" count="72"/>
+      <line num="164" type="stmt" count="72"/>
+      <line num="172" type="method" name="normalizeMultiPoint" visibility="public" complexity="2" crap="2" count="48"/>
+      <line num="174" type="stmt" count="48"/>
+      <line num="175" type="stmt" count="48"/>
+      <line num="176" type="stmt" count="48"/>
+      <line num="178" type="stmt" count="48"/>
+      <line num="186" type="method" name="normalizeMultiLineString" visibility="public" complexity="2" crap="2" count="24"/>
+      <line num="188" type="stmt" count="24"/>
+      <line num="189" type="stmt" count="24"/>
+      <line num="190" type="stmt" count="24"/>
+      <line num="192" type="stmt" count="24"/>
+      <line num="200" type="method" name="normalizeMultiPolygon" visibility="public" complexity="2" crap="2" count="24"/>
+      <line num="202" type="stmt" count="24"/>
+      <line num="203" type="stmt" count="24"/>
+      <line num="204" type="stmt" count="24"/>
+      <line num="206" type="stmt" count="24"/>
+      <line num="209" type="method" name="normalizegeometrycollection" visibility="public" complexity="2" crap="2" count="24"/>
+      <line num="211" type="stmt" count="24"/>
+      <line num="212" type="stmt" count="24"/>
+      <line num="213" type="stmt" count="24"/>
+      <line num="215" type="stmt" count="24"/>
+      <metrics loc="217" ncloc="141" classes="1" methods="12" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="50" coveredstatements="48" elements="62" coveredelements="58"/>
+    </file>
+    <metrics files="35" loc="4828" ncloc="2828" classes="35" methods="284" coveredmethods="249" conditionals="0" coveredconditionals="0" statements="841" coveredstatements="761" elements="1125" coveredelements="1010"/>
+  </project>
+</coverage>

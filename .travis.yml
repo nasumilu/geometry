@@ -9,4 +9,4 @@ script:
 after_success:
     - curl -Os https://uploader.codecov.io/latest/linux/codecov
     - chmod +x codecov
-    - ./codecov -t 5f11e8d7-63d6-4e4b-b5f3-36a57f3fd16d -f ./coverage.xml
+    - ./codecov -f ./coverage.xml
