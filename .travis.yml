@@ -7,6 +7,4 @@ before_script: composer update
 script: 
     - vendor/bin/phpunit --configuration phpunit.dist.xml
 after_success:
-    - curl -Os https://uploader.codecov.io/latest/linux/codecov
-    - chmod +x codecov
-    - ./codecov -f ./coverage.xml
+    - bash <(curl -s https://codecov.io/bash)
