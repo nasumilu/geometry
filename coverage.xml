@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1629166984">
-  <project timestamp="1629166984">
+<coverage generated="1629167085">
+  <project timestamp="1629167085">
     <file name="/home/mlucas/Projects/php/geometry/src/Geometry/AbstractGeometryFactory.php">
       <class name="Nasumilu\Spatial\Geometry\AbstractGeometryFactory" namespace="global">
         <metrics complexity="41" methods="25" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="64" elements="102" coveredelements="83"/>
