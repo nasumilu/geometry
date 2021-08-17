@@ -43,7 +43,7 @@ trait EndiannessTrait
                 true);
     }
     
-    public function setEndianness(string $endianness): void
+    public function setEndianness(string $endianness = Endianness::NDR): void
     {
         $this->endianness($endianness);
     }
