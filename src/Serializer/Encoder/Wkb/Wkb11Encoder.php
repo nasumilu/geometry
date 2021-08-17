@@ -23,7 +23,10 @@ namespace Nasumilu\Spatial\Serializer\Encoder\Wkb;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
 use InvalidArgumentException;
 use Nasumilu\Spatial\Serializer\Encoder\WkbEncoder;
-use Nasumilu\Spatial\Serializer\Endianness;
+use Nasumilu\Spatial\Serializer\{
+    Endianness,
+    EndiannessTrait
+};
 use Nasumilu\Spatial\Geometry\{
     Point,
     LineString,
@@ -42,14 +45,14 @@ use function count;
 class Wkb11Encoder implements EncoderInterface
 {
 
+    use EndiannessTrait;
+
     /** Well-known binary 1.1 format */
     public const FORMAT = 'wkb11';
 
-    protected string $endianness = Endianness::NDR;
-
     public function __construct(string $endiannes = Endianness::NDR)
     {
-        $this->setEndianness($endiannes);
+        $this->endianness($endiannes);
     }
 
     public function encode($data, string $format, array $context = []): string
