@@ -48,7 +48,7 @@ trait EndiannessTrait
         $this->endianness($endianness);
     }
     
-    private function endianness(string $endianness = self::NDR): void
+    private function endianness(string $endianness = Endianness::NDR): void
     {
         if(!$this->validateEndianness($endianness)) {
             throw new \InvalidArgumentException(sprintf('Endianness must be %s '
