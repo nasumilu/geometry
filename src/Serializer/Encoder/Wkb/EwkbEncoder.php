@@ -20,7 +20,7 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Serializer\Encoder\Wkb;
 
-use Nasumilu\Spatial\Serializer\Encoder\WkbEncoder;
+use Nasumilu\Spatial\Serializer\Endianness;
 
 /**
  * Well-known binary version 1.1.0 encoder
@@ -52,9 +52,9 @@ class EwkbEncoder extends Wkb12Encoder
 
         if ((-1 !== $data['crs']['srid'] ?? -1)) {
             $type |= self::EWKB_SRID;
-            return $this->packUInt32($context[WkbEncoder::ENDIANNESS], $type, $data['crs']['srid']);
+            return $this->packUInt32($context[Endianness::ENDIANNESS], $type, $data['crs']['srid']);
         }
-        return $this->packUInt32($context[WkbEncoder::ENDIANNESS], $type);
+        return $this->packUInt32($context[Endianness::ENDIANNESS], $type);
     }
 
 }

@@ -23,6 +23,7 @@ namespace Nasumilu\Spatial\Serializer\Decoder\Wkb;
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
 use Nasumilu\Spatial\Serializer\Decoder\WkbDecoder;
 use Nasumilu\Spatial\Geometry\GeometryCollection;
+use Nasumilu\Spatial\Serializer\Endianness;
 use InvalidArgumentException;
 use function ctype_xdigit;
 use function pack;
@@ -84,9 +85,9 @@ class Wkb11Decoder implements DecoderInterface
     {
         $endianness = $this->unpackEndianness();
         if (0 === $endianness) {
-            $context[WkbDecoder::ENDIANNESS] = WkbDecoder::XDR;
+            $context[Endianness::ENDIANNESS] = Endianness::XDR;
         } else if (1 === $endianness) {
-            $context[WkbDecoder::ENDIANNESS] = WkbDecoder::NDR;
+            $context[Endianness::ENDIANNESS] = Endianness::NDR;
         } else {
             throw new InvalidArgumentException("Unknown endianness expected 0 (XDR) or 1 (NDR) found, $endianness!");
         }
@@ -102,7 +103,7 @@ class Wkb11Decoder implements DecoderInterface
      */
     protected function decodeGeometryType(array &$context): string
     {
-        $wkbType = $this->unpackUInt32($context[WkbDecoder::ENDIANNESS]);
+        $wkbType = $this->unpackUInt32($context[Endianness::ENDIANNESS]);
         return WkbDecoder::WKB_TYPES[$wkbType];
     }
 
@@ -113,8 +114,8 @@ class Wkb11Decoder implements DecoderInterface
      */
     protected function decodePoint(array $context): array
     {
-        return [$this->unpackDouble($context[WkbDecoder::ENDIANNESS]),
-            $this->unpackDouble($context[WkbDecoder::ENDIANNESS])];
+        return [$this->unpackDouble($context[Endianness::ENDIANNESS]),
+            $this->unpackDouble($context[Endianness::ENDIANNESS])];
     }
 
     /**
@@ -124,7 +125,7 @@ class Wkb11Decoder implements DecoderInterface
      */
     protected function decodeLineString(array $context): array
     {
-        $numPoints = $this->unpackUInt32($context[WkbDecoder::ENDIANNESS]);
+        $numPoints = $this->unpackUInt32($context[Endianness::ENDIANNESS]);
         $points = [];
         for ($i = 0; $i < $numPoints; $i++) {
             $points[] = $this->decodePoint($context);
@@ -139,7 +140,7 @@ class Wkb11Decoder implements DecoderInterface
      */
     protected function decodePolygon(array $context): array
     {
-        $numRings = $this->unpackUInt32($context[WkbDecoder::ENDIANNESS]);
+        $numRings = $this->unpackUInt32($context[Endianness::ENDIANNESS]);
         $linestrings = [];
         for ($i = 0; $i < $numRings; $i++) {
             $linestrings[] = $this->decodeLineString($context);
@@ -154,7 +155,7 @@ class Wkb11Decoder implements DecoderInterface
      */
     protected function decodeMultiPoint(array $context): array
     {
-        $numPoints = $this->unpackUInt32($context[WkbDecoder::ENDIANNESS]);
+        $numPoints = $this->unpackUInt32($context[Endianness::ENDIANNESS]);
         $points = [];
         for ($i = 0; $i < $numPoints; $i++) {
             $points[] = $this->decodeGeometry($context)['coordinates'];
@@ -169,7 +170,7 @@ class Wkb11Decoder implements DecoderInterface
      */
     protected function decodeMultiLineString(array $context): array
     {
-        $numLineStrings = $this->unpackUInt32($context[WkbDecoder::ENDIANNESS]);
+        $numLineStrings = $this->unpackUInt32($context[Endianness::ENDIANNESS]);
         $linestrings = [];
         for ($i = 0; $i < $numLineStrings; $i++) {
             $linestrings[] = $this->decodeGeometry($context)['coordinates'];
@@ -184,7 +185,7 @@ class Wkb11Decoder implements DecoderInterface
      */
     protected function decodeMultiPolygon(array $context): array
     {
-        $numPolygons = $this->unpackUInt32($context[WkbDecoder::ENDIANNESS]);
+        $numPolygons = $this->unpackUInt32($context[Endianness::ENDIANNESS]);
         $polygons = [];
         for ($i = 0; $i < $numPolygons; $i++) {
             $polygons[] = $this->decodeGeometry($context)['coordinates'];
@@ -199,7 +200,7 @@ class Wkb11Decoder implements DecoderInterface
      */
     protected function decodeGeometryCollection(array $context): array
     {
-        $numGeometries = $this->unpackUInt32($context[WkbDecoder::ENDIANNESS]);
+        $numGeometries = $this->unpackUInt32($context[Endianness::ENDIANNESS]);
         $geometries = [];
         for($i = 0; $i < $numGeometries; $i++) {
             $geometries[] = $this->decodeGeometry($context);
@@ -249,7 +250,7 @@ class Wkb11Decoder implements DecoderInterface
      */
     public function unpackUInt32(string $endianness): int
     {
-        $format = ($endianness === WkbDecoder::NDR) ? 'V' : 'N';
+        $format = ($endianness === Endianness::NDR) ? 'V' : 'N';
         $unpack = unpack($format, $this->wkb, $this->position);
         $this->position += 4;
         return $unpack[1];
@@ -263,7 +264,7 @@ class Wkb11Decoder implements DecoderInterface
      */
     public function unpackDouble(string $endinannes): float
     {
-        $format = ($endinannes === WkbDecoder::NDR) ? 'e' : 'E';
+        $format = ($endinannes === Endianness::NDR) ? 'e' : 'E';
         $unpack = unpack($format, $this->wkb, $this->position)[1];
         $this->position += 8;
         return $unpack;

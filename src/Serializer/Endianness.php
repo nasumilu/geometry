@@ -18,27 +18,25 @@ declare(strict_types=1);
  * limitations under the License.
  */
 
-namespace Nasumilu\Spatial\Serializer\Encoder;
-
-use Symfony\Component\Serializer\Encoder\ChainEncoder;
-use Nasumilu\Spatial\Serializer\Endianness;
+namespace Nasumilu\Spatial\Serializer;
 
 /**
- * Description of WkbEncoder
+ * Endianness
  */
-class WkbEncoder extends ChainEncoder
+interface Endianness
+
 {
- 
-    public const HEX_STR = 'hex_str';
-    
-    public function __construct(string $endianness = Endianness::NDR)
-    {
-        parent::__construct([
-            new Wkb\Wkb11Encoder($endianness),
-            new Wkb\Wkb12Encoder($endianness),
-            new Wkb\EwkbEncoder($endianness)
-        ]);
-    }
 
+    /** Little-endian */
+    public const NDR = 'NDR';
 
+    /** Big-endian */
+    public const XDR = 'XDR';
+
+    /** Byteorder (endianness) context option */
+    public const ENDIANNESS = 'endianness';
+
+    public function getEndianness(): string;
+
+    public function setEndianness(string $endianness = self::NDR): void;
 }

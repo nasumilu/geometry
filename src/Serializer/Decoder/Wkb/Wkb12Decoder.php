@@ -20,7 +20,7 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Serializer\Decoder\Wkb;
 
-use Symfony\Component\Serializer\Encoder\DecoderInterface;
+use Nasumilu\Spatial\Serializer\Endianness;
 use Nasumilu\Spatial\Serializer\Decoder\WkbDecoder;
 
 /**
@@ -40,7 +40,7 @@ class Wkb12Decoder extends Wkb11Decoder
      */
     protected function decodeGeometryType(array &$context): string
     {
-        $wkbType = $this->unpackUInt32($context[WkbDecoder::ENDIANNESS]);
+        $wkbType = $this->unpackUInt32($context[Endianness::ENDIANNESS]);
         $type = WkbDecoder::WKB_TYPES[$wkbType % 1000];
 
         if (!isset($context['crs'])) {
@@ -60,13 +60,13 @@ class Wkb12Decoder extends Wkb11Decoder
      */
     protected function decodePoint(array $context): array
     {
-        $wkb = [$this->unpackDouble($context[WkbDecoder::ENDIANNESS]),
-            $this->unpackDouble($context[WkbDecoder::ENDIANNESS])];
+        $wkb = [$this->unpackDouble($context[Endianness::ENDIANNESS]),
+            $this->unpackDouble($context[Endianness::ENDIANNESS])];
         if($context['crs']['3d'] ?? false) {
-            $wkb[] = $this->unpackDouble($context[WkbDecoder::ENDIANNESS]);
+            $wkb[] = $this->unpackDouble($context[Endianness::ENDIANNESS]);
         }
         if($context['crs']['measured']) {
-            $wkb[] =  $this->unpackDouble($context[WkbDecoder::ENDIANNESS]);
+            $wkb[] =  $this->unpackDouble($context[Endianness::ENDIANNESS]);
         }
         return $wkb;
     }

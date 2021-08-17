@@ -20,6 +20,7 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Serializer\Decoder\Wkb;
 
+use Nasumilu\Spatial\Serializer\Endianness;
 use Nasumilu\Spatial\Serializer\Decoder\WkbDecoder;
 
 /**
@@ -45,7 +46,7 @@ class EwkbDecoder extends Wkb12Decoder
      */
     protected function decodeGeometryType(array &$context): string
     {
-        $wkbType = $this->unpackUInt32($context[WkbDecoder::ENDIANNESS]);
+        $wkbType = $this->unpackUInt32($context[Endianness::ENDIANNESS]);
         $type = WkbDecoder::WKB_TYPES[$wkbType & 0xFF];
         if (!isset($context['crs'])) {
             $context['crs'] = [
@@ -56,7 +57,7 @@ class EwkbDecoder extends Wkb12Decoder
         }
 
         if(($wkbType & self::EWKB_SRID) === self::EWKB_SRID) {
-            $context['crs']['srid'] = $this->unpackUInt32($context[WkbDecoder::ENDIANNESS]);
+            $context['crs']['srid'] = $this->unpackUInt32($context[Endianness::ENDIANNESS]);
         }
         $context['crs']['3d'] = ($wkbType & self::EWKBZ) === self::EWKBZ;
         $context['crs']['measured'] = ($wkbType & self::EWKBM) === self::EWKBM;

@@ -23,6 +23,7 @@ namespace Nasumilu\Spatial\Serializer\Encoder\Wkb;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
 use InvalidArgumentException;
 use Nasumilu\Spatial\Serializer\Encoder\WkbEncoder;
+use Nasumilu\Spatial\Serializer\Endianness;
 use Nasumilu\Spatial\Geometry\{
     Point,
     LineString,
@@ -44,43 +45,46 @@ class Wkb11Encoder implements EncoderInterface
     /** Well-known binary 1.1 format */
     public const FORMAT = 'wkb11';
 
-    public function __construct(string $defaultEndianness = WkbEncoder::NDR)
-    {
-        $this->setDefaultEndianness($defaultEndianness);
-    }
+    protected string $endianness = Endianness::NDR;
 
-    final public function setDefaultEndianness(string $endianness): self
+    public function __construct(string $endiannes = Endianness::NDR)
     {
-        if (!$this->validateEndianness($endianness)) {
-            throw new InvalidArgumentException(sprintf('Endianness must be %s or %s, found %s!',
-                                    WkbEncoder::NDR, WkbEncoder::XDR, $endianness));
-        }
-        $this->defaultEndianness = $endianness;
-        return $this;
-    }
-
-    private function validateEndianness(string $endianness): bool
-    {
-        return $endianness === WkbEncoder::NDR || $endianness === WkbEncoder::XDR;
-    }
-
-    public function getDefaultEndianness(): string
-    {
-        return $this->defaultEndianness;
+        $this->setEndianness($endiannes);
     }
 
     public function encode($data, string $format, array $context = []): string
     {
-        $context[WkbEncoder::ENDIANNESS] = $context[WkbEncoder::ENDIANNESS] ?? $this->defaultEndianness;
-        if (!$this->validateEndianness($context[WkbEncoder::ENDIANNESS])) {
+        $context[Endianness::ENDIANNESS] = $context[Endianness::ENDIANNESS] ?? $this->endianness;
+        if (!$this->validateEndianness($context[Endianness::ENDIANNESS])) {
             throw new InvalidArgumentException(sprintf('Endianness must be %s or %s, found %s!',
-                                    WkbEncoder::NDR, WkbEncoder::XDR, $context[WkbEncoder::ENDIANNESS]));
+                                    Endianness::NDR, Endianness::XDR, $context[Endianness::ENDIANNESS]));
         }
         $wkb = $this->encodeNormalizedGeometry($data, $context);
-        if((bool) ($context[WkbEncoder::HEX_STR] ?? false)) {
+        if ((bool) ($context[WkbEncoder::HEX_STR] ?? false)) {
             return unpack('H*', $wkb)[1];
         }
         return $wkb;
+    }
+
+    public function getEndianness(): string
+    {
+        return $this->endianness;
+    }
+
+    private function validateEndianness(string $endianness): bool
+    {
+        return in_array(strtolower($endianness),
+                array_map('strtolower', [Endianness::NDR, Endianness::XDR]),
+                true);
+    }
+
+    public final function setEndianness(string $endianness = self::NDR): void
+    {
+        if (!$this->validateEndianness($endianness)) {
+            throw new \InvalidArgumentException(sprintf('Endianness must be %s '
+                                    . 'or %s, found %!', Endianness::NDR, Endianness::XDR, $endianness));
+        }
+        $this->endianness = $endianness;
     }
 
     public function supportsEncoding(string $format): bool
@@ -96,7 +100,7 @@ class Wkb11Encoder implements EncoderInterface
      */
     protected function encodeNormalizedGeometry(array $data, array $context = []): string
     {
-        $wkb = $this->encodeEndianness($context[WkbEncoder::ENDIANNESS]);
+        $wkb = $this->encodeEndianness($context[Endianness::ENDIANNESS]);
         $wkb .= $this->encodeGeometryType($data, $context);
         if (!isset($data['coordinates']) && !isset($data['geometries'])) {
             return $wkb;
@@ -113,7 +117,7 @@ class Wkb11Encoder implements EncoderInterface
      */
     protected function encodeGeometryType(array $data, array $context = []): string
     {
-        return $this->packUInt32($context[WkbEncoder::ENDIANNESS], $data['binary_type']);
+        return $this->packUInt32($context[Endianness::ENDIANNESS], $data['binary_type']);
     }
 
     /**
@@ -124,7 +128,7 @@ class Wkb11Encoder implements EncoderInterface
      */
     protected function encodeCoordinate(array $values, array $context = []): string
     {
-        return $this->packDouble($context[WkbEncoder::ENDIANNESS], ...array_slice($values, 0, 2));
+        return $this->packDouble($context[Endianness::ENDIANNESS], ...array_slice($values, 0, 2));
     }
 
     /**
@@ -135,7 +139,7 @@ class Wkb11Encoder implements EncoderInterface
      */
     protected function encodeCoordinateSequence(array $values, array $context = []): string
     {
-        $wkb = $this->packUInt32($context[WkbEncoder::ENDIANNESS], count($values));
+        $wkb = $this->packUInt32($context[Endianness::ENDIANNESS], count($values));
         foreach ($values as $value) {
             $wkb .= $this->encodeCoordinate($value, $context);
         }
@@ -173,7 +177,7 @@ class Wkb11Encoder implements EncoderInterface
      */
     public function encodePolygon(array $data, array $context = []): string
     {
-        $wkb = $this->packUInt32($context[WkbEncoder::ENDIANNESS], count($data['coordinates'] ?? $data));
+        $wkb = $this->packUInt32($context[Endianness::ENDIANNESS], count($data['coordinates'] ?? $data));
         foreach ($data['coordinates'] ?? $data as $linestring) {
             $wkb .= $this->encodeCoordinateSequence($linestring, $context);
         }
@@ -188,14 +192,14 @@ class Wkb11Encoder implements EncoderInterface
      */
     public function encodeMultiPoint(array $data, array $context = []): string
     {
-        $wkb = $this->packUInt32($context[WkbEncoder::ENDIANNESS], count($data['coordinates']));
-        foreach($data['coordinates'] as $point) {
+        $wkb = $this->packUInt32($context[Endianness::ENDIANNESS], count($data['coordinates']));
+        foreach ($data['coordinates'] as $point) {
             $wkb .= $this->encodeNormalizedGeometry([
                 'type' => Point::WKT_TYPE,
                 'binary_type' => Point::WKB_TYPE,
                 'coordinates' => $point,
                 'crs' => &$data['crs']
-            ], $context);
+                    ], $context);
         }
         return $wkb;
     }
@@ -208,14 +212,14 @@ class Wkb11Encoder implements EncoderInterface
      */
     public function encodeMultiLineString(array $data, array $context = []): string
     {
-        $wkb = $this->packUInt32($context[WkbEncoder::ENDIANNESS], count($data['coordinates']));
+        $wkb = $this->packUInt32($context[Endianness::ENDIANNESS], count($data['coordinates']));
         foreach ($data['coordinates'] as $linestring) {
             $wkb .= $this->encodeNormalizedGeometry([
                 'type' => LineString::WKT_TYPE,
-                'binary_type'=> LineString::WKB_TYPE,
+                'binary_type' => LineString::WKB_TYPE,
                 'coordinates' => $linestring,
                 'crs' => &$data['crs']
-            ], $context);
+                    ], $context);
         }
         return $wkb;
     }
@@ -228,14 +232,14 @@ class Wkb11Encoder implements EncoderInterface
      */
     public function encodeMultiPolygon(array $data, array $context = []): string
     {
-        $wkb = $this->packUInt32($context[WkbEncoder::ENDIANNESS], count($data['coordinates']));
+        $wkb = $this->packUInt32($context[Endianness::ENDIANNESS], count($data['coordinates']));
         foreach ($data['coordinates'] as $polygon) {
             $wkb .= $this->encodeNormalizedGeometry([
                 'type' => Polygon::WKT_TYPE,
                 'binary_type' => Polygon::WKB_TYPE,
                 'coordinates' => $polygon,
                 'crs' => &$data['crs']
-            ], $context);
+                    ], $context);
         }
         return $wkb;
     }
@@ -249,21 +253,21 @@ class Wkb11Encoder implements EncoderInterface
      */
     public function encodeGeometryCollection(array $data, array $context = []): string
     {
-        $wkb = $this->packUInt32($context[WkbEncoder::ENDIANNESS], count($data['geometries']));
+        $wkb = $this->packUInt32($context[Endianness::ENDIANNESS], count($data['geometries']));
         foreach ($data['geometries'] as $geometry) {
             $wkb .= $this->encodeNormalizedGeometry($geometry, $context);
         }
         return $wkb;
     }
-    
+
     /**
      * Pack an unsigned char
      * @param string $endianness
      * @return string
      */
-    protected function encodeEndianness(string $endianness): string 
+    protected function encodeEndianness(string $endianness): string
     {
-        return pack('C', (($endianness === WkbEncoder::NDR) ? 1 : 0));
+        return pack('C', (($endianness === Endianness::NDR) ? 1 : 0));
     }
 
     /**
@@ -274,7 +278,7 @@ class Wkb11Encoder implements EncoderInterface
      */
     protected function packUInt32(string $endianness, int ...$values): string
     {
-        $format = ($endianness === WkbEncoder::NDR) ? 'V*' : 'N*';
+        $format = ($endianness === Endianness::NDR) ? 'V*' : 'N*';
         return pack($format, ...$values);
     }
 
@@ -286,7 +290,7 @@ class Wkb11Encoder implements EncoderInterface
      */
     protected function packDouble(string $endianness, float ...$values): string
     {
-        $format = ($endianness === WkbEncoder::NDR) ? 'e*' : 'E*';
+        $format = ($endianness === Endianness::NDR) ? 'e*' : 'E*';
         return pack($format, ...$values);
     }
 

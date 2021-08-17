@@ -20,7 +20,7 @@ declare(strict_types=1);
 
 namespace Nasumilu\Spatial\Serializer\Encoder\Wkb;
 
-use Nasumilu\Spatial\Serializer\Encoder\WkbEncoder;
+use Nasumilu\Spatial\Serializer\Endianness;
 
 /**
  * Well-known binary version 1.1.0 encoder
@@ -41,7 +41,7 @@ class Wkb12Encoder extends Wkb11Encoder
      */
     protected function encodeCoordinate(array $values, array $context = []): string
     {
-        return $this->packDouble($context[WkbEncoder::ENDIANNESS], ...$values);
+        return $this->packDouble($context[Endianness::ENDIANNESS], ...$values);
     }
 
     /**
@@ -56,7 +56,7 @@ class Wkb12Encoder extends Wkb11Encoder
         if($data['crs']['measured']) {
             $type += 2000;
         }
-        return $this->packUInt32($context[WkbEncoder::ENDIANNESS], $type);
+        return $this->packUInt32($context[Endianness::ENDIANNESS], $type);
     }
 
 }

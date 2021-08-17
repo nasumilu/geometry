@@ -43,15 +43,6 @@ use Nasumilu\Spatial\Geometry\{
  */
 class WkbDecoder extends ChainDecoder
 {
-
-    /** Little-endian */
-    public const NDR = 'NDR';
-
-    /** Big-endian */
-    public const XDR = 'XDR';  
-    
-    /** Byteorder (endianness) context option */
-    public const ENDIANNESS = 'endianness';
     
     /**
      * Map with the key value as the wkb type value and the value as its
