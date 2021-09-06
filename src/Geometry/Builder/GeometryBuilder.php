@@ -39,4 +39,5 @@ interface GeometryBuilder
      * @return Geometry|null
      */
     public function build(GeometryFactory $factory, $args): ?Geometry;
+    
 }
