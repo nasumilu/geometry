@@ -5,6 +5,35 @@
 
 This component **only** provides a common framework used to develop platform specific implementation.
 
+## Basic usage
+
+```php
+
+$options = [
+    '3d' => true,
+    'measured' => true,
+    'srid' => 3857
+];
+
+$factory = new GeometryFactoryAdapter($options);
+
+$point = $factory->creatPoint([
+    -93957413244860,
+    -89692863500304,
+    58.464,
+    9863321.35
+]);
+
+echo $point->asText();
+echo $point->asBinary(['hex_str' => true, 'endianness' => 'XDR']);
+
+```
+Output
+```php
+POINTZM(-93957413244860 -89692863500304 58.464 9863321.35)
+0000000bb9c2d55d0a8f63ef00c2d464cfd1240400404d3b645a1cac084162d0132b333333
+```
+
 ## Download and Test
 
 ```bash

@@ -23,6 +23,7 @@ namespace Nasumilu\Spatial\Geometry;
 use function array_unique;
 use function array_merge;
 use function array_search;
+
 use RuntimeException;
 use Nasumilu\Spatial\Serializer\{
     Normalizer\GeometryNormalizer,
@@ -88,7 +89,6 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
         $this->srid = intval($options[self::OPTION_SRID] ?? -1);
         $this->is3D = boolval($options[self::OPTION_3d] ?? false);
         $this->isMeasured = boolval($options[self::OPTION_MEASURED] ?? false);
-        $this->serializer = $options[self::OPTION_SERIALIZER];
         $this->precisionModel = $options[self::OPTION_PRECISION_MODEL] ?? new PrecisionModel();
 
         if (!isset($options[self::OPTION_SERIALIZER])) {
