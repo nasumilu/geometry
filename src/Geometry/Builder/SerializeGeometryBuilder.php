@@ -57,7 +57,7 @@ class SerializeGeometryBuilder implements GeometryBuilder
             return null;
         }
         
-        foreach(['wkt', 'wkb', 'ewkt', 'ewkb'] as $format) {
+        foreach(['wkt', 'wkb', 'ewkt', 'ewkb', 'json'] as $format) {
             try {
                 return $this->serializer->deserialize($args, Geometry::class, $format, ['factory' => $factory]);
             } catch(\Exception $e) {
