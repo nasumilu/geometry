@@ -38,7 +38,7 @@ Creating geometry from WKT
 ```php
 $point = $factory->create('POINTZM(-93957413244860 -89692863500304 58.464 9863321.35)');
 
-echo $point->output('json', ['json_encode_options' => ]);
+echo $point->output('json', ['json_encode_options' => \JSON_PRETTY_PRINT]);
 
 ```
 Output 
