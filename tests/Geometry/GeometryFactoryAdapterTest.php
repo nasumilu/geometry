@@ -45,13 +45,6 @@ class GeometryFactoryAdapterTest extends TestCase {
      * @return void
      */
     public function area(): void {
-        $point = $this->factory->createPoint([
-            -93957413244860,
-            -89692863500304,
-            58.464,
-            9863321.35
-        ]);
-        echo $point->asBinary(['hex_str' => true, 'endianness' => 'XDR']);
         $this->expectException(RuntimeException::class);
         $polygon = $this->factory->createPolygon();
         $this->factory->area($polygon);
