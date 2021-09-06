@@ -37,7 +37,7 @@ class GeometryFactoryAdapterTest extends TestCase {
     private GeometryFactory $factory;
 
     protected function setUp(): void {
-        $this->factory = new GeometryFactoryAdapter(['3d' => true, 'measured' => true]);
+        $this->factory = new GeometryFactoryAdapter(['srid'=> 3857, '3d' => true, 'measured' => true]);
     }
 
     /**

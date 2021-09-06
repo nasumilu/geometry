@@ -34,7 +34,8 @@ use Nasumilu\Spatial\Serializer\{
 };
 use Symfony\Component\Serializer\{
     SerializerInterface,
-    Serializer
+    Serializer,
+    Encoder\JsonEncoder
 };
 use Nasumilu\Spatial\Geometry\Builder\{
     CloneGeometryBuilder,
@@ -96,7 +97,8 @@ abstract class AbstractGeometryFactory implements GeometryFactory, GeometryBuild
                 new WktEncoder(),
                 new WkbEncoder(),
                 new WktDecoder(),
-                new WkbDecoder()
+                new WkbDecoder(),
+                new JsonEncoder()
             ]);
         }
         $this->serializer = $options[self::OPTION_SERIALIZER];
