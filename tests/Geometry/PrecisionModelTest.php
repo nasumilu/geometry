@@ -54,6 +54,24 @@ class PrecisionModelTest extends TestCase
         
     }
     
+    /**
+     * @testWith ["String Value", true]
+     *           [12.3, false]
+     *           ["10", false]
+     *           ["Ten", true]
+     */
+    public function testIsNan($value, bool $is_nan) {
+        $precisionModel = new PrecisionModel();
+        $precise = $precisionModel->makePrecise($value);
+        if($is_nan) {
+            $this->assertIsFloat($precise);
+            $this->assertNan($precise);
+        } else {
+            $this->assertFalse(is_nan($precise));
+            $this->assertIsFloat($precise);
+        }
+    }
+    
     public function testPrecisionGreaterThanIniPrecision() {
         $this->expectException(\InvalidArgumentException::class);
         $precisionModel = new PrecisionModel(99);
