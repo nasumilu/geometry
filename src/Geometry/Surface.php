@@ -47,9 +47,9 @@ abstract class Surface extends Geometry implements Iterator, ArrayAccess, Counta
 
     /**
      * @see SpatialEngine::boundary()
-     * @return MultiCurve
+     * @return Geometry
      */
-    public function getBoundary(): MultiCurve
+    public function getBoundary(): Geometry
     {
         return $this->factory
                         ->getSpatialEngine()
