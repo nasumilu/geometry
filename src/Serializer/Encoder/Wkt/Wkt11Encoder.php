@@ -164,7 +164,7 @@ class Wkt11Encoder implements EncoderInterface
     {
         $wkt = '';
         foreach ($data['coordinates'] as $linestring) {
-            $wkt = '(' . $this->encodeCoordinateSequence($linestring, $context) . '),';
+            $wkt .= '(' . $this->encodeCoordinateSequence($linestring, $context) . '),';
         }
         return rtrim($wkt, ',');
     }
