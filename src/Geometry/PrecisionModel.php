@@ -125,7 +125,7 @@ final class PrecisionModel
 
     public function makePrecise($value): float
     {
-        if (!is_numeric($value) || is_nan($value)) {
+        if (is_string($value) && !is_numeric($value)) {
             return NAN;
         }
 
