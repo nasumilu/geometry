@@ -29,14 +29,12 @@ use Nasumilu\Spatial\Geometry\CoordinateException;
  * Description of AbstractGeometryFactoryTest
  * @covers \Nasumilu\Spatial\Geometry\AbstractGeometryFactory
  */
-class AbstractGeometryFactoryTest extends AbstractGeometryTest
-{
+class AbstractGeometryFactoryTest extends AbstractGeometryTest {
 
     /**
      * @test
      */
-    public function testRegisterAndUnregisterBuilder()
-    {
+    public function testRegisterAndUnregisterBuilder() {
         $builder = $this->createMock(GeometryBuilder::class);
         $factory = $this->getMockGeometryFactory();
         $this->assertFalse($factory->hasBuilder($builder));
@@ -51,8 +49,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @dataProvider dataProvider
      * @param array $options
      */
-    public function testGetSpatialDimension(array $options)
-    {
+    public function testGetSpatialDimension(array $options) {
         $factory = $this->getMockGeometryFactory($options);
         $expected = $factory->is3D() ? 3 : 2;
         $this->assertEquals($expected, $factory->getSpatialDimension());
@@ -63,8 +60,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @dataProvider dataProvider
      * @param array $options
      */
-    public function testGetCoordinateDimension(array $options)
-    {
+    public function testGetCoordinateDimension(array $options) {
         $factory = $this->getMockGeometryFactory($options);
         $expected = 2;
         if ($factory->is3D()) {
@@ -81,8 +77,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @dataProvider dataProvider
      * @param array $options
      */
-    public function testGetSrid(array $options)
-    {
+    public function testGetSrid(array $options) {
         $factory = $this->getMockGeometryFactory($options);
         $this->assertEquals($options['srid'], $factory->getSrid());
     }
@@ -91,8 +86,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::getEnvelope
      */
-    public function testGetEnvelope()
-    {
+    public function testGetEnvelope() {
 
         $factory = $this->getMockGeometryFactory();
         $expected = $factory->createPolygon();
@@ -106,10 +100,24 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
 
     /**
      * @test
+     * @covers \Nasumilu\Spatial\Geometry\Geometry::equals
+     */
+    public function testEquals() {
+        $factory = $this->getMockGeometryFactory();
+        $geometry = $factory->createPolygon();
+        $factory->expects($this->atLeastOnce())
+                ->method('equals')
+                ->willReturn(false);
+        $other = $factory->createMultiLineString();
+        
+        $this->assertFalse($geometry->equals($other));
+    }
+
+    /**
+     * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::isSimple
      */
-    public function testIsSimple()
-    {
+    public function testIsSimple() {
         $factory = $this->getMockGeometryFactory();
         $factory->expects($this->atLeastOnce())
                 ->method('isSimple')
@@ -122,8 +130,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::getBoundary
      */
-    public function testGetBoundary()
-    {
+    public function testGetBoundary() {
 
         $factory = $this->getMockGeometryFactory();
         $expected = $factory->createPolygon();
@@ -139,8 +146,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::disjoint
      */
-    public function testDisjoint()
-    {
+    public function testDisjoint() {
         $factory = $this->getMockGeometryFactory();
         $factory->expects($this->atLeastOnce())
                 ->method('disjoint')
@@ -154,8 +160,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::intersects
      */
-    public function testIntersects()
-    {
+    public function testIntersects() {
         $factory = $this->getMockGeometryFactory();
         $factory->expects($this->atLeastOnce())
                 ->method('intersects')
@@ -169,8 +174,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::touches
      */
-    public function testTouches()
-    {
+    public function testTouches() {
         $factory = $this->getMockGeometryFactory();
         $factory->expects($this->atLeastOnce())
                 ->method('touches')
@@ -184,8 +188,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::crosses
      */
-    public function testCrosses()
-    {
+    public function testCrosses() {
         $factory = $this->getMockGeometryFactory();
         $factory->expects($this->atLeastOnce())
                 ->method('crosses')
@@ -199,8 +202,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::within
      */
-    public function testWithin()
-    {
+    public function testWithin() {
         $factory = $this->getMockGeometryFactory();
         $factory->expects($this->atLeastOnce())
                 ->method('within')
@@ -214,8 +216,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::contains
      */
-    public function testContains()
-    {
+    public function testContains() {
         $factory = $this->getMockGeometryFactory();
         $factory->expects($this->atLeastOnce())
                 ->method('contains')
@@ -229,8 +230,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::overlaps
      */
-    public function testOverlaps()
-    {
+    public function testOverlaps() {
         $factory = $this->getMockGeometryFactory();
         $factory->expects($this->atLeastOnce())
                 ->method('overlaps')
@@ -244,8 +244,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::relate
      */
-    public function testRelate()
-    {
+    public function testRelate() {
         $factory = $this->getMockGeometryFactory();
         $factory->expects($this->atLeastOnce())
                 ->method('relate')
@@ -264,8 +263,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::relate
      */
-    public function testRelateError()
-    {
+    public function testRelateError() {
         $factory = $this->getMockGeometryFactory();
         $geometry = $factory->createPoint();
         $other = $factory->createPolygon();
@@ -279,8 +277,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::locateAlong
      */
-    public function testLocateAlong()
-    {
+    public function testLocateAlong() {
         $factory = $this->getMockGeometryFactory(['measured' => true]);
         $expected = $factory->createMultiPoint();
         $factory->expects($this->atLeastOnce())
@@ -294,8 +291,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::locateAlong
      */
-    public function testLocateAlongNotMeasured()
-    {
+    public function testLocateAlongNotMeasured() {
         $factory = $this->getMockGeometryFactory();
         $geometry = $factory->createMultiLineString();
         $this->expectException(CoordinateException::class);
@@ -306,8 +302,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::locateAlong
      */
-    public function testLocateAlongPolygonal()
-    {
+    public function testLocateAlongPolygonal() {
         $factory = $this->getMockGeometryFactory();
         $geometry = $factory->createPolygon();
         $this->expectException(\InvalidArgumentException::class);
@@ -318,8 +313,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::locateBetween
      */
-    public function testLocateBetween()
-    {
+    public function testLocateBetween() {
         $factory = $this->getMockGeometryFactory(['measured' => true]);
         $expected = $factory->createMultiPoint();
         $factory->expects($this->atLeastOnce())
@@ -333,8 +327,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::locateBetween
      */
-    public function testLocateBetweenNotMeasured()
-    {
+    public function testLocateBetweenNotMeasured() {
         $factory = $this->getMockGeometryFactory();
         $geometry = $factory->createMultiLineString();
         $this->expectException(CoordinateException::class);
@@ -345,8 +338,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::locateBetween
      */
-    public function testLocateBetweenPolygonal()
-    {
+    public function testLocateBetweenPolygonal() {
         $factory = $this->getMockGeometryFactory();
         $geometry = $factory->createPolygon();
         $this->expectException(\InvalidArgumentException::class);
@@ -357,8 +349,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::distance
      */
-    public function testDistance()
-    {
+    public function testDistance() {
         $expected = (float) rand(1000, 9999); // some random number
         $factory = $this->getMockGeometryFactory();
         $factory->expects($this->atLeastOnce())
@@ -373,8 +364,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::buffer
      */
-    public function testBuffer()
-    {
+    public function testBuffer() {
         $factory = $this->getMockGeometryFactory();
         $expected = $factory->createPolygon();
         $factory->expects($this->atLeastOnce())
@@ -388,8 +378,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::convexHull
      */
-    public function testConvexHull()
-    {
+    public function testConvexHull() {
         $factory = $this->getMockGeometryFactory();
         $expected = $factory->createPolygon();
         $factory->expects($this->atLeastOnce())
@@ -403,8 +392,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::intersection
      */
-    public function testIntersection()
-    {
+    public function testIntersection() {
         $factory = $this->getMockGeometryFactory();
         $expected = $factory->createPolygon();
         $factory->expects($this->atLeastOnce())
@@ -419,8 +407,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::union
      */
-    public function testUnion()
-    {
+    public function testUnion() {
         $factory = $this->getMockGeometryFactory();
         $expected = $factory->createPolygon();
         $factory->expects($this->atLeastOnce())
@@ -435,8 +422,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::difference
      */
-    public function testDifference()
-    {
+    public function testDifference() {
         $factory = $this->getMockGeometryFactory();
         $expected = $factory->createPolygon();
         $factory->expects($this->atLeastOnce())
@@ -451,8 +437,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::symDifference
      */
-    public function testSymDifference()
-    {
+    public function testSymDifference() {
         $factory = $this->getMockGeometryFactory();
         $expected = $factory->createPolygon();
         $factory->expects($this->atLeastOnce())
@@ -467,8 +452,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::transform
      */
-    public function testTransformSameSridAKAClone()
-    {
+    public function testTransformSameSridAKAClone() {
         $factory = $this->getMockGeometryFactory();
         $transform = $this->getMockGeometryFactory();
         $expected = $transform->createPolygon();
@@ -485,8 +469,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
      * @test
      * @covers \Nasumilu\Spatial\Geometry\Geometry::transform
      */
-    public function testTransformDiffSrid()
-    {
+    public function testTransformDiffSrid() {
         $factory = $this->getMockGeometryFactory(['srid' => 3857]);
         $transform = $this->getMockGeometryFactory(['srid' => 2387]);
         $expected = $transform->createPolygon();
@@ -499,8 +482,7 @@ class AbstractGeometryFactoryTest extends AbstractGeometryTest
         $this->assertSame($transform, $transformGeometry->getFactory());
     }
 
-    public function dataProvider(): array
-    {
+    public function dataProvider(): array {
         return require __DIR__ . '/../Resources/php/factory_options.php';
     }
 
