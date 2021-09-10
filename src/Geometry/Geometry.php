@@ -24,16 +24,14 @@ namespace Nasumilu\Spatial\Geometry;
  * The root (base) class of the hierarchy. 
  * @link https://www.ogc.org/standards/sfa Simple Feature Access - Part 1: Common Architecture
  */
-abstract class Geometry
-{
+abstract class Geometry {
 
     /**
      * @var GeometryFactory
      */
     protected $factory;
 
-    public function __construct(GeometryFactory $geometryFactory)
-    {
+    public function __construct(GeometryFactory $geometryFactory) {
         $this->factory = $geometryFactory;
     }
 
@@ -42,8 +40,7 @@ abstract class Geometry
      * Geometry.
      * @return GeometryFactory S
      */
-    public function getFactory(): GeometryFactory
-    {
+    public function getFactory(): GeometryFactory {
         return $this->factory;
     }
 
@@ -51,8 +48,7 @@ abstract class Geometry
      * Gets the Spatial Reference System ID
      * @return int the Geometry objects SRID
      */
-    public function getSrid(): int
-    {
+    public function getSrid(): int {
         return $this->factory->getCoordianteSystem()->getSrid();
     }
 
@@ -60,8 +56,7 @@ abstract class Geometry
      * Indicates whether the GeometryFactory supports the z-coordinate.
      * @return bool
      */
-    public function is3D(): bool
-    {
+    public function is3D(): bool {
         return $this->factory->getCoordianteSystem()->is3D();
     }
 
@@ -69,26 +64,22 @@ abstract class Geometry
      * Indicates whether the GeometryFactory supports the m-coordinate.
      * @return bool
      */
-    public function isMeasured(): bool
-    {
+    public function isMeasured(): bool {
         return $this->factory->getCoordianteSystem()->isMeasured();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getEnvelope(): Geometry
-    {
+    public function getEnvelope(): Geometry {
         return $this->factory->getSpatialEngine()->envelope($this);
     }
 
-    public function isSimple(): bool
-    {
+    public function isSimple(): bool {
         return $this->factory->getSpatialEngine()->isSimple($this);
     }
 
-    public function getBoundary(): Geometry
-    {
+    public function getBoundary(): Geometry {
         return $this->factory->getSpatialEngine()->boundary($this);
     }
 
@@ -98,8 +89,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return bool
      */
-    public function disjoint(Geometry $other): bool
-    {
+    public function disjoint(Geometry $other): bool {
         return $this->factory->getSpatialEngine()->disjoint($this, $other);
     }
 
@@ -109,8 +99,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return bool
      */
-    public function intersects(Geometry $other): bool
-    {
+    public function intersects(Geometry $other): bool {
         return $this->factory->getSpatialEngine()->intersects($this, $other);
     }
 
@@ -120,8 +109,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return bool
      */
-    public function touches(Geometry $other): bool
-    {
+    public function touches(Geometry $other): bool {
         return $this->factory->getSpatialEngine()->touches($this, $other);
     }
 
@@ -131,8 +119,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return bool
      */
-    public function crosses(Geometry $other): bool
-    {
+    public function crosses(Geometry $other): bool {
         return $this->factory->getSpatialEngine()->crosses($this, $other);
     }
 
@@ -142,8 +129,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return bool
      */
-    public function within(Geometry $other): bool
-    {
+    public function within(Geometry $other): bool {
         return $this->factory->getSpatialEngine()->within($this, $other);
     }
 
@@ -153,8 +139,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return bool
      */
-    public function contains(Geometry $other): bool
-    {
+    public function contains(Geometry $other): bool {
         return $this->factory->getSpatialEngine()->contains($this, $other);
     }
 
@@ -164,8 +149,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return bool
      */
-    public function overlaps(Geometry $other): bool
-    {
+    public function overlaps(Geometry $other): bool {
         return $this->factory->getSpatialEngine()->overlaps($this, $other);
     }
 
@@ -178,8 +162,7 @@ abstract class Geometry
      * @param string $matrix
      * @return bool
      */
-    public function relate(Geometry $other, string $matrix): bool
-    {
+    public function relate(Geometry $other, string $matrix): bool {
         if (0 === preg_match('/^(T|F|\*){9}$/i', $matrix)) {
             throw new \InvalidArgumentException('Invalid DE-9IM model! Model must'
                             . ' only contain 9 characters of T, F, or *');
@@ -195,8 +178,7 @@ abstract class Geometry
      * @throws InvalidArgumentException when the geometry is polygonal
      * @throws CoordinateException if the m-coordinate is not supported
      */
-    public function locateAlong(float $mValue): Geometry
-    {
+    public function locateAlong(float $mValue): Geometry {
         if ($this instanceof Polygonal) {
             throw new \InvalidArgumentException('Polygongal geometry objects '
                             . 'are not supported!');
@@ -216,8 +198,7 @@ abstract class Geometry
      * @throws InvalidArgumentException when the geometry is polygonal
      * @throws CoordinateException if m-coordinate is not supported
      */
-    public function locateBetween(float $mStart, float $mEnd): Geometry
-    {
+    public function locateBetween(float $mStart, float $mEnd): Geometry {
         if ($this instanceof Polygonal) {
             throw new \InvalidArgumentException('Polygongal geometry objects '
                             . 'are not supported!');
@@ -234,8 +215,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return float
      */
-    public function distance(Geometry $other): float
-    {
+    public function distance(Geometry $other): float {
         return $this->factory->getSpatialEngine()->distance($this, $other);
     }
 
@@ -246,8 +226,7 @@ abstract class Geometry
      * @param float $distance
      * @return Geometry
      */
-    public function buffer(float $distance): Geometry
-    {
+    public function buffer(float $distance): Geometry {
         return $this->factory->getSpatialEngine()->buffer($this, $distance);
     }
 
@@ -256,8 +235,7 @@ abstract class Geometry
      * </code> object
      * @return Geometry
      */
-    public function convexHull(): Geometry
-    {
+    public function convexHull(): Geometry {
         return $this->factory->getSpatialEngine()->convexHull($this);
     }
 
@@ -268,8 +246,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return Geometry
      */
-    public function intersection(Geometry $other): Geometry
-    {
+    public function intersection(Geometry $other): Geometry {
         return $this->factory->getSpatialEngine()->intersection($this, $other);
     }
 
@@ -279,8 +256,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return Geometry
      */
-    public function union(Geometry $other): Geometry
-    {
+    public function union(Geometry $other): Geometry {
         return $this->factory->getSpatialEngine()->union($this, $other);
     }
 
@@ -291,8 +267,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return Geometry
      */
-    public function difference(Geometry $other): Geometry
-    {
+    public function difference(Geometry $other): Geometry {
         return $this->factory->getSpatialEngine()->difference($this, $other);
     }
 
@@ -303,8 +278,7 @@ abstract class Geometry
      * @param Geometry $other
      * @return Geometry
      */
-    public function symDifference(Geometry $other): Geometry
-    {
+    public function symDifference(Geometry $other): Geometry {
         return $this->factory->getSpatialEngine()->symDifference($this, $other);
     }
 
@@ -314,8 +288,7 @@ abstract class Geometry
      * @param GeometryFactory $factory
      * @return Geometry
      */
-    public function transform(GeometryFactory $factory): Geometry
-    {
+    public function transform(GeometryFactory $factory): Geometry {
         return $factory->create($this);
     }
 
@@ -342,22 +315,43 @@ abstract class Geometry
      * @return bool
      */
     public abstract function isEmpty(): bool;
-    
-    public function output(string $format, array $context = []): string
-    {
+
+    public function output(string $format, array $context = []): string {
         return $this->factory->getSpatialEngine()
-                ->output($this, $format, $context);
+                        ->output($this, $format, $context);
     }
-    
-    public function asText(array $context = []): string
-    {
+
+    /**
+     * Indicates whether Geometry object <code>$other</code> is "<em>spatially equal</em>"
+     * to this Geometry object.
+     * 
+     * @param Geometry $other
+     * @return bool
+     */
+    public function equals(Geometry $other): bool {
         return $this->factory->getSpatialEngine()
-                ->asText($this, $context);
+                        ->equals($this, $other);
     }
-    
-    public function asBinary(array $context = []): string
-    {
+
+    /**
+     * Gets the Geometry object as well-known text (WKT)
+     * 
+     * @param array $context options used when serializing
+     * @return string
+     */
+    public function asText(array $context = []): string {
         return $this->factory->getSpatialEngine()
-                ->asBinary($this, $context);
+                        ->asText($this, $context);
     }
+
+    /**
+     * Gets the Geometry object as well-known binary (WKB)
+     * @param array $context options used when serializing 
+     * @return string
+     */
+    public function asBinary(array $context = []): string {
+        return $this->factory->getSpatialEngine()
+                        ->asBinary($this, $context);
+    }
+
 }
