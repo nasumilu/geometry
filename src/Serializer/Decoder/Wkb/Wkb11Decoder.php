@@ -42,11 +42,12 @@ class Wkb11Decoder implements DecoderInterface
     /** Well-Known Binary 1.1.0 format */
     public const FORMAT = 'wkb11';
 
-    /** 
+    /**
      * The input strings position
      * @var int
      */
     private int $position = 0;
+
     /**
      * The input string
      * @var string|null
@@ -58,13 +59,18 @@ class Wkb11Decoder implements DecoderInterface
      */
     public function decode(string $data, string $format, array $context = []): array
     {
-        if (ctype_xdigit($data)) {
-            $data = pack('H*', $data);
+        try {
+            if (ctype_xdigit($data)) {
+                $data = pack('H*', $data);
+            }
+            $this->setInput($data);
+            $value = $this->decodeGeometry($context);
+            $this->reset();
+            return $value;
+        } catch (\Exception $ex) {
+            throw $ex;
+            $this->reset();
         }
-        $this->setInput($data);
-        $value = $this->decodeGeometry($context);
-        $this->reset();
-        return $value;
     }
 
     /**
@@ -192,7 +198,7 @@ class Wkb11Decoder implements DecoderInterface
         }
         return $polygons;
     }
-    
+
     /**
      * Decodes the well-known binary geometry collection geometries
      * @param array $context
@@ -202,7 +208,7 @@ class Wkb11Decoder implements DecoderInterface
     {
         $numGeometries = $this->unpackUInt32($context[Endianness::ENDIANNESS]);
         $geometries = [];
-        for($i = 0; $i < $numGeometries; $i++) {
+        for ($i = 0; $i < $numGeometries; $i++) {
             $geometries[] = $this->decodeGeometry($context);
         }
         return $geometries;

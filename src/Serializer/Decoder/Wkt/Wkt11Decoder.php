@@ -23,6 +23,7 @@ namespace Nasumilu\Spatial\Serializer\Decoder\Wkt;
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
 use Doctrine\Common\Lexer\AbstractLexer;
 use Nasumilu\Spatial\Geometry\GeometryCollection;
+use UnexpectedValueException;
 use function strtolower;
 
 /**
@@ -53,7 +54,7 @@ class Wkt11Decoder extends AbstractLexer implements DecoderInterface
 
     /** Wkt geometry type character set type (point, linestring ... geometrycollection) */
     protected const T_GEOMETRY_TYPE = 600;
-    
+
     /** Wkt version 1.1.0 format */
     public const FORMAT = 'wkt11';
 
@@ -62,11 +63,16 @@ class Wkt11Decoder extends AbstractLexer implements DecoderInterface
      */
     public function decode(string $data, string $format, array $context = []): array
     {
-        $this->setInput($data);
-        $this->moveNext();
-        $geometry = $this->decodeGeometry();
-        $this->reset();
-        return $geometry;
+        try {
+            $this->setInput($data);
+            $this->moveNext();
+            $geometry = $this->decodeGeometry();
+            $this->reset();
+            return $geometry;
+        } catch (\Exception $ex) {
+            $this->reset();
+            throw $ex;
+        }
     }
 
     /**
@@ -231,7 +237,7 @@ class Wkt11Decoder extends AbstractLexer implements DecoderInterface
         $this->match(self::T_CLOSE_PARENTHESIS);
         return $coordinates;
     }
-    
+
     /**
      * Decode a wkt geometrycollection geometries.
      * @return array
@@ -241,7 +247,7 @@ class Wkt11Decoder extends AbstractLexer implements DecoderInterface
         $geometries = [];
         $this->match(self::T_OPEN_PARENTHESIS);
         $geometries[] = $this->decodeGeometry();
-        while($this->isNextToken(self::T_COMMA)) {
+        while ($this->isNextToken(self::T_COMMA)) {
             $this->match(self::T_COMMA);
             $geometries[] = $this->decodeGeometry();
         }
@@ -308,7 +314,7 @@ class Wkt11Decoder extends AbstractLexer implements DecoderInterface
     {
         $lookaheadType = $this->lookahead['type'];
         if ($lookaheadType !== $token) {
-            throw new \Exception('Syntax error near ' . $this->getLiteral($token) . print_r($this->peek(), true));
+            throw new UnexpectedValueException('Syntax error near ' . $this->getLiteral($token) . print_r($this->peek(), true));
         }
         $this->moveNext();
     }
