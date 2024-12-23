@@ -101,7 +101,7 @@ class Wkt11Decoder extends AbstractLexer implements DecoderInterface
     protected function decodeGeometryType(): string
     {
         $this->match(self::T_GEOMETRY_TYPE);
-        return $this->token['value'];
+        return $this->token->value;
     }
 
     /**
@@ -111,8 +111,8 @@ class Wkt11Decoder extends AbstractLexer implements DecoderInterface
     protected function decodeCoordinate(): array
     {
         while ($this->isNextToken(self::T_NUMERIC)) {
-            $this->match($this->lookahead['type']);
-            $value = (float) $this->token['value'];
+            $this->match($this->lookahead->type);
+            $value = (float) $this->token->value;
             $values[] = $value;
         }
         return $values;
@@ -312,7 +312,7 @@ class Wkt11Decoder extends AbstractLexer implements DecoderInterface
      */
     protected function match($token)
     {
-        $lookaheadType = $this->lookahead['type'];
+        $lookaheadType = $this->lookahead->type;
         if ($lookaheadType !== $token) {
             throw new UnexpectedValueException('Syntax error near ' . $this->getLiteral($token) . print_r($this->peek(), true));
         }
