@@ -61,7 +61,7 @@ class Wkt12Decoder extends Wkt11Decoder
         ];
         if ($this->isNextToken(self::T_DIMENSION)) {
             $this->match(self::T_DIMENSION);
-            $d = $this->token['value'];
+            $d = $this->token->value;
             $dimension['3d'] = false !== stripos($d, 'z');
             $dimension['measured'] = false !== stripos($d, 'm');
         }

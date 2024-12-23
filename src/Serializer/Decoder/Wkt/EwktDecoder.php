@@ -67,7 +67,7 @@ class EwktDecoder extends Wkt12Decoder
             $this->match(self::T_SRID);
             $this->match(self::T_EQUALS);
             $this->match(self::T_NUMERIC);
-            $srid = (int) $this->token['value'];
+            $srid = (int) $this->token->value;
             $this->match(self::T_SEMICOLON);
         }
         return $srid;
