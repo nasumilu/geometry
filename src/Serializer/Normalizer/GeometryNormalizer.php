@@ -23,6 +23,7 @@ namespace Nasumilu\Spatial\Serializer\Normalizer;
 use function is_subclass_of;
 use function array_merge;
 use function get_class;
+use ArrayObject;
 use Symfony\Component\Serializer\Normalizer\{
     NormalizerInterface,
     DenormalizerInterface
@@ -59,7 +60,7 @@ class GeometryNormalizer implements NormalizerInterface, DenormalizerInterface
     /**
      * {@inheritDoc}
      */
-    public function normalize($object, string $format = null, array $context = array())
+    public function normalize(mixed $object, ?string $format = null, array $context = array()): ArrayObject|array|string|int|float|bool|null
     {
         $crs = $object->getFactory()->getCoordianteSystem();
         return array_filter(array_merge([
@@ -78,7 +79,7 @@ class GeometryNormalizer implements NormalizerInterface, DenormalizerInterface
     /**
      * {@inheritDoc}
      */
-    public function supportsNormalization($data, string $format = null): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof Geometry;
     }
@@ -86,7 +87,7 @@ class GeometryNormalizer implements NormalizerInterface, DenormalizerInterface
     /**
      * {@inheritDoc}
      */
-    public function denormalize($data, string $type, string $format = null, array $context = []): Geometry
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): Geometry
     {
         if (null === $factory = $context['factory'] ?? null) {
             throw new \InvalidArgumentException("Must have a geomtry factory in context!");
@@ -97,7 +98,7 @@ class GeometryNormalizer implements NormalizerInterface, DenormalizerInterface
     /**
      * {@inheritDoc}
      */
-    public function supportsDenormalization($data, string $type, string $format = null): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === Geometry::class || is_subclass_of($type, Geometry::class, true);
     }
@@ -213,5 +214,19 @@ class GeometryNormalizer implements NormalizerInterface, DenormalizerInterface
             $geometries[] = $this->normalize($geometry);
         }
         return $geometries;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            Geometry::class => true,
+            Point::class => true,
+            LineString::class => true,
+            Polygon::class => true,
+            MultiPoint::class => true,
+            MultiLineString::class => true,
+            MultiPolygon::class => true,
+            GeometryCollection::class => true
+        ];
     }
 }
